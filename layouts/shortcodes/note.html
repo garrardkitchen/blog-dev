@@ -1,0 +1,96 @@
+<!-- <br /> -->
+<div style="padding:2px; margin-top: 20px; margin-bottom: 20px;">
+
+    <style>
+        .header {
+            color: white;
+            font-weight: bold;
+            padding-left: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-top-right-radius: 5px;
+            border-top-left-radius: 5px;
+            font-size: smaller;
+        }
+
+        .info {
+            background-color: #336699;
+        }
+
+        .warning {
+            background-color: orange;
+        }
+
+        .error {
+            background-color: red;
+        }
+
+        .note-panel {
+            background-color: #c2f5f5;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .panel-info {
+            border: 1px solid #336699;
+            background-color: rgba(51, 102, 153, 0.2);
+        }
+
+        .panel-warning {
+            border: 1px solid orange;
+            background-color: rgba(255, 166, 0, 0.2);
+        }
+
+        .panel-error {
+            border: 1px solid red;
+            background-color: rgba(255, 0, 0, 0.2);
+        }
+
+        .panel-header {
+            border-top-left-radius: 0px !important;
+            border-top-right-radius: 0px !important;
+        }
+    </style>
+
+
+    {{ if .Get "title"}}
+    <div>
+        <div style=" font-family: 'Open Sans'; "
+            class="header {{ if .Get "error" | eq "true" }} error {{ else }} {{ if .Get "warning" | eq "true" }} warning {{ else }} info {{ end }} {{ end }} ">
+            {{ if .Get "error" | eq "true" }}
+
+            <i class="fa fa-ban"></i>
+
+            {{ else }}
+
+            {{ if .Get "warning" | eq "true" }}
+
+            <i class="fa fa-exclamation-circle"></i>
+
+            {{ else }}
+
+            <i class="fa fa-question-circle"></i>
+
+            {{ end }}
+
+            {{ end }}
+
+            {{ .Get "title"}}
+        </div>
+    </div>
+    {{ end }}
+
+    <div class="note-panel 
+         {{ if .Get "error" | eq "true"}} panel-error {{ else }} 
+            {{ if .Get "warning" | eq "true"}} panel-warning warning
+            {{ else }} panel-info
+            {{ end }} 
+        {{ end }} 
+        {{ if .Get "title" }} panel-header {{ end }}">
+
+        <div style="{{ if .Get "italic" }} font-style: italic; {{ end }}; ">
+            {{ .Inner }}
+        </div>
+    </div>
+</div>
+<!-- <br /> -->
