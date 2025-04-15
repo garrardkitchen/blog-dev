@@ -54,9 +54,13 @@ menu:
       name: Documentation
       pageRef: /docs
       weight: 1
-    - identifier: showcase
-      name: Showcase
-      pageRef: /showcase
+    # - identifier: showcase
+    #   name: Showcase
+    #   pageRef: /showcase
+    #   weight: 2
+    - identifier: ai
+      name: AI
+      pageRef: /ai
       weight: 2
     - identifier: blog
       name: Blog
