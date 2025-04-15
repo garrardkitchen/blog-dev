@@ -10,11 +10,11 @@ As a reminder, the 1st and 2nd waves were Virtual Machines and Containers, respe
 
 Warning, profound statement inbound…
 
-{{< hint info >}}
-
+{{< callout emoji="🌐" type="info">}}
 **The Docker cofounder, Solomon Hykes, said this in 2019**  
 "If WASM+WASI existed in 2008, we wouldn't have needed to create Docker. That's how important it is. WebAssembly on the server is the future of computing." - [Quote](https://twitter.com/solomonstre/status/1111004913222324225)
-{{< /hint >}}
+{{< /callout >}}
+
 
 I think we need to let this sink in for a few moments.  IMO, this is huge.  Personally, since 2016, most of my DevOps [development & orchestration] work has involved containers.  Container and FaaS is my preferred approach to development and orchestration.  But now there's a new way?  Will I now have to throw out all this knowledge and return to ground zero and start over?  In short, no.  Anyways, back to this 3rd wave…
 
