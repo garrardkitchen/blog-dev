@@ -88,23 +88,22 @@ The top line is importing code from this file:
 
 _I've highlighted the problematic line of code_
 
-{{< highlight js "linenos=table,hl_lines=3" >}}
 
+```js {linenos=table,hl_lines=3}
 const fs = require('fs')
 const dotenv = require('dotenv')
 const envConfig = dotenv.parse(fs.readFileSync(`.env`))
 for (const k in envConfig) {
     process.env[k] = envConfig[k]
 }
+```
 
-{{< / highlight >}}
 
 The quickest (IMO) way to deal with this and move forward is to Mock the `fs` class.  I did this by included a jest module mock into my unit test file:
 
 _I've highlighted the mock related code_
 
-{{< highlight js "linenos=table,hl_lines=2 4-8" >}}
-
+```js {linenos=table,hl_lines=[3, 4,5,6,7,8]}
 'use strict'
 const fs = require('fs')
 const eda = require('..')
@@ -118,6 +117,6 @@ describe('@cf247/eda', () => {
     it('no tests', () => {
     })
 });
-{{< / highlight >}}
+```
 
 What this does is, when the `readFileSync` class function is called, it always returns an empty array `[]`.  As the unit code does not have a dependency on environment variables, this mocked response will work fine.

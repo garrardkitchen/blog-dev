@@ -62,6 +62,10 @@ menu:
       name: AI
       pageRef: /ai
       weight: 2
+    - identifier: gaming
+      name: Gaming
+      pageRef: /gaming
+      weight: 2
     - identifier: blog
       name: Blog
       pageRef: /blog
