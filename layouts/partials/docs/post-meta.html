@@ -1,0 +1,30 @@
+<p>
+  {{ with .Date}}
+  <i>{{ partial "docs/date" (dict "Date" . "Format" $.Site.Params.BookDateFormat) }}</i>&nbsp;
+  {{ end }}
+
+  {{ if .Site.Params.readingTime }}
+  - &nbsp;<i class="fas fa-clock"></i>&nbsp;{{ i18n "readingTime"}}{{ .ReadingTime }}&nbsp;mins read time
+  {{ end }}
+  {{ if .Site.Params.wordCount }}
+  - &nbsp;<i class="fas fa-book"></i>&nbsp;{{ .WordCount }}&nbsp;words
+  {{ end }}
+
+  {{ if .Params.author }}
+  - &nbsp;<i class="fas fa-user"></i>&nbsp;{{ .Params.author | safeHTML }}
+  {{ else }}
+  -&nbsp;<i class="fas fa-user"></i>&nbsp;{{ .Site.Params.Author.name | safeHTML }}
+  {{ end }}
+</p>
+
+
+
+{{ range $taxonomy, $_ := .Site.Taxonomies }}
+{{ with $terms := $.GetTerms $taxonomy }}
+<div>
+  {{ range $n, $term := $terms }}{{ if $n }}, {{ end }}
+  <a href="{{ $term.RelPermalink }}">{{ $term.Title }}</a>
+  {{- end }}
+</div>
+{{ end }}
+{{ end }}

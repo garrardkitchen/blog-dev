@@ -1,7 +1,6 @@
 themes/book
 themes/hextra
-docs/
+/docs/
 resources/
 .vscode/
-blog/
-public/
+/public/
