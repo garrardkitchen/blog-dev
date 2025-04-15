@@ -59,22 +59,23 @@ jobs:
           HUGO_ENVIRONMENT: production
         run: |
           hugo \
+            --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
-      - name: debug ./docs
+      - name: debug ./public
         run: |
           pwd
-          ls -al ./docs
+          ls -al ./public
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./docs
+          path: ./public
 
   # Deployment job
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}      
     runs-on: ubuntu-latest
     needs: build
     steps:
