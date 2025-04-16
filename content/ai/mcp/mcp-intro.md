@@ -2,6 +2,8 @@
 title: Model Context Protocol
 date: 2022-01-27T11:49:14+01:00
 ---
+
+When I first came across the Model Context Protocol (MCP), I couldn't help but notice its parallels with OpenAPI. What follows is my attempt to connect the dots. While it's not a perfect one-to-one comparison, it's fascinating how concepts can feel similar simply by swapping a few key terms.
  
 # Understanding MCP and Its Comparison to OpenAPI for LLMs
 
