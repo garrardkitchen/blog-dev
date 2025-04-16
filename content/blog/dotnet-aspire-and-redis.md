@@ -16,7 +16,7 @@ The first time I opened a sample project, the Visual Studio Community 2022 (Prev
 
 To avoid this ahead of time you can:
 
-{{< hint info >}}
+{{< callout type="info" >}}
 
 **.NET Aspire workload**
 
@@ -38,7 +38,7 @@ then to confirm version and install status
 dotnet workload list
 ```
 
-{{</hint >}}
+{{< /callout >}}
 
 # The `Wow`
 
@@ -47,13 +47,13 @@ The sample I tried to run in Visual Studio did not work, so I switched to anothe
 I was even more impressed when I saw an example solution that had both a Windows Forms and a WPF app. I wanted to test how easy it was to set up and find a situation that would require me to code.
 
 
-{{< hint warning >}}
+{{< callout type="warning" >}}
 **My sample repo** 
 
 You can find my sample .NET Aspire applicaton here:
 https://github.com/garrardkitchen/dotnet-aspire-and-redis-sample
 
-{{</hint>}}
+{{< /callout >}}
 
 To create your first .NET Aspire application is straight forward.  From the menu you choose `Create a new project`.  I filtered on the .NET Apsire project type just to see what's available:
 
@@ -224,11 +224,11 @@ Well, I couldn't wait to use AZD to deploy my sample app.  Sadly, this didn't go
 
 I got this error [condensed] at the deploy application stage:
 
-{{< hint danger>}}
+{{< callout type="error" >}}
 
 error CONTAINER1013: Failed to push to the output registry: The request was canceled due to the configured HttpClient.Timeout of 100 seconds elapsing
 
-{{</ hint>}}
+{{< /callout >}}
 
 I managed to deploy most of the infra plus 2 ACAs (`apiserver` and `cache`) with the `azd up` command but failed to deploy `webfrontend`.  On retry, it fails this time with `apiservice` which it had previously deployed successfully.  I retried with `azd deploy webfrontend` but I saw a repeat of the the above.
 
