@@ -6,7 +6,7 @@ tags: [nodejs, cluster, docker, docker-compose, resilience]
 
 If by accident to deploy a solution using the [Node.js](https://nodejs.org/en/) [Cluster API](https://nodejs.org/dist/latest-v14.x/docs/api/cluster.html) and do not fork exited processes then the following `docker-compose` restart_policy will not help you:
 
-```yml
+```yml {filename="docker-compose.yml"}
 deploy:
     restart_policy:
         condition: on-failure
@@ -16,7 +16,7 @@ If you're using the Cluster API to schedule tasks across your processes, and all
 
 Take this code for example, you will see that it doesn't fork another process and therefore, at some point it will no longer process any anything:
 
-```ts
+```ts {filename="cluster-service.ts"}
 import { Injectable } from '@nestjs/common';
 import * as cluster from 'cluster';
 import * as os from 'os'
@@ -60,7 +60,7 @@ export class ClusterService {
 
 To mitigate this, you simply fork another process within the `exit` event handler like this:
 
-```ts
+```ts {filename="server.ts"}
 cluster.on('exit', (worker, code, signal) => {
     console.log(`worker ${worker.process.pid} died ${signal || code}, restarting...`);
     const newWorker = cluster.fork();
@@ -76,7 +76,7 @@ To avoid the container not restarting due to lack of process availability to dea
 
 ---
 
-```yml
+```yml {filename="docker-compose.yml"}
 deploy:
     replicas: 1
     resources:

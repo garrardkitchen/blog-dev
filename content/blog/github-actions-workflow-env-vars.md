@@ -75,8 +75,8 @@ For context, I've pasted below an example of where the `TAG` env var is being co
 
 Here's a note on being sympathetic to our development teams' nuances...
 
-{{< hint info >}}
+{{< callout type="info" >}}
 
 We are using the approach of regenerating feature images and deploying from one workflow_dispatcher instead of triggering a deployment from a merge to a dedicated development branch. Our (the virtual team I'm managing that is the Platform Team - senior staff) combined experience lead us to determine that a dedicated development branch will get out of sync with our main branch.  This is especially problematic if your branching strategy predicates promoting to production via a merge to main from a dedicated development branch.  To compound this point, we often have multiple developers concurrently working on the same repo so this in itself presents inherent complexities so arriving at a CICD pipelines wasn't clear cut as teams have subtle nuances around how they build & deploy features/fixes.
 
-{{< /hint >}}
+{{< /callout >}}

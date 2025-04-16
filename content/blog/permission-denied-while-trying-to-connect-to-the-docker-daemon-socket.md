@@ -6,16 +6,17 @@ tags: [docker, linux, github actions, GHA, Self-Hosted Runner, dotnet, Azure Con
 
 Out of the blue today, my first day back after Christmas break, I got this when running a GH Actions Workflow on one of our Self-Hosted Linux Runners 😱:
 
-{{< hint danger >}}
+{{< callout type="error" >}}
 
 Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/json": dial unix /var/run/docker.sock: connect: permission denied
-{{< /hint >}}
 
-{{< hint info >}}
+{{< /callout >}}
+
+{{< callout type="info" >}}
 
 We have several GitHub Self-Hosted Runners running on Linux and Windows O/S that produce, amongst other artefacts, Linux and Windows images.  These images are pushed to ACR.  We're in the process of migrating our on-premise real-estate - IIS Web apps, Windows Services, Docker swarm containers - to AKS as well as migrating our SQL Server AG to Azure.  We're using Self-Hosted Runners as we have spare compute capacity and some of our applications have a dependency on a legacy NuGet server which requires our CI pipelines to run in our network.  We are in the process of also migrating these legacy packages to our Azure DevOps NuGet Feed as part of our modernization initiative. This modernization initiative encompasses upgrading our runtimes to .NET Framework 4.8 and .NET 6.0.
 
-{{< /hint >}}
+{{< /callout >}}
 
 It had been running fine prior to my break so what gives?  I started to investigate...
 
@@ -51,9 +52,9 @@ sudo systemctl status docker
 
 It reported:
 
-{{< hint info >}}
+{{< callout type="info" >}}
 Active: active (running) since Thu 2021-09-16 14:13:04 UTC; 3 months 20 days ago
-{{< /hint >}}
+{{< /callout >}}
 
 Ok, what next? 🤔
 
@@ -66,7 +67,7 @@ sudo ./svc.sh start
 
 This is when I saw these failures:
 
-{{< hint danger >}}
+{{< callout type="error" >}}
 
 Dec 19 22:01:15 *redacted* runsvc.sh[291703]: 2021-12-19 22:01:15Z: Runner connect error: The HTTP request timed out after 00:01:00.. Retrying unt…econnected.
 
@@ -79,7 +80,7 @@ Jan 06 14:42:41 *redacted* runsvc.sh[291703]: 2022-01-06 14:42:41Z: Job deploy c
 Jan 06 14:46:19 *redacted* runsvc.sh[291703]: 2022-01-06 14:46:19Z: Running job: deploy
 
 ...
-{{< /hint >}}
+{{< /callout >}}
 
 I restarted the Self-Hosted Runner using these commands:
 

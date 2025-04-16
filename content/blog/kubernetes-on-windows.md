@@ -25,22 +25,22 @@ That’s how `Kubernetes` comes to the rescue! Kubernetes provides you with a fr
 <!-- {{< note title="Permissions">}} -->
 <!-- {{</ note>}} -->
 
-{{< hint info >}}
+{{< callout type="info" >}}
 **Permissions** 
 
 To install <b>kubectl</b> and <b>minikube</b> you must start Powershell with Administrator permissions
-{{< /hint >}}
+{{< /callout >}}
 
 
 <!-- {{< note title="Shell" warning="true">}}
 {{</ note >}} -->
 
-{{< hint warning >}}
+{{< callout type="warning" >}}
 
 **Shell**
 
 These settings will only viable for the current shell, if you need to run another shell, ensure the <b>minikube docker-env</b> commands in the <b>Steps to take to configure your environment</b> section are also executed in the new shell. As minikube is the tool that runs a local cluster in your development environment, we need to tell it to use it's built-in docker daemon and have images pulled from there, and not from a container registry.
-{{< /hint>}}
+{{< /callout >}}
 
 ### How do I install `kubectl` (and what the heck is it)?
 
@@ -112,7 +112,7 @@ PS C:\> minikube.exe dashboard
 
 Here's some sample nodejs (`server.js`) code. It starts a server on port 8080:
 
-```js
+```js {filename="server.js"}
 var http = require('http');
 
 var handleRequest = function (request, response) {
@@ -127,7 +127,7 @@ www.listen(8080);
 
 Here's a `Dockerfile` for the above `nodejs` server. Please observe that it exposes port 8080. This ensures that network TCP traffic can be received by the container via port 8080.
 
-```Dockerfile
+```Dockerfile {filename="dockerfile"}
 FROM node:13.5.0
 EXPOSE 8080
 COPY server.js .
@@ -142,11 +142,11 @@ PS C:\> docker build -t hello-world:1 .
 <!-- {{< note warning="true" title="Include a build tag">}}
 {{</ note>}} -->
 
-{{< hint warning >}}
+{{< callout type="warning" >}}
 **Include a build tag**
 
 You must specify a version tag and it has to be something other than **latest**. Here, I have used **1**.  If you don't follow these instructions, minikube will attempt to pull the image from a docker registry (normally DockerHub).
-{{< /hint >}}
+{{< /callout >}}
 
 
 To check that the image exists in Minikube's built-in Docker daemon, run:

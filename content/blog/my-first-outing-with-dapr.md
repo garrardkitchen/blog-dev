@@ -4,14 +4,14 @@ date: 2020-11-06T09:54:02Z
 tags: [dapr, kubernetes, redis, secret store csi driver, aks, nestjs, keda]
 ---
 
-TL;DR: Not as forgiving as I'd have liked ...
+**TL;DR**: Not as forgiving as I'd have liked ...
 
-{{< hint info >}}
+{{< callout type="info" >}}
 
 I was a speaker at a meet-up in Manchester in late 2020. I spoke about Dapr, Keda and the NestJS Framework.  My talk topic was on "Writing less code - let your architecture and abstractions help with your *-cases".  The `*` in the title is a wildcard for use/edge/corner.  
 
 My code examples can be found here (includes both docker compose & Kubernetes manifests) - https://github.com/garrardkitchen/meetup-nov20
-{{< /hint >}}
+{{< /callout >}}
 
 ## Challenge #1 
 
@@ -168,10 +168,10 @@ time="2020-11-06T11:23:20.529658232Z" level=info msg="component loaded. name: my
 
 ---
 
-{{< hint info >}}
+{{< callout type="info" >}}
 
 This post was created some time ago.  Now, we're using the Secrets Store CSI Driver to map Azure KeyVault secrets to containers running in our AKS clusters.
 
 Ref: https://docs.microsoft.com/en-us/azure/aks/csi-secrets-store-driver
-{{< /hint >}}
+{{< /callout >}}
 
