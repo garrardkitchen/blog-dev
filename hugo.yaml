@@ -50,10 +50,14 @@ enableInlineShortcodes: true
 
 menu:
   main:
-    - identifier: documentation
-      name: Documentation
-      pageRef: /docs
+    - identifier: blog
+      name: Blog
+      pageRef: /blog
       weight: 1
+    - identifier: documentation
+      name: How to
+      pageRef: /docs
+      weight: 2
     # - identifier: showcase
     #   name: Showcase
     #   pageRef: /showcase
@@ -61,26 +65,22 @@ menu:
     - identifier: ai
       name: AI
       pageRef: /ai
-      weight: 2
+      weight: 3
     - identifier: gaming
       name: Gaming
       pageRef: /gaming
-      weight: 2
-    - identifier: blog
-      name: Blog
-      pageRef: /blog
-      weight: 3
+      weight: 4    
     - identifier: about
       name: About
       pageRef: /about
-      weight: 4
-    - name: Search
       weight: 5
+    - name: Search
+      weight: 6
       params:
         type: search
     - name: GitHub
-      weight: 6
-      url: "https://github.com/imfing/hextra"
+      weight: 7
+      url: "https://github.com/garrardkitchen"
       params:
         icon: github
 
@@ -95,8 +95,8 @@ menu:
       pageRef: "/about"
       weight: 2
     - identifier: hugoDocs
-      name: "Hugo Docs ↗"
-      url: "https://gohugo.io/documentation/"
+      name: "Resume ↗"
+      url: "https://www.garrardkitchen.com/"
       weight: 3
 
 params:
