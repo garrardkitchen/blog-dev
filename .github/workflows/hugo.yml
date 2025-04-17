@@ -94,7 +94,7 @@ jobs:
         id: staging
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAT_SCOPE_REPO }}
           publish_dir: ./public
           external_repository: garrardkitchen/blog-staging
           publish_branch: main
