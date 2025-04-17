@@ -5,9 +5,9 @@ draft: true
 ---
 
 
-{{< hint danger >}}
+ {{< callout type="error" >}}
 Error: Az CLI Login failed. Please check the credentials and make sure az is installed on the runner
-{{< /hint>}}
+{{< /callout >}}
 
 
 Turns out I forgot to assign SP a RBAC role and scope!

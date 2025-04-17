@@ -31,9 +31,9 @@ Here are my observations:
 - You CANNOT add package from private feed
 ```
 
-{{< hint warning example>}}
+{{< callout type="warning" >}}
 dotnet add package xunit --version 2.4.2
-{{</ hint>}}
+{{< /callout >}}
 
 👆 This example does not add a cached version of this package to your private feed
 

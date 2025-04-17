@@ -166,11 +166,11 @@ $ openssl dgst -sha256 -sign private.pem -out msg.signature msg
 
 `rsautl`, unlike `dgst`, does **not create a hash** or ASN1 encoding. 
 
-{{< hint danger >}}
+ {{< callout type="error" >}}
 
 As `rsautl` uses the RSA algorithm directly, it can only be used to sign, or verify, small pieces of data:  
 
-{{</ hint >}}
+{{< /callout >}}
 
 ```shell
 $ openssl rsautl -sign -in msg -inkey private.pem -out msg.sig

@@ -12,7 +12,7 @@ npm install
 
 I got this little cherub back instead:
 
-{{< hint danger >}}
+{{< callout type="error" >}}
 
 npm ERR! code E401
 
@@ -39,7 +39,7 @@ npm ERR! A complete log of this run can be found in:
 
 npm ERR!     C:\Users\garrard.kitchen\AppData\Local\npm-cache\_logs\2022-01-22T16_53_11_848Z-debug-0.log
 
-{{</ hint >}}
+{{< /callout >}}
 
 Ok then, I've _obviously_ set my default registry to something other than npmjs!
 

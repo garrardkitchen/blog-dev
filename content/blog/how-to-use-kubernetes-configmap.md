@@ -192,11 +192,10 @@ metadata:
 ```
 
 
-{{< hint danger >}}
-
+ {{< callout type="error" >}}
 This is just a Base64 encoded string of `mypassword`.  This is not secure enough.  We need another way of to protect our sensitive information/passwords.
 
-{{< /hint >}}
+{{< /callout >}}
 
 So, what do we do?
 

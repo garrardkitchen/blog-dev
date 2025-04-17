@@ -43,9 +43,9 @@ Ok, let me explain 👀 ...
 
 A deployment manifest _kind_ is a manifest that describes the desired state of your application(s).  I say applications here as a POD can contain more than one container (application).  The desired part of this is found in a ReplicaSet _kind_ manifest.  For example, you'd use a ReplicaSet if you require to have 2 replicas (instances) of your POD running.  A Deployment manifest is a short-hand way of stipulating this, ergo, saves you having to create 2 separate manifests.  Makes sense?  Good.
 
-{{< hint info >}}
+ {{< callout type="info" >}}
 Behind the scenes, it is the **Deployment Controller** that monitors your deployment's desired state and if it differs, it will return to it's desired state.        
-{{</ hint >}}
+{{< /callout >}}
 
 So why is there two mentions of `metadata`?  Ok, The first reference identifies this Deployment object itself:
 

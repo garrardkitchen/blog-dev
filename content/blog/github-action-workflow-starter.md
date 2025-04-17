@@ -2,7 +2,7 @@
 title: "Github Action Workflow Starter"
 date: 2022-01-09T15:36:45Z
 tags: [github action workflow, starter, cruft, azure devops, bamboo, github plans]
-draft: true
+draft: false
 ---
 
 REWRITE!
@@ -26,9 +26,9 @@ Someone, not too long ago, said to me, "There you go, you got your way in the en
 
 At Carfinance 247 we use a variety of CICD tooling.  This list includes Bamboo, Azure DevOps as well as GitHub Actions.  We're moving away from **Bamboo** as it's been determined as not fit for purpose; it fails from time to time as well as being painfully slow (to execute, render).  Zero TLC provided.  This however may be due, in part, to it being 2 major versions behind the latest release and being last updated in 2017!  Then there's **Azure DevOps**.  This requires an unwelcome amount of cruft.  For example, creating Service Connections then sharing with projects.  If you're using templates which requires convention over configuration, then you have to rename these service connections instances. Then there's the permissions faff and lack of features like not being able to create global variables?!  which leaves **GitHub Actions** 🥳.  Sadly, we're not on the Enterprise plan and missing out on features that would undoubtedly contribute to further reductions in effort.  This post is orientated to a non-enterprise plan perspective <sup>1</sup>
 
-{{< hint warning >}}
+{{< callout type="warning" >}}
 We have also learned that **Azure DevOps** isn't on their [Microsoft] long term roadmap
-{{< /hint>}}
+{{< /callout >}}
 
 # Creating a GHA Workflow starter
 

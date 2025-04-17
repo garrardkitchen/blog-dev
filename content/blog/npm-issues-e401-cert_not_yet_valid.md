@@ -8,7 +8,7 @@ Today a PR Merge resulted in a GHA failure.  Sadly, this is not the only CICD pi
 
 This was the error:
 
-{{< hint danger >}}
+{{< callout type="error" >}}
 ---
 [3/7] RUN npm install:
 
@@ -22,7 +22,7 @@ This was the error:
 
 #7 1.475 npm ERR!     /root/.npm/_logs/2021-12-27T09_38_24_060Z-debug.log
 
-{{< /hint >}}
+{{< /callout >}}
 
 Mmmm, E401? 🤔
 
@@ -94,7 +94,7 @@ I re-ran the `docker build -t <image:tag> .` This time I got a different error b
 
 The new error:
 
-{{< hint danger >}}
+{{< callout type="error" >}}
 
 #7 43.61 npm ERR! code CERT_NOT_YET_VALID
 
@@ -102,7 +102,7 @@ The new error:
 
 #7 43.61 npm ERR! request to https://xuavsblobprodsu6weus12.blob.core.windows.net/b-7a3f75bdbbf3432bbe2621e93c98932a/86CDB768B8C395B14974*********1963D831555B55E3458*********************.blob?sv=2019-07-07&sr=b&si=1&sig=LUCuO42mrmOAx5N*************zds9RWS0v2qL%2FwbB86c%3D&spr=https&se=2022-01-12T11%3A42%3A24Z&rscl=x-e2eid-59793e65-**********-a727df6e-***********-session-59793e65-**********-a727df6e-8c628cc8&rscd=attachment%3B%20filename%3D%22string-width-4.2.3.tgz%22 failed, reason: certificate is not yet valid
 
-{{< /hint>}}
+{{< /callout >}}
 
 Mmmm, `CERT_NOT_YET_VALID`.  I'd not seen this error before.  Google...
 
