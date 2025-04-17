@@ -75,10 +75,26 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}      
+      url: ${{ steps.deployment.outputs.page_url }}            
     runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  deploy_staging:
+    needs: deploy
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: https://blog-staging.garrardkitchen.com
+    steps:
+      - name: Deploy to staging
+        id: staging
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          external_repository: garrardkitchen/blog-staging
+          publish_branch: main
