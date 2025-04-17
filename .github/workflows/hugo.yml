@@ -90,6 +90,9 @@ jobs:
       name: staging
       url: https://blog-staging.garrardkitchen.com
     steps:
+      - name: Debug Token
+        run: |
+          echo "Token Length: ${#${{ secrets.PAT_SCOPE_REPO }}}"
       - name: Deploy to staging
         id: staging
         uses: peaceiris/actions-gh-pages@v4
@@ -98,3 +101,4 @@ jobs:
           publish_dir: ./public
           external_repository: garrardkitchen/blog-staging
           publish_branch: main
+          cname: blog-staging.garrardkitchen.com
