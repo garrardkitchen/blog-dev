@@ -96,7 +96,7 @@ jobs:
       url: https://blog-staging.garrardkitchen.com
     steps:
       - name: Download public directory artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.2.1
         with:
           name: public-artifact
       - name: Debug Public Directory
