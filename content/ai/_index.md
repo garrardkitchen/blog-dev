@@ -1,6 +1,8 @@
 ---
-linkTitle: "ai"
+linkTitle: "AI"
 title: Artificial Intelligence
+cascade:
+  type: docs
 ---
 
 Welcome to the home of Artificial Intelligence (AI) content! Here, you'll find discussions, explanations, and insights into a wide range of AI concepts and technologies. Below is an overview of some key topics, along with their definitions and additional relevant items for exploration:
