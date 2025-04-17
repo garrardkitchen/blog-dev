@@ -4,6 +4,9 @@ title: Welcome
 prev: /docs/guide/shortcodes/tabs
 next: /docs/advanced/multi-language
 layout: hextra-home
+
+# cascade:
+#   type: blog
 ---
 
 👋 Hey! Welcome to my blog, where I share insights, stories, and a few extra surprises!
