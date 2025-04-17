@@ -70,6 +70,11 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
+      - name: Upload public directory as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: public-artifact
+          path: ./public
 
   # Deployment job
   deploy:
@@ -90,9 +95,14 @@ jobs:
       name: staging
       url: https://blog-staging.garrardkitchen.com
     steps:
-      - name: Debug Token
+      - name: Download public directory artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: public-artifact
+      - name: Debug Public Directory
         run: |
-          echo "Token Length: ${#${{ secrets.PAT_SCOPE_REPO }}}"
+          echo "Contents of public directory:"
+          ls -al ./public || echo "Public directory not found!"
       - name: Deploy to staging
         id: staging
         uses: peaceiris/actions-gh-pages@v4
