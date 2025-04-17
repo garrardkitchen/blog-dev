@@ -15,8 +15,8 @@ layout: hextra-home
 
 {{< cards cols="2">}}
   {{< card link="blog" title="Blog" icon="annotation" >}}
-  {{< card link="nuggets" title="Nuggets" icon="bookmark-alt" tag="new" tagType="info" >}}
-  {{< card link="docs" title="How To" icon="translate" >}}
+  <!-- {{< card link="nuggets" title="Nuggets" icon="bookmark-alt" tag="new" tagType="info" >}}
+  {{< card link="docs" title="How To" icon="translate" >}} -->
   {{< card link="ai" title="Artificial Intelligence" icon="academic-cap" tag="new" tagType="info" >}}
   {{< card link="gaming" title="Gaming" icon="puzzle" >}}
 {{< /cards >}}
