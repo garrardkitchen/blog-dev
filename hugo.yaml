@@ -54,10 +54,10 @@ menu:
       name: Blog
       pageRef: /blog
       weight: 1
-    # - identifier: nuggets
-    #   name: Nuggets
-    #   pageRef: /nuggets
-    #   weight: 2
+    - identifier: nuggets
+      name: Nuggets
+      pageRef: /nuggets
+      weight: 2
     # - identifier: documentation
     #   name: How to
     #   pageRef: /docs

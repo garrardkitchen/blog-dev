@@ -3,6 +3,7 @@ linkTitle: MCP
 title: Model Context Protocol Nuggets
 # prev: /docs/guide/shortcodes/tabs
 # next: /docs/advanced/multi-language
+draft: true
 ---
 
 This section covers some advanced topics of the theme.
