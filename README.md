@@ -1,4 +1,4 @@
-# Garrard Kitchen Blog Monorepo
+# Garrard Kitchen blog, insights, stories, and a few extra surprises!
 
 ## Contents
 
