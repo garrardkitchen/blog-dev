@@ -1,5 +1,5 @@
 ---
-title: Model Context Protocol
+title: Comparison to OpenAPI
 date: 2022-01-27T11:49:14+01:00
 ---
 

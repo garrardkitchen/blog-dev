@@ -1,6 +1,7 @@
 ---
 date: 2025-04-17
-Title: Local
+title: Local
+description: A collection of links, how to's and posts on MCP
 ---
 
 ## Links

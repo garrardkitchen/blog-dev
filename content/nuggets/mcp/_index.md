@@ -12,6 +12,6 @@ This section covers some advanced topics of the theme.
 
 {{< cards >}}
   {{< card link="mcp-local" title="Local" icon="translate" >}}
-  {{< card link="mcp-remote" title="Remote" icon="pencil" >}}
-  {{< card link="mcp-vscode" title="VSCode System" icon="chat-alt" >}}
+  <!-- {{< card link="mcp-remote" title="Remote" icon="pencil" >}}
+  {{< card link="mcp-vscode" title="VSCode System" icon="chat-alt" >}} -->
 {{< /cards >}}
