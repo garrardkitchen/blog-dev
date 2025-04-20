@@ -17,6 +17,6 @@ I'm a DevSecOps expert, Cloud Native Lead, and Distinguished Engineer specializi
 
 As a seasoned developer proficient in C# and JavaScript (including TypeScript), with additional experience in Python and Rust, I am deeply passionate about crafting Infrastructure as Code using tools like Terraform and Bicep. I also specialize in orchestrators like Kubernetes, serverless computing, and cutting-edge development with WebAssembly (WASM) outside the browser (OOB), empowering organizations to harness the full potential of automation and cloud-native architecture. Beyond my technical expertise, I am devoted to mentoring aspiring engineers and helping them navigate the ever-changing tech landscape.
 
-Outside the world of technology, I am a proud father of two energetic boys and a loving husband. This blog is my space to share insights, lessons, and stories from my professional journey and personal life. Whether you're here for tech tips, career advice, or a glimpse into my day-to-day experiences, I hope you'll find something inspiring and valuable.
+Outside the world of technology, I am a proud father of two energetic boys and a loving and committed husband to Louise. This blog is my space to share insights, lessons, and stories from my professional journey and personal life. Whether you're here for tech tips, career advice, or a glimpse into my day-to-day experiences, I hope you'll find something inspiring and valuable.
 
 Thanks for stopping by!
