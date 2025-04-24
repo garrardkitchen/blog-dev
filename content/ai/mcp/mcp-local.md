@@ -1,11 +1,8 @@
 ---
 date: 2025-04-17
-title: Local MCP Server
+title: MCP Local Server
 description: A collection of links, how to's and posts on MCP
 ---
-
-## Links
-
 
 | Link | Description | |
 | :-: | :- |:-: |

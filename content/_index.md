@@ -19,4 +19,5 @@ layout: hextra-home
   <!-- {{< card link="docs" title="How To" icon="translate" >}} -->
   {{< card link="ai" title="Artificial Intelligence" icon="academic-cap" tag="new" tagType="error" >}}
   {{< card link="gaming" title="Gaming" icon="puzzle" >}}
+  {{< card link="about" title="About" icon="information-circle" >}}
 {{< /cards >}}
