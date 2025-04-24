@@ -29,7 +29,7 @@ An MCP server acts as a bridge between your development environment and AI tools
 
 1. **Get the MCP Server Code**
 
-   Download or clone the MCP server implementation from the [official repository](https://github.com/garrardkitchen/mcp-server-example).
+   Download or clone the MCP server implementation from the [MCP Server repository](https://github.com/garrardkitchen/mcp-server-example).
 
 2. **Open the Agent Pane in VSCode**
 
