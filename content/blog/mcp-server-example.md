@@ -14,7 +14,7 @@ This guide walks you through the process of connecting a Model Context Protocol 
 
 ## What is Model Context Protocol (MCP)?
 
-Model Context Protocol (MCP) is an open standard that enables editors, AI tools, and services to share and understand the context of your workspace or project. By providing a standardized way to communicate context (such as open files, project structure, or user actions), MCP improves the quality, privacy, and interoperability of AI-powered suggestions.
+Model Context Protocol (MCP) is an open protocol that standardizes how applications supply context to large language models (LLMs), similar to how USB-C standardizes device connections. It enables AI tools to integrate with local and remote data sources, supporting agent workflows, flexibility between vendors, and secure handling of user data. MCP follows a client-server architecture with hosts, clients, and servers working together.
 
 For more information, see the [Model Context Protocol website](https://modelcontext.org/).
 
