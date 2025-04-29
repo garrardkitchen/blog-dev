@@ -10,7 +10,7 @@ tags: [prompts, prompt engineering, ai, vscode]
 
 This post explains what prompts are in the context of GitHub Copilot Chat, how to create reusable prompts in the `.github/prompts` directory, and how to automatically include them in Copilot Chat using the `github.copilot.chat.codeGeneration.instructions` setting. An example and useful references are provided.
 
-For more tips on writing effective prompts and using Copilot efficiently, see the [Best Practices for Using GitHub Copilot](#best-practices-for-using-github-copilot) section below.
+For more tips on writing effective prompts and using Copilot efficiently, see the [Best Practices for Using GitHub Copilot](https://docs.github.com/en/copilot/using-github-copilot/best-practices-for-using-github-copilot).
 
 ## Understanding Prompts in GitHub Copilot Chat
 
