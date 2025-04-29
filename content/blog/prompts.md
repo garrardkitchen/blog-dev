@@ -29,9 +29,9 @@ Example (`.github/prompts/readme.prompt.md`):
 Always use 2 spaces for indentation and single quotes for strings.
 ```
 
-## Automatically Including Prompts in Copilot Chat
+## Automatically Including Prompts in Copilot Chat (User or Workspace settings)
 
-To have Copilot Chat automatically use your custom prompts, configure the `github.copilot.chat.codeGeneration.instructions` setting in your workspace settings (e.g., `.vscode/settings.json`):
+To have Copilot Chat automatically use your custom prompts, configure the `github.copilot.chat.codeGeneration.instructions` setting in your workspace settings:
 
 ```json
 {
@@ -43,7 +43,24 @@ To have Copilot Chat automatically use your custom prompts, configure the `githu
 }
 ```
 
-This tells Copilot Chat to include the content of `readme.prompt.md` as context for your requests.
+## Automatically Include Prompts in Copilot Chat (Folder settings)
+
+To have Copilot Chat automatically use your custom prompts, configure the `github.copilot.chat.codeGeneration.instructions` setting in your Folder settings (has highest priority and will override both User and Workspace settings):
+
+```json {filename=".vscode/settings.json"}
+{
+  "github.copilot.chat.codeGeneration.instructions": [
+    {
+      "file": ".github/prompts/readme.prompt.md"
+    }
+  ]
+}
+```
+
+>[!NOTE]
+> You will need to include the full path for Copilot to find this file
+
+This tells Copilot Chat to include the content of `readme.prompt.md` as context for each request.
 
 ## Example
 
@@ -55,10 +72,10 @@ Always use 2 spaces for indentation and single quotes for strings.
 
 Then, update `.vscode/settings.json`:
 
-```json
+```json {filename=".vscode/settings.json"}
 {
   "github.copilot.chat.codeGeneration.instructions": [
-    { "file": "codestyle.prompt.md" }
+    { "file": ".github/prompts/codestyle.prompt.md" }
   ]
 }
 ```
