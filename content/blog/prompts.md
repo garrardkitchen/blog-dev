@@ -82,9 +82,24 @@ Then, update `.vscode/settings.json`:
 
 Now, Copilot Chat will automatically consider your code style instructions.
 
+> [!TIP] 
+> To share instructions across multiple projects within a VS Code workspace, create a **`.github/prompts/`** folder at the workspace root and place your instruction markdown files in that folder.
+
+## Custom instructions settings
+
+> [!NOTE]
+> There are multiple custom instructions settings.  These are listed below
+
+- **`github.copilot.chat.codeGeneration.useInstructionFiles`**: controls whether code instructions from .github/copilot-instructions.md are added to Copilot requests.
+- **`github.copilot.chat.codeGeneration.instructions (Experimental)`**: set of instructions that will be added to Copilot requests that generate code.
+- **`github.copilot.chat.testGeneration.instructions (Experimental)`**: set of instructions that will be added to Copilot requests that generate tests.
+- **`github.copilot.chat.reviewSelection.instructions (Preview)`**: set of instructions that will be added to Copilot requests for reviewing the current editor selection.
+- **`github.copilot.chat.commitMessageGeneration.instructions (Experimental)`**: set of instructions that will be added to Copilot requests that generate commit messages.
+- **`github.copilot.chat.pullRequestDescriptionGeneration.instructions (Experimental)`**: set of instructions that will be added to Copilot requests that generate pull request titles and descriptions.
+
 ## References
 
 - [GitHub Copilot Chat Cookbook](https://docs.github.com/en/copilot/copilot-chat-cookbook)
-- [GitHub Copilot Chat Documentation](https://docs.github.com/en/copilot/copilot-chat)
-- [Configuring Copilot Chat](https://docs.github.com/en/copilot/copilot-chat/configuring-copilot-chat)
+- [GitHub Copilot Tips and Tricks](https://code.visualstudio.com/docs/copilot/copilot-tips-and-tricks)
+- [Customise Copilot Chat](https://code.visualstudio.com/docs/copilot/copilot-customization)
 - [Best Practices for Using GitHub Copilot](https://docs.github.com/en/copilot/using-github-copilot/best-practices-for-using-github-copilot)
