@@ -83,7 +83,7 @@ Then, update `.vscode/settings.json`:
 Now, Copilot Chat will automatically consider your code style instructions.
 
 > [!TIP] 
-> To share instructions across multiple projects within a VS Code workspace, create a **`.github/prompts/`** folder at the workspace root and place your instruction markdown files in that folder.
+> To share instructions across multiple projects within a VS Code Workspace, create a **`.github/prompts/`** folder in your elected main project and start adding instruction markdown files in that folder.
 
 ## Custom instructions settings
 
