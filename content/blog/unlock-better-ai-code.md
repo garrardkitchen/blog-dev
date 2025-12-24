@@ -1,6 +1,6 @@
 ---
 title: "Unlock Better AI Code - Why Small Batches are Your Secret Weapon"
-date: 2025-12-24T10:00:00Z
+date: 2025-11-20T10:00:00Z
 draft: false
 author: "Garrard Kitchen"
 tags: ["ai-assisted-development", "prompt-engineering", "software-engineering", "best-practices", "agile"]

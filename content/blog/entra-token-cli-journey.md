@@ -1,5 +1,5 @@
 ---
-title: "Building EntraTool: A Secure CLI for Microsoft Entra ID Token Management"
+title: "Building EntraTool - A Secure CLI for Microsoft Entra ID Token Management"
 date: 2025-12-18T10:00:00Z
 draft: false
 author: "Garrard Kitchen"
