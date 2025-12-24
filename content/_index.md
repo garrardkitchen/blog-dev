@@ -13,7 +13,7 @@ layout: hextra-home
 
 <!--more-->
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+<div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; margin-top: 2rem;">
 
 <div>
 
