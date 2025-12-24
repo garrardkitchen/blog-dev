@@ -5,7 +5,17 @@ cascade:
   type: docs
 ---
 
-Welcome to the home of Artificial Intelligence (AI) content! Here, you'll find discussions, explanations, and insights into a wide range of AI concepts and technologies. Below is an overview of some key topics, along with their definitions and additional relevant items for exploration:
+Welcome to the home of Artificial Intelligence (AI) content! Here, you'll find discussions, explanations, and insights into a wide range of AI concepts and technologies. 
+
+Here are some post links relating to AI:
+
+ - [Unlock Better AI Code - Why Small Batches are Your Secret Weapon](/blog/unlock-better-ai-code)
+ - [This post explains what prompts are and how to creating them in the context of GitHub Copilot Chat](/blog/prompts)
+ - [Setting Up a Model Context Protocol (MCP) Remote Server in VSCode](/blog/mcp-server-example)
+
+
+
+Below is an overview of some key topics, along with their definitions and additional relevant items for exploration:
 
 ### Large Language Models (LLM)
 Large Language Models are advanced AI models designed to process and generate human-like text at scale. These models, such as GPT (Generative Pre-trained Transformer), are trained on vast amounts of data and are capable of understanding context, answering questions, summarizing text, and even engaging in conversational AI tasks. They excel in a variety of applications, from content creation to customer support and beyond.
