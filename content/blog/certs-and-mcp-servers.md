@@ -78,6 +78,29 @@ var result = await app
     .ExecuteAsync();
 ```
 
+```python
+# Python — MSAL handles the signed-assertion dance
+import msal
+
+app = msal.ConfidentialClientApplication(
+    client_id=client_id,
+    authority=f"https://login.microsoftonline.com/{tenant_id}",
+    client_credential={
+        "private_key": open("private_key.pem").read(),
+        "thumbprint": "1234567890ABCDEF1234567890ABCDEF12345678",
+    },
+)
+
+result = app.acquire_token_for_client(
+    scopes=["api://mcp-docs.contoso.com/.default"]
+)
+
+if "access_token" in result:
+    token = result["access_token"]
+else:
+    raise RuntimeError(f"{result.get('error')}: {result.get('error_description')}")
+```
+
 ## The resource side: expose an API, define app roles
 
 Each MCP server gets its own app registration — that part is non-negotiable best practice. Each one exposes an API and defines its own app roles, reflecting that server's specific tool surface and risk profile. Setting one up is a four-step job:
