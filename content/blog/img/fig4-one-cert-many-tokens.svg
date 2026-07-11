@@ -1,0 +1,34 @@
+<svg viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="f4t f4d">
+<title id="f4t">One certificate producing differently scoped tokens per MCP server</title>
+<desc id="f4d">One certificate authenticates every request, but Entra issues a differently scoped token per target server: orders roles for the orders API, docs roles for the docs API, and a refusal where no roles are assigned.</desc>
+<style>
+  .th{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:600;font-size:14px}
+  .ts{font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:11.5px}
+  .lbl{font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:11.5px;fill:#5F5E5A}
+</style>
+<defs><marker id="a4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect x="0" y="0" width="680" height="400" rx="12" fill="#FFFFFF"/>
+<rect x="230" y="40" width="220" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text class="th" x="340" y="62" text-anchor="middle" fill="#085041">ElevenLabs client identity</text>
+<text class="ts" x="340" y="82" text-anchor="middle" fill="#0F6E56">one certificate: proves identity</text>
+<line x1="340" y1="96" x2="340" y2="134" stroke="#5F5E5A" stroke-width="1.2" marker-end="url(#a4)"/>
+<rect x="200" y="138" width="280" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text class="th" x="340" y="160" text-anchor="middle" fill="#3C3489">Entra ID token endpoint</text>
+<text class="ts" x="340" y="180" text-anchor="middle" fill="#534AB7">looks up roles per target server</text>
+<path d="M240 194 L130 194 L130 232" fill="none" stroke="#5F5E5A" stroke-width="1.2" marker-end="url(#a4)"/>
+<line x1="340" y1="194" x2="340" y2="232" stroke="#5F5E5A" stroke-width="1.2" marker-end="url(#a4)"/>
+<path d="M440 194 L550 194 L550 232" fill="none" stroke="#5F5E5A" stroke-width="1.2" marker-end="url(#a4)"/>
+<rect x="45" y="236" width="170" height="76" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text class="th" x="130" y="258" text-anchor="middle" fill="#085041">Token: MCP orders</text>
+<text class="ts" x="130" y="278" text-anchor="middle" fill="#0F6E56">aud: mcp-orders</text>
+<text class="ts" x="130" y="296" text-anchor="middle" fill="#0F6E56">roles: Orders.Read</text>
+<rect x="255" y="236" width="170" height="76" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text class="th" x="340" y="258" text-anchor="middle" fill="#085041">Token: MCP docs</text>
+<text class="ts" x="340" y="278" text-anchor="middle" fill="#0F6E56">aud: mcp-docs</text>
+<text class="ts" x="340" y="296" text-anchor="middle" fill="#0F6E56">roles: Docs.Search, Docs.Fetch</text>
+<rect x="465" y="236" width="170" height="76" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<text class="th" x="550" y="258" text-anchor="middle" fill="#791F1F">MCP provisioning</text>
+<text class="ts" x="550" y="278" text-anchor="middle" fill="#A32D2D">no role assigned</text>
+<text class="ts" x="550" y="296" text-anchor="middle" fill="#A32D2D">access refused</text>
+<text class="lbl" x="340" y="356" text-anchor="middle">same certificate every time; the roles claim differs per target server</text>
+</svg>
