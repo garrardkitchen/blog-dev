@@ -244,7 +244,7 @@ Benefits include:
 The following PowerShell commands create a native Windows installation, three isolated profiles, and a gateway for each profile. Open a new PowerShell or Windows Terminal tab after installation so the updated user `PATH` is available.
 
 > [!Warning]
-> Treat each profile as a security boundary. Keep API keys and messaging tokens in that profile's `.env` file, never commit them to source control, and use distinct bot tokens for gateways that run at the same time.
+> Treat each profile as a security boundary. Keep API keys and messaging tokens in that profile's `.env` file, never commit them to source control, and use distinct bot tokens for gateways that run at the same time. File-system permissions can reduce casual access, but they do not encrypt secrets or protect them if the account, device, or profile is compromised. See [Making `.env` Files Secure](https://blog.garrardkitchen.com/blog/making-env-files-secure/).
 
 ## Install and Verify
 
@@ -341,6 +341,10 @@ hermes gateway list
 # Corporate Laptops: Keep the Work Boundary Intact
 
 On a managed corporate laptop, treat Hermes like any other developer platform: install it once for the signed-in user, run a **work** profile through its own auto-starting gateway, and connect it only to tools approved by your organisation.
+
+If your setup allows it, prefer a bastion tunnel to a remote Hermes host rather than exposing the agent directly to the corporate network. That keeps access constrained to an approved entry point while preserving network boundaries and auditability.
+
+When policy is stricter, the cleaner option is a separate device that is not domain-joined or otherwise enrolled in corporate management. That reduces the risk of corporate data ending up on personal or shared drives, and it avoids cross-contamination between work credentials, cached files, and local storage.
 
 > [!Important]
 > Obtain approval from your security, privacy and IT teams before connecting Hermes to corporate repositories, tenants, MCP servers, or data. A profile is an isolation mechanism, not a substitute for organisational controls such as least privilege, data classification, endpoint management, audit logging, and acceptable-use policies.
@@ -497,3 +501,5 @@ That is the transition from **AI assistance** to **engineering intelligence**.
 > **The future won't belong to the organisations with the biggest models.**
 >
 > **It will belong to those that build the best learning systems around them.**
+
+
