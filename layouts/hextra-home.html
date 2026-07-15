@@ -22,16 +22,7 @@
             </a>
           </div>
 
-          <div class="garden-hero-art" aria-hidden="true">
-            <div class="garden-orb garden-orb-coral"></div>
-            <div class="garden-orb garden-orb-sage"></div>
-            <div class="garden-grid-dots"></div>
-            <div class="garden-node garden-node-a"></div>
-            <div class="garden-node garden-node-b"></div>
-            <div class="garden-node garden-node-c"></div>
-            <div class="garden-line garden-line-a"></div>
-            <div class="garden-line garden-line-b"></div>
-          </div>
+          <div class="garden-hero-art garden-hero-svg" aria-hidden="true"><img src="{{ "images/garden/hero.svg" | relURL }}" alt=""></div>
         </section>
 
         <section class="garden-section garden-topic-section">
@@ -43,39 +34,19 @@
           </div>
 
           <div class="garden-topic-grid">
-            <a class="garden-topic topic-cloud" href="{{ "blog" | relURL }}">
-              <span class="topic-symbol">☁</span>
-              <h3>Cloud</h3>
-              <p>Designing resilient, observable platforms that scale.</p>
-              <span>Explore Cloud →</span>
-            </a>
+            <a class="garden-topic topic-cloud" href="{{ "blog" | relURL }}"><img class="garden-topic-art" src="{{ "images/garden/cloud.svg" | relURL }}" alt=""><div class="garden-topic-copy"><h3>Cloud</h3><p>Designing resilient, observable platforms that scale.</p><span>Explore Cloud →</span></div></a>
 
-            <a class="garden-topic topic-ai" href="{{ "ai" | relURL }}">
-              <span class="topic-symbol">✦</span>
-              <h3>AI</h3>
-              <p>Practical AI engineering, from prompts to production.</p>
-              <span>Explore AI →</span>
-            </a>
+            <a class="garden-topic topic-ai" href="{{ "ai" | relURL }}"><img class="garden-topic-art" src="{{ "images/garden/ai.svg" | relURL }}" alt=""><div class="garden-topic-copy"><h3>AI</h3><p>Practical AI engineering, from prompts to production.</p><span>Explore AI →</span></div></a>
 
-            <a class="garden-topic topic-engineering" href="{{ "blog" | relURL }}">
-              <span class="topic-symbol">&lt;/&gt;</span>
-              <h3>Engineering</h3>
-              <p>Patterns, practices and lessons from the trenches.</p>
-              <span>Explore Engineering →</span>
-            </a>
+            <a class="garden-topic topic-engineering" href="{{ "nuggets" | relURL }}"><img class="garden-topic-art" src="{{ "images/garden/engineering.svg" | relURL }}" alt=""><div class="garden-topic-copy"><h3>Engineering</h3><p>Patterns, practices and lessons from the trenches.</p><span>Explore Engineering →</span></div></a>
 
-            <a class="garden-topic topic-gaming" href="{{ "gaming" | relURL }}">
-              <span class="topic-symbol">⌘</span>
-              <h3>Gaming</h3>
-              <p>Thoughts on games, design and what I’m playing.</p>
-              <span>Explore Gaming →</span>
-            </a>
+            <a class="garden-topic topic-gaming" href="{{ "gaming" | relURL }}"><img class="garden-topic-art" src="{{ "images/garden/gaming.svg" | relURL }}" alt=""><div class="garden-topic-copy"><h3>Gaming</h3><p>Thoughts on games, design and what I’m playing.</p><span>Explore Gaming →</span></div></a>
           </div>
         </section>
 
         {{ with index $posts 0 }}
           <section class="garden-featured-post">
-            <div class="garden-featured-art"><span></span><i></i><b></b></div>
+            <div class="garden-featured-art"><img src="{{ "images/garden/agent.svg" | relURL }}" alt="Agent learning feedback loop"></div>
             <div class="garden-featured-copy">
               <p class="garden-eyebrow">Featured</p>
               <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
