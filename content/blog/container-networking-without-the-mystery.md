@@ -1,6 +1,6 @@
 ---
 title: "Container Networking Without the Mystery"
-date: 2026-07-15
+date: 2026-07-14
 draft: false
 featured: true
 tags: [containers, good engineering, security, docker, podman]
