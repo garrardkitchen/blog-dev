@@ -1,0 +1,2 @@
+{{ define "navbar" }}{{ end }}
+<div class="garden-nav"><nav class="garden-nav-inner"><a class="garden-brand" href="{{ .Site.Home.RelPermalink }}">Garrard Kitchen</a><div class="garden-nav-links"><a href="{{ "blog" | relURL }}">Cloud</a><a href="{{ "nuggets" | relURL }}">Engineering</a><a href="{{ "ai" | relURL }}">AI</a><a href="{{ "gaming" | relURL }}">Gaming</a><a href="{{ "about" | relURL }}">About</a></div><div class="garden-nav-actions">{{ partial "search.html" (dict "params" (dict)) }}{{ partial "theme-toggle.html" (dict "hideLabel" true) }}</div></nav></div>
