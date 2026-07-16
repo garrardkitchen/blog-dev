@@ -1,8 +1,11 @@
 ---
 title:  "What is the Inner Loop?"
 date: 2024-07-06T08:18:24+01:00
-tags: [ci, continuous integration, clean code, code quality, Inner-loop]
+tags: [engineering, ci, "continuous integration", "clean code", "code quality", Inner-loop]
 ---
+
+
+In this article, you'll learn what the engineering inner loop contains, how to measure it, and where to shorten feedback without lowering standards. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
 
 This post explores the concept of the Inner Loop in software development, emphasizing its importance in enhancing productivity, reducing feedback delays, and improving code quality. It provides practical examples and tools to optimize the inner loop, ensuring a more efficient and enjoyable development process.
 
@@ -108,3 +111,7 @@ Emerging technologies are set to revolutionize the inner loop. For example:
 
 - **AI-Assisted Development:** Tools like GitHub Copilot can suggest code snippets and automate repetitive tasks, further streamlining the inner loop.
 - **Cloud-Based Development Environments:** Platforms like GitHub Codespaces allow developers to work in pre-configured environments, reducing setup time and ensuring consistency across teams.
+
+## Closing thought
+
+The inner loop is where an engineer forms beliefs about a change; shortening it matters because every delayed signal allows an incorrect belief to travel farther.

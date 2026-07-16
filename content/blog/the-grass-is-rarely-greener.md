@@ -1,8 +1,11 @@
 ---
 title: "The Grass Is Rarely Greener"
 date: 2022-01-30T18:27:54Z
-tags: [azure, aws, empty promises, building relationship, willing, attrition, managed service]
+tags: [engineering, azure, aws, "empty promises", "building relationship", willing, attrition, "managed service"]
 ---
+
+
+In this article, you'll learn how to evaluate a cloud migration by capabilities, constraints, and operating model rather than by vendor promises. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
 
 I recently had a conversation that stirred up some _surpressed_ memories.  The conversation was related to moving to a different cloud vendor.  That journey didn't work out so well for me and the company I was working for at the time.  Sadly, that company stopped trading and I don't think it's that much of a leap to link that journey to the demise of that company.  Hopefully, now the title of this post is starting to make more sense?
 
@@ -32,7 +35,7 @@ Here are a few nuggets that will hopefully resonate:
 
 8 - If technical issues are plaguing you, then likely they'll manifest themselves also on a different cloud provider.  So, if you've invested heavily with a particular tech, or approach, and this is too costly, too risky to the business due to instability, first understand why first before jumping ship.  You never know, you might be using it inefficiently or incorrectly.  Take AKS for instance.  It's hugely involved.  If you get any part of that wrong, it's a risk to your business.
 
-There will be more I'm sure, but for the sake of getting closure on this topic and to put these emotions back into _that_ box, I will leave it there.  
+There will be more I'm sure, but for the sake of getting closure on this topic and to put these emotions back into _that_ box, I will leave it there.
 
 # Recommendations
 
@@ -45,3 +48,7 @@ In summary, my advice is this; evaluate your current platform to identify (in no
 - What is your prominent tech?  For example, if your ecosystem is predominately .NET then Azure is a justifiable Cloud Platform.  You simply won't get the same depth/scope of features/integrations if you go with a different Cloud Provider.  Think about it...would you offer up all your crown jewels to a competing provider? I rest my case!
 
 I do hope this post has been informative.  If I help one person avoid this _more often than not wasted effort_, then this post will have been worth it.  Changes of this magnitude are laden with risk and one thing companies are adverse to is risk.
+
+## Closing thought
+
+A cloud migration is justified when the new operating model solves named constraints; changing logos while carrying the same habits merely relocates the difficult work.

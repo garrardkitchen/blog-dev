@@ -3,8 +3,11 @@ title: "Kubernetes on Windows"
 date: 2020-04-06T10:20:26+01:00
 draft: false
 featured: true
-tags: [blogging, kubernetes, setup, windows, containers, pods, services, azure, aws, gcp]
+tags: [cloud, kubernetes, setup, windows, containers, pods, services, azure, aws, gcp]
 ---
+
+
+In this article, you'll learn how to build a local Kubernetes learning environment on Windows and understand each moving part rather than memorising commands. That distinction matters because cloud failures usually emerge at the seams between configuration, identity, networking, and operations.
 
 This post is a reminder to me of what needs to be installed in order for a `pod`, created from a local image, that is to be served up via a `kubernetes cluster`, to be run from your local development environment.
 
@@ -20,15 +23,15 @@ That’s how `Kubernetes` comes to the rescue! Kubernetes provides you with a fr
 
 `Kubernetes` is the community's (has a much larger community than that of `Swarm's` community) choice of `container` `orchestrators`.
 
-### Some important notices  
+### Some important notices
 
 <!-- {{< note title="Permissions">}} -->
 <!-- {{</ note>}} -->
 
 {{< callout type="info" >}}
-**Permissions** 
+**Permissions**
 
-To install <b>kubectl</b> and <b>minikube</b> you must start Powershell with Administrator permissions
+To install <b>kubectl</b> and <b>minikube</b> you must start PowerShell with Administrator permissions
 {{< /callout >}}
 
 
@@ -95,12 +98,12 @@ $Env:MINIKUBE_ACTIVE_DOCKERD = "minikube"
 # & minikube -p minikube docker-env | Invoke-Expression
 ```
 
-To point your shell to minikube's docker-daemon, run: 
+To point your shell to minikube's docker-daemon, run:
 ```ps
 PS C:\> minikube docker-env | Invoke-Expression
 ```
 
-To get access to minikube's dashboard, run: 
+To get access to minikube's dashboard, run:
 
 ```ps
 PS C:\> minikube.exe dashboard
@@ -191,7 +194,7 @@ PS C:\> kubectl run hello-world --image=hello-world:1 --port=8080 --image-pull-p
 pod/hello-world created
 ```
 
-The `--image-pull-policy=never` is telling Kubectl to use the local image and not one from a container registry ([Docker](https://hub.docker.com/), [ACR](https://azure.microsoft.com/en-us/services/container-registry/), [ECR](https://aws.amazon.com/ecr/), [GCP](https://cloud.google.com/container-registry)) 
+The `--image-pull-policy=never` is telling Kubectl to use the local image and not one from a container registry ([Docker](https://hub.docker.com/), [ACR](https://azure.microsoft.com/en-us/services/container-registry/), [ECR](https://aws.amazon.com/ecr/), [GCP](https://cloud.google.com/container-registry))
 
 To expose this port for external access (from browser) from outside of the cluster, run:
 ```ps
@@ -210,7 +213,7 @@ kubernetes    ClusterIP      10.96.0.1       <none>        443/TCP          2d16
 
 {{< hint info>}}
 
-You will see the **\<pending>** state of your LoadBalancer if you do not have not a Load Balancer integrated with your cluster.  For your local development environment, it is nothing to worry about. 
+You will see the **\<pending>** state of your LoadBalancer if you do not have not a Load Balancer integrated with your cluster.  For your local development environment, it is nothing to worry about.
 {{</ hint >}}
 
 You will see that the **hello-world** service is accessible via port **8080**. However, we still don't know behind what IPv4 address, this services is available.  To get the IPv4 address of your cluster, you type:
@@ -284,3 +287,9 @@ PS C:\> kubectl config use-context docker-for-desktop
 - [Install Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 - [Kubectl Cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 - [Minikube's built-in Docker daemon](https://kubernetes.io/docs/setup/learning-environment/minikube/#use-local-images-by-re-using-the-docker-daemon)
+- [Kubernetes documentation](https://kubernetes.io/docs/home/)
+- [Kubernetes API reference](https://kubernetes.io/docs/reference/kubernetes-api/)
+
+## Closing thought
+
+A local Kubernetes cluster is most valuable when each command reveals another layer of the control plane, rather than leaving behind a collection of steps that work only on one laptop.

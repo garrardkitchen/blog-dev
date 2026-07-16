@@ -1,13 +1,16 @@
 ---
 title: "Inner Loop with Continuous Integration"
 date: 2024-07-08T07:56:02+01:00
-tags: [vscode, ci, continuous integration, clean code, code quality, Inner-loop, github, branching strategy, branching]
+tags: [engineering, vscode, ci, "continuous integration", "clean code", "code quality", Inner-loop, github, "branching strategy", branching]
 draft: true
 ---
 
+
+In this article, you'll learn how local feedback and continuous integration reinforce one another from edit to protected-branch merge. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
+
 I huge part of DevOps is experimenting.  If you've no way to experiment in your inner loop then you need to do this via your outer loop using pipelines.
 
-Optimize for fast feedback.  This is where code scan tools such as Linters or Analyzers come into their own. 
+Optimize for fast feedback.  This is where code scan tools such as Linters or Analyzers come into their own.
 
 As feature branches are hidden from others, we still need to test our changes with the latest merged code found in our mainline branch.  We can't rely on our developers to always pull frequently or even pre push to the remote branch.  We can however include these operations declaratively in our CI pipelines.  Each CI scenario can how their own nuances but essentially you're merging from mainline, building your code changes and testing in accordance to your CI scenario.  For example, the PR may include CDC tests, where as your feature may purely include L0 or L1 tests (class or namespace centric, fast tests).  Tip: Fast, inexpensive tests run first.
 
@@ -83,7 +86,7 @@ name: CI for Pull Requests
 on:
   pull_request:
     branches:
-      - main 
+      - main
 
 jobs:
   build:
@@ -133,13 +136,17 @@ jobs:
 
 ### Changes Made:
 - Added a step `Pull from main` before the build step to fetch the latest changes from the `main` branch and merge them into the current branch.
-  
+
 ---
 
 # Mainline Branch Merge
 
 # Strategies
 
-## Release Flow 
+## Release Flow
 
 Always merge from mainline into release, never from release branch (in the case of hot or bug fixes) into mainline. one of the benefits with this protocol is thattThis insures ppl pull the latest from mainline.  <= reword
+
+## Closing thought
+
+Continuous integration should not be the first place a developer learns whether a change works; it should independently confirm evidence the inner loop already made cheap to obtain.

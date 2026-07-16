@@ -1,8 +1,11 @@
 ---
 title: "Npm E401 and CERT_NOT_YET_VALID"
 date: 2022-01-11T11:47:54Z
-tags: [github actions, npm, nodejs, e401, cert_not_yet_valid, docker, acr, npmrc, GH Secrets]
+tags: [engineering, "github actions", npm, nodejs, e401, cert_not_yet_valid, docker, acr, npmrc, "GH Secrets"]
 ---
+
+
+In this article, you'll learn how to distinguish an npm authentication failure from a TLS validity failure caused by clocks, certificates, or proxies. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
 
 Today a PR Merge resulted in a GHA failure.  Sadly, this is not the only CICD pipeline to fail this year!  This particular pipeline builds a NodeJS Image, pushes the image to ACR and deploys the service to a production Docker Swarm (on merge to main).
 
@@ -114,7 +117,7 @@ FROM node:14.4.0
 WORKDIR /
 COPY . .
 RUN npm config set registry http://registry.npmjs.org
-RUN npm install 
+RUN npm install
 RUN echo 'module.exports = ' | cat - node_modules/@<redacted>/<redacted>/dist/libs/<redacted>-lib/index.js > temp && mv temp helpers/index.js
 RUN cd helpers && ls -la
 RUN head -10 helpers/index.js
@@ -132,6 +135,10 @@ I updated the appropriate GH Secret with the modified .npmrc file and asked the 
 
 - [Npm scopes](https://docs.microsoft.com/en-us/azure/devops/artifacts/npm/scopes?view=azure-devops)
 
---- 
+---
 
 <sup>1</sup> - secrets that expire need to be registered centrally on a system that can notify you in advance, giving you ample time to remediate.  For our Azure AAD SP (Service Principals) client secrets, we run an Automation Runbook each day that traverses the Azure Resource Graph and alerts me via email of those SP that will be expiring within 30 days.
+
+## Closing thought
+
+When npm reports CERT_NOT_YET_VALID, the clock and certificate chain deserve investigation before authentication, because trust cannot begin until both sides agree on time.

@@ -2,12 +2,15 @@
 title: "How to run the Apache Ignite Agent with an Ignite.NET Core Server Node"
 date: 2020-07-28T13:48:46+01:00
 draft: false
-tags: ["apache ignite", "ignite", "gridgain", "data grid", "Ignite.NET"]
+tags: [cloud, "apache ignite", ignite, gridgain, "data grid", "Ignite.NET"]
 ---
 
-I've recently been researching into [Apache Ignite](https://apacheignite-net.readme.io/docs/getting-started).  Apache Ignite is an in-memory, memory-centric, distributed database, caching and processing platform for transactional, analytical, and streaming workloads.  
 
-So why the post?  Well, with using .NET Core, I have run into one or two challenges that I have had to work through.  One of which involves the Agent.  I feel it is important to share with you how I get beyond this issue.  It may save you a lot of time if you're an Apache Ignite noob like me.  
+In this article, you'll learn how the Ignite control agent relates to an Ignite.NET server node, and how to run the pairing deliberately. That distinction matters because cloud failures usually emerge at the seams between configuration, identity, networking, and operations.
+
+I've recently been researching into [Apache Ignite](https://apacheignite-net.readme.io/docs/getting-started).  Apache Ignite is an in-memory, memory-centric, distributed database, caching and processing platform for transactional, analytical, and streaming workloads.
+
+So why the post?  Well, with using .NET Core, I have run into one or two challenges that I have had to work through.  One of which involves the Agent.  I feel it is important to share with you how I get beyond this issue.  It may save you a lot of time if you're an Apache Ignite noob like me.
 
 You use the Agent when you want to execute queries, SQL DML & DDL amongst other actions, from within the Web Console app.  The Agent acts as a proxy.  The Agent must connect to both the Web Console and your Server node or Thick Client node.
 
@@ -32,3 +35,11 @@ using (var ignite = Ignition.Start(cfg))
 From what I could find, there's no plans on including the ignite-rest-http module in the Apache.Ignite nuget package.
 
 I will share a GitHub repo to ease you into this shortly.
+
+## References
+- [Apache Ignite documentation](https://ignite.apache.org/docs/latest/)
+- [Apache Ignite.NET documentation](https://ignite.apache.org/docs/latest/net-specific/net-quick-start)
+
+## Closing thought
+
+The Ignite agent is valuable only when its connection to the cluster is explicit, observable, and treated as an operational dependency rather than as background magic.

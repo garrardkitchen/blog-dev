@@ -3,8 +3,11 @@ title: "Setting Up a Model Context Protocol (MCP) Remote Server in VSCode"
 description: "This guide walks you through the process of connecting a Model Context Protocol (MCP) remote server to Visual Studio Code (VSCode)"
 date: 2025-04-23T13:29:21+01:00
 draft: false
-tags: [model context protocol, mcp, vscode, c#, mcp remote server]
+tags: [ai, "model context protocol", mcp, vscode, c#, "mcp remote server"]
 ---
+
+
+In this article, you'll learn how VS Code connects to a remote MCP server, where trust boundaries sit, and how to troubleshoot the transport. That matters because useful AI integration depends as much on explicit trust and verification as it does on model capability.
 
 ## Summary
 
@@ -122,8 +125,24 @@ By connecting an MCP server, you enable VSCode and its AI-powered extensions (li
 
     SSE allows an MCP server to broadcast context changes to clients in real time, improving the responsiveness and accuracy of AI-powered features in tools that support MCP.
 
+## 2026 technical review
+
+## 2026 update: use Streamable HTTP
+
+The screenshots capture VS Code's earlier remote-server flow. Current MCP uses Streamable HTTP for remote transport. The older HTTP+SSE transport is retained only for backwards compatibility in clients that support it; describing MCP as “HTTP pushing real-time events” is incomplete. The client sends JSON-RPC over HTTP POST, and the server may respond with JSON or an SSE stream. A standalone SSE endpoint is part of the legacy transport.
+
+A remote endpoint must validate authentication and authorisation, not just accept a URL from mcp.json. Use HTTPS, current OAuth guidance, least-privilege scopes, and per-resource tenant checks. Validate Origin where relevant and do not use a session ID as an authentication token.
+
+The Inspector is a development tool. Run it only from a trusted package source, keep its proxy bound to a safe interface, and avoid testing with production credentials. Successful tool discovery proves protocol compatibility; it does not prove that tool descriptions, argument validation, side effects, or access control are safe.
+
 ## References
 
 - [Model Context Protocol (MCP) Website](https://modelcontextprotocol.io/introduction)
 - [MCP GitHub Organization](https://github.com/modelcontextprotocol/)
 - [Server-Sent Events (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)
+- [Model Context Protocol specification](https://modelcontextprotocol.io/specification/2025-06-18)
+- [VS Code: MCP servers](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)
+
+## Closing thought
+
+A green connection in VS Code proves that MCP messages can travel; trust begins only when the server's tools, identities, side effects, and failure modes have also been examined.

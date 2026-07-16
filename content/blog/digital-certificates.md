@@ -1,10 +1,13 @@
 ---
 title: "Digital Certificates"
 date: 2020-06-08T12:57:32+01:00
-tags: ["ssl", "openssl", "digital certificate", "digital signature", "key pairs", "keys", "signing", "hash", "encryption", "sso"]
+tags: [engineering, ssl, openssl, "digital certificate", "digital signature", "key pairs", keys, signing, hash, encryption, sso]
 ---
 
-I've been wanting to put some notes down on digital certificates, signing and JWT for some time now.  I find there are plenty of confusing terms involved in this area, plus a few nuances that have added to my personal confusion.  I feel it now important to document these before I forget and move on [to another project].  
+
+In this article, you'll learn how hashing, signatures, encryption, certificates, and JWT verification fit together without conflating their purposes. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
+
+I've been wanting to put some notes down on digital certificates, signing and JWT for some time now.  I find there are plenty of confusing terms involved in this area, plus a few nuances that have added to my personal confusion.  I feel it now important to document these before I forget and move on [to another project].
 
 So, what's triggered this post?  Well, one of many tasks I'm involved in [juggling] evolves SSO (single sign on).  Albeit, mainly focused on the architecture on this task, I have compiled a few PoCs where I'm using digital certificates for authentication.  In particular, SSOing into Twilio Flex and using an `identity` field returned from their I.AM service, to seamlessly log into our internal CRM, securely using a digital certificate.
 
@@ -37,7 +40,7 @@ Ok, let's start with a few terms.  I'll slowly integrate these terms in the foll
    The process of creating the digital signature.
 
 - Base64
-   
+
    The more efficient was of encoding and sending data over a network.
 
 - Cipher algorithm
@@ -57,21 +60,21 @@ Ok, let's start with a few terms.  I'll slowly integrate these terms in the foll
    Asymmetric Encryption is a form of Encryption where keys come in pairs. What one key encrypts, only the other can decrypt.
 
 - X.509
-   
-   Is a standard format for public key certificates. Each X.509 certificate includes a public key, identifying information, and a digital signature.   
+
+   Is a standard format for public key certificates. Each X.509 certificate includes a public key, identifying information, and a digital signature.
 
 
 Of course, if this [digital signature] is new to you, the above won't (yet) make much sense.
 
 I'm going to walk you through an example, well 2 actually.  One that used a phrase as a key(aka keyphrase), and the other that used a public/private key found in a digital certificate (albeit, self-signed).  I am going to use a tool call `openssl`, not may have heard of it?
 
-# Symmetric encyrption
+# Symmetric encryption
 
 **_Encryption using a keyphrase_**
 
-In this first example, I'm going to encrypt a message with a `keyphrase`. 
+In this first example, I'm going to encrypt a message with a `keyphrase`.
 
-Before I begin, I'm going to write the content of `my secret message` to a file called `msg.txt`. 
+Before I begin, I'm going to write the content of `my secret message` to a file called `msg.txt`.
 
 Next, I'm going to encrypt this file it using a keyphrase of `abc123` and output the encrypted file to `msg.txt.enc`:
 
@@ -164,11 +167,11 @@ $ openssl dgst -sha256 -sign private.pem -out msg.signature msg
 
 ### using `rsautl`
 
-`rsautl`, unlike `dgst`, does **not create a hash** or ASN1 encoding. 
+`rsautl`, unlike `dgst`, does **not create a hash** or ASN1 encoding.
 
  {{< callout type="error" >}}
 
-As `rsautl` uses the RSA algorithm directly, it can only be used to sign, or verify, small pieces of data:  
+As `rsautl` uses the RSA algorithm directly, it can only be used to sign, or verify, small pieces of data:
 
 {{< /callout >}}
 
@@ -178,7 +181,7 @@ $ openssl rsautl -sign -in msg -inkey private.pem -out msg.sig
 
 ## Encrypt the message
 
-The `rsautl` command can be used to sign, verify, encrypt and decrypt data using the RSA algorithm.  
+The `rsautl` command can be used to sign, verify, encrypt and decrypt data using the RSA algorithm.
 
 ```shell
 $ openssl rsautl -encrypt -inkey public.pem -pubin -in msg -out msg.enc
@@ -192,7 +195,7 @@ _By including the `-pubin` switch, you're telling the command that the input key
 $ openssl rsautl -decrypt -inkey private.pem -in msg.enc -out msg.dec
 ```
 
-## Verify signature 
+## Verify signature
 
 ### using `dgst`
 
@@ -228,7 +231,7 @@ So far, we've covered hashes, key pairs, digital signatures and encryption and d
 Let's start by creating a self-signed certificate. Type:
 
 ```shell
-# create self-signed certificate 
+# create self-signed certificate
 openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:4096 -keyout myserver.pem -out myserver.crt -subj "/C=UK/OU=IT/CN=myserver.com"
 ```
 
@@ -252,7 +255,7 @@ openssl rsautl -encrypt -inkey server-public.pem -pubin -in msg -out msg.enc2
 # decrypt my encrypted message
 openssl rsautl -decrypt -inkey myserver.pem -in msg.enc2 -out msg.dec2
 
-# vertify signature
+# verify signature
 openssl dgst -sha256 -verify server-public.pem -signature msg.server-signature msg
 ```
 
@@ -262,15 +265,15 @@ This results in:
 Verified OK
 ```
 
-# JWT 
+# JWT
 
-So, how does the digital signature relate to the Signature verification against a JWT Token?  
+So, how does the digital signature relate to the Signature verification against a JWT Token?
 
 In this section I will be using the jwt.io website.  From this site I can choose which cipher algorithm.  I will be using a RSA (widely used for secure data transmission and public-key cryptography) cipher as I'm simulating the sending and receiving of a JWT Token over HTTP.
 
-A JWT signature will use RSA SHA (irreversible hash) of the header and payload.  This algorithm is set in the header so we have all the information we need to decrypt the encrypted data.  However, we're not able to verify these points yet: (a) has the message been tampered with inflight and (b) the identity of the entity presenting this message.  
+A JWT signature will use RSA SHA (irreversible hash) of the header and payload.  This algorithm is set in the header so we have all the information we need to decrypt the encrypted data.  However, we're not able to verify these points yet: (a) has the message been tampered with inflight and (b) the identity of the entity presenting this message.
 
-In actual fact, you will see this if you copied the a JWT token without keys into jwt.io (selecting RSA256 algorithm).  It will show `Invalid Signature`.  So, to verify these points, you need to provide the public and private key.  It will use the private key to obtain the original Hash (hash of the original data) then decrypt this.  If once decrypted, this equates to the RSASHA246 HMAC, then the signature is verified. 
+In actual fact, you will see this if you copied the a JWT token without keys into jwt.io (selecting RSA256 algorithm).  It will show `Invalid Signature`.  So, to verify these points, you need to provide the public and private key.  It will use the private key to obtain the original Hash (hash of the original data) then decrypt this.  If once decrypted, this equates to the RSASHA246 HMAC, then the signature is verified.
 
 All I've done is added a tenant property to the claims (payload). I've doing this prove that I've changed the claim and will become apparent shortly why I've done this:
 
@@ -297,7 +300,7 @@ I now copy in my encoded token:
 
 ![](../img/2020-06-16-08-43-00.png)
 
-You will see the `Invalid Signature` near the bottom, but, the correct payload is back!  This is because the certificates key pair in this default screen are different to my digital certificate's key pair. 
+You will see the `Invalid Signature` near the bottom, but, the correct payload is back!  This is because the certificates key pair in this default screen are different to my digital certificate's key pair.
 
 So, if I removed the entire encoded signature from the encoded token, we'll still see the decrypted payload:
 
@@ -320,7 +323,7 @@ The **signature**, with using the RS246 cipher, is a RSA SHA of the **header** (
 
 _From encoded token_
 
-Algorithm (HASH_1): 
+Algorithm (HASH_1):
 
 ```
 ENCRYPT (
@@ -330,7 +333,7 @@ ENCRYPT (
 )
 ```
 
-The `Signature` is RSA SHA of ( base64(header) + "." + base64(payload)). 
+The `Signature` is RSA SHA of ( base64(header) + "." + base64(payload)).
 
 Here, in the jwt.io site, it is recalculated after each valid payload change.
 
@@ -342,12 +345,12 @@ Here, in the jwt.io site, it is recalculated after each valid payload change.
 
 _Comparison using key pair_
 
-Algorithm (HASH_2): 
+Algorithm (HASH_2):
 ```
-DECRYPT ( 
-   KEY -> ( 
-      HASH ( base64 (header) + "." + base64 (payload) ) 
-   )    
+DECRYPT (
+   KEY -> (
+      HASH ( base64 (header) + "." + base64 (payload) )
+   )
 )
 ```
 It base64 encodes the header + payload using the key pair, then encrypts it.  If this matches the signature in the the encoded token then the signature is verified:
@@ -363,10 +366,26 @@ As soon as I paste in my public and private keys, it correctly verifies the digi
 ![](../img/2020-06-16-09-02-20.png)
 
 
-# References
+## 2026 technical review
+
+## Technical review: modern cryptographic practice
+
+Several commands below are useful demonstrations of primitives, but they are not a production protocol. The OpenSSL rsautl command is deprecated; use pkeyutl for low-level RSA operations. More importantly, do not design an application that encrypts arbitrary messages directly with RSA. Real systems normally use authenticated symmetric encryption for the data and a reviewed key-encapsulation or hybrid scheme for the symmetric key.
+
+A signature provides integrity and evidence that the holder of a private key signed particular bytes. It does not encrypt the message. A certificate binds a public key to names and other assertions through a signature from an issuer; trust also depends on path validation, name constraints, validity, revocation policy, and the relying party's trust store.
+
+For new application designs, use a high-level, reviewed protocol such as TLS and platform cryptography APIs. Prefer authenticated encryption modes, protect private keys in an appropriate key store, rotate them, and define what happens after compromise. With JWTs, restrict accepted algorithms, validate signature, issuer, audience, and time claims, and never choose the verification algorithm solely from untrusted token input.
+
+## References
 
 - [openssl genrsa](https://www.openssl.org/docs/man1.0.2/man1/genrsa.html)
 - [openssl rsautl](https://www.openssl.org/docs/man1.0.2/man1/rsautl.html)
 - [openssl examples](https://jumpnowtek.com/security/Code-signing-with-openssl.html)
 - [the difference rsautl -sign AND dgst -sign](https://stackoverflow.com/questions/9951559/difference-between-openssl-rsautl-and-dgst#:~:text=The%20simple%20answer%20is%20that,only%20a%20signature%20as%20output.)
 - [openssl](https://www.openssl.org/docs/man1.0.2/man1/)
+- [OpenSSL command documentation](https://docs.openssl.org/master/man1/)
+- [RFC 7519: JSON Web Token](https://www.rfc-editor.org/rfc/rfc7519)
+
+## Closing thought
+
+Certificates do not eliminate the need for trust decisions; they make those decisions portable enough that software can enforce them at scale.

@@ -1,8 +1,11 @@
 ---
 title: "Nodejs Container Restart Policy"
 date: 2020-09-21T16:36:35+01:00
-tags: [nodejs, cluster, docker, docker-compose, resilience]
+tags: [cloud, nodejs, cluster, docker, docker-compose, resilience]
 ---
+
+
+In this article, you'll learn how process failure, container restart policies, and orchestration each cover a different part of Node.js resilience. That distinction matters because cloud failures usually emerge at the seams between configuration, identity, networking, and operations.
 
 If by accident to deploy a solution using the [Node.js](https://nodejs.org/en/) [Cluster API](https://nodejs.org/dist/latest-v14.x/docs/api/cluster.html) and do not fork exited processes then the following `docker-compose` restart_policy will not help you:
 
@@ -99,7 +102,7 @@ deploy:
 
 ---
 
-Additionally, I found one further interesting facts when looking into this issue.  
+Additionally, I found one further interesting facts when looking into this issue.
 
 If you're using `Docker Stack Deploy` (think stack in Portainer) using a docker-compose file to deploy to your swarm and you're using `restart: always`, then beware, the `restart` is not supported.
 
@@ -108,3 +111,21 @@ If you're using `Docker Stack Deploy` (think stack in Portainer) using a docker-
 ref: 👆 [compose-file](https://docs.docker.com/compose/compose-file/)
 
 ---
+
+## 2026 technical review
+
+## Technical review: separate three failure domains
+
+Node's cluster module can run multiple worker processes, but it is not a container restart policy and it does not recover a failed host. A container runtime restart policy can restart a terminated container on one machine. An orchestrator adds desired state, scheduling, health checks, rollout, and replacement across machines. Choose each layer for a distinct failure boundary.
+
+Run one application concern per container and handle SIGTERM: stop accepting new work, complete bounded in-flight operations, close resources, and exit before the grace period. Do not catch uncaught exceptions merely to keep serving from potentially inconsistent process state; log the failure safely, let the process terminate, and rely on supervised replacement.
+
+A restart loop is not resilience. Add readiness, backoff, resource limits, externalised state, and telemetry that reveals why the process exited. Test graceful shutdown and dependency failure rather than assuming a restart flag proves recovery.
+
+## References
+- [Docker Engine documentation](https://docs.docker.com/engine/)
+- [Docker rootless mode](https://docs.docker.com/engine/security/rootless/)
+
+## Closing thought
+
+A restart policy can bring a Node.js process back; resilience is whether the surrounding system remains correct while that process disappears and returns.

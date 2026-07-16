@@ -1,8 +1,11 @@
 ---
 title: "Nodejs Install E401"
 date: 2022-01-22T16:54:48Z
-tags: [nodejs, e401, azure functions, npm feed, upstream feed, typescript]
+tags: [engineering, nodejs, e401, "azure functions", "npm feed", "upstream feed", typescript]
 ---
+
+
+In this article, you'll learn how to trace npm E401 errors across credentials, registry selection, and Azure Artifacts upstream behavior. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
 
 Today I created a simple nodeJS Azure Functions Applicaiton to start building out a PoC and when I tried to install it's dependencies like so:
 
@@ -87,3 +90,25 @@ info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
 ```
 
 All good, but now I need to change my defaults ...
+
+## Deepening the article
+
+## Diagnose in layers
+
+E401 means the registry rejected authentication, but the cause may be a missing credential, an expired token, a registry mismatch, or an upstream feed policy. Ask npm which configuration it actually sees:
+
+~~~powershell
+npm config get registry
+npm config list
+npm ping --registry https://registry.npmjs.org/
+~~~
+
+Redact output before sharing it; user and project npmrc files may contain credentials. Check configuration precedence across command-line options, environment variables, project npmrc, user npmrc, and global configuration. A scoped package can use a different registry from unscoped packages.
+
+For Azure Artifacts, use the feed's current Connect to feed instructions and a supported credential provider for the environment. In CI, create the minimal npmrc at run time, inject a short-lived secret, and delete the file after use. Never commit a personal access token. If the package should arrive through an upstream source, confirm the upstream is enabled, ordered correctly, and that the requesting identity has the required feed permissions.
+
+Do not disable strict SSL to make an authentication problem disappear. A TLS error, proxy interception, or incorrect system clock is a separate failure and should be fixed at the trust boundary.
+
+## Closing thought
+
+An npm E401 is resolved properly only when the registry, credential source, identity, and feed policy are understood—not when another token happens to make the error vanish.

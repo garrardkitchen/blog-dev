@@ -1,17 +1,20 @@
 ---
 title: "The 3rd Wave of Cloud Computing"
 date: 2024-02-05T19:26:11Z
-tags: [wasm, wasi, compute, docker, "component model", "sustainability", "sustainability transformation"]
+tags: [cloud, wasm, wasi, compute, docker, "component model", sustainability, "sustainability transformation"]
 ---
+
+
+In this article, you'll learn what WebAssembly and WASI add to server-side compute, where the component model helps, and which claims remain speculative. That distinction matters because cloud failures usually emerge at the seams between configuration, identity, networking, and operations.
 
 That's quite an opening statement, isn't it?
 
-As a reminder, the 1st and 2nd waves were Virtual Machines and Containers, respectively. 
+As a reminder, the 1st and 2nd waves were Virtual Machines and Containers, respectively.
 
 Warning, profound statement inbound…
 
 {{< callout emoji="🌐" type="info">}}
-**The Docker cofounder, Solomon Hykes, said this in 2019**  
+**The Docker cofounder, Solomon Hykes, said this in 2019**
 "If WASM+WASI existed in 2008, we wouldn't have needed to create Docker. That's how important it is. WebAssembly on the server is the future of computing." - [Quote](https://twitter.com/solomonstre/status/1111004913222324225)
 {{< /callout >}}
 
@@ -22,13 +25,13 @@ WebAssembly (or WASM for short) is now considered to be the 3rd wave.  I will co
 
 # What is WASM?
 
-{{< columns >}} 
+{{< columns >}}
 
 So then, what is WASM?  WebAssembly (or WASM) is a binary instruction format (Bytecode) that is designed to be a portable target for the compilation of high-level languages like JavaScript, C/C++, Rust, Python and .NET, enabling deployment on the web for either client or server applications.  To run a WASM application you also require a WASM runtime.
 
 WASM isn't a new technology either.  It's been around for several years and if you've had any exposure to the .NET ecosystem then you'll most likely be aware of Blazor.  However, all that Blazor is, is JavaScript running in a NodeJS console application with very little association to the wider WASM eco-system.  For example, you could not take a compiled application module from Blazor and deploy them to Docker or Kubernetes.  However, with .NET 8.0 there is the wasi-experimental workload that you can use in conjunction with the wasi-sdk and CLang.  But as the name suggests, this is experimental and both specifications as well as the tooling are likely to change.  I'm including this here to show that there is some WASM 💖 being given to .NET.
 
-<---> 
+<--->
 
 What many of you (including myself up until a few months ago) may not be been aware of is that WASM can run outside of the browser (OOB) too; on a server.  This is the very reason why I wanted to create this blog.  This, and to make you aware of how profoundly this technology will impact how we will develop, and platform, our future applications.
 
@@ -39,7 +42,7 @@ WASM by design is sandboxed.  This is intentional.  So, what does this mean?  It
 # What else is needed?
 
 
-{{< columns >}} 
+{{< columns >}}
 
 
 Now that we have touched on the second capability or Import & Export functions, we may now want to think about where these might sit as well as why do we need these.
@@ -51,9 +54,9 @@ For example, you may want to access the host's filesystem (or what the host woul
 
 _List of all the companies that form the Bytecode Alliance_
 
-<---> 
+<--->
 
-What is being developed is a specification that is a standardized system interface for WASM that enables it to interact with the underlying operating system in a secure and platform independent manner. 
+What is being developed is a specification that is a standardized system interface for WASM that enables it to interact with the underlying operating system in a secure and platform independent manner.
 
 ![](../img/wasi-logo.png)
 
@@ -112,17 +115,17 @@ Here's a picture of my running container on Docker for Desktop (see the `WASM` t
 
 _Showing a WASM container running on Docker for Desktop_
 
-{{< columns >}} 
+{{< columns >}}
 
 ![](../img/engineer-coding.png)
 
 _An engineer coding a serverless function in WASM_
 
-<---> 
+<--->
 
-My sample code is ultra basic and all it does is run an HTTP listener.  You could add a KV store or Db connection to extend this example to make it more realistic.  
+My sample code is ultra basic and all it does is run an HTTP listener.  You could add a KV store or Db connection to extend this example to make it more realistic.
 
-One fun activity you could participate in is to review some of the Azure Functions or AWS Lambdas or GCP Cloud Functions you have recently written and assess which of these could have been done in WASM?  
+One fun activity you could participate in is to review some of the Azure Functions or AWS Lambdas or GCP Cloud Functions you have recently written and assess which of these could have been done in WASM?
 
 You could even go one step farther and rewrite one of these in WASM then share the link in the Comment section below.  I would genuinely love to see this!
 
@@ -137,3 +140,11 @@ You could even go one step farther and rewrite one of these in WASM then share t
 In summary, WASM on the server is important for developing modern, secure, and efficient applications that can run closer to the data and the users. It is especially useful for microservices, edge computing and cloud-native computing.
 
 I do hope you have found this article interesting and seen how uncomplicated it is to deploy having cloned my GitHub code repository.  I also hope this has piqued your interest to the point that you're already started exploring this fascinating ecosystem.  It's an area of cloud computing that I'm excited about and looking forward to it being mainstream.  It is clear to see that WASM/WASI will be a cloud disruptor, and that a delivery cycle involving this technology can be ridiculously short, not to mention **energy efficient**.
+
+## References
+- [WASI](https://wasi.dev/)
+- [WebAssembly component model](https://component-model.bytecodealliance.org/)
+
+## Closing thought
+
+Server-side WebAssembly will deserve the label of a new cloud wave only where its constraints make deployment, isolation, portability, or cost measurably better than the alternatives.

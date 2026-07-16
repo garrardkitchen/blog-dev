@@ -2,8 +2,11 @@
 title: "Terraform Get Values"
 date: 2020-07-23T13:42:59+01:00
 draft: false
-tags: ["terraform"]
+tags: [cloud, terraform]
 ---
+
+
+In this article, you'll learn how Terraform expressions expose values directly and why text-oriented workarounds are brittle. That distinction matters because cloud failures usually emerge at the seams between configuration, identity, networking, and operations.
 
 With not wanting to have hard coded values pushed to a project's code repository, and an antiquated way to derive Azure Service Principal credentials, I set about exploring ways on accomplishing this with this in mind using Terraform.
 
@@ -13,11 +16,11 @@ With not wanting to have hard coded values pushed to a project's code repository
 Here ins my first attempt, I load all permutations into map variables.  I use an environment variable as an indexer to the appropriate map value:
 
 ```tf
-provider "azurerm" {  
+provider "azurerm" {
   version         = "=2.17"
-  ...  
-  subscription_id = var.azure_subscription_id[var.environment]     
-  client_id       = var.azure_client_id[var.environment]   
+  ...
+  subscription_id = var.azure_subscription_id[var.environment]
+  client_id       = var.azure_client_id[var.environment]
   ...
 }
 
@@ -45,9 +48,9 @@ variable "azure_client_id" {
 This second and more efficient approach, I used `jsondecode` function to load the entire credentials JSON to access the subscriptionId property:
 
 ```tf
-provider "azurerm" {  
+provider "azurerm" {
   version         = "=2.17"
-  ...  
+  ...
   subscription_id   = var.environment == "dev" ? jsondecode(var.azure_sp_dev).subscriptionId : jsondecode(var.azure_sp_prod).subscriptionId
   client_id   = var.environment == "dev" ? jsondecode(var.azure_sp_dev).clientId : jsondecode(var.azure_sp_prod).clientId
   ...
@@ -76,6 +79,41 @@ variable "azure_sp_prod" {
 ...
 ```
 
-Obviously, none of the above deals with not pushing these credentials into the code repository.  
+Obviously, none of the above deals with not pushing these credentials into the code repository.
 
 So, in my opinion, there are 2 options available here.  The first option is to use a GitHub Secret and to inject this secret into a script file.  It could even be passed as a parameter to Terraform (e.g. `terrafor apply -var credentials={...}` ).  Or, the second option is to obtain this key using the GitHub `Azure/get-keyvault-secrets@v1.0` Action.  This method will then allow you to obtain the Service Principal credentials from an Azure KeyVault.  This latter approach means that we never need to expose these secrets outside of Azure, which we would have to do if we cut & paste them into a GitHub Secret.
+
+## Deepening the article
+
+## Keep credentials out of Terraform values
+
+jsondecode is appropriate for parsing JSON, but a service-principal credential blob is the wrong object to place in a variable default. Defaults live in configuration, plan files can contain sensitive values, and marking a variable sensitive mainly redacts presentation—it does not remove the value from state or every artifact.
+
+Prefer workload identity or OpenID Connect in CI so Terraform receives short-lived credentials through the provider's supported environment variables. If a secret is unavoidable, retrieve it outside Terraform from an approved secret store and inject it at run time. Do not pass secrets on a command line where process listings and shell history may capture them.
+
+Use a typed object when the data is not secret:
+
+~~~hcl
+variable "azure_context" {
+  type = object({
+    subscription_id = string
+    tenant_id       = string
+  })
+}
+
+provider "azurerm" {
+  features {}
+  subscription_id = var.azure_context.subscription_id
+  tenant_id       = var.azure_context.tenant_id
+}
+~~~
+
+Modern provider constraints belong in required_providers, not inside the provider block. Pin a compatible range and commit the dependency lock file so automation and developer machines resolve consistently.
+
+## References
+- [Terraform language documentation](https://developer.hashicorp.com/terraform/language)
+- [Terraform JSON output format](https://developer.hashicorp.com/terraform/internals/json-format)
+
+## Closing thought
+
+Terraform makes decoding a value straightforward; the more important design is ensuring that the value—especially a credential—never enters configuration or state without necessity.

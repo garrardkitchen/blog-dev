@@ -1,9 +1,12 @@
 ---
 title: "Reality of Engineering"
 date: 2020-05-18T11:48:48+01:00
-tags: ["good engineering", "good practices", "patterns", "architecture", "guiding principles"]
+tags: [engineering, "good engineering", "good practices", patterns, architecture, "guiding principles"]
 draft: true
 ---
+
+
+In this article, you'll learn how architectural ideals meet delivery constraints, and how to make trade-offs without disguising them as universal rules. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
 
 I gave myself some downtime this weekend.  The weather was rubbish so unfortunately I couldn't execute some "list" tasks.  Instead, I watched some movies, helped my boys find stuff, build and generally make a mess - ah, the good stuff yeah?!  This gave me the necessary space to think about some of the areas of engineering that would have benefited me from knowing "at the time".  Below is a list of guiding principles, advice and general experience in engineering resulting from this "moment of clarify".  I never know whether to call it engineering or development. Apologies if I switch between the two terms in this post.  I essentially mean the same thing.  One thing to note, it's a list with some content.  It not exhaustive and they are _just_ my opinions. As always, this is a reminder to myself but hoping this will help others too!
 
@@ -36,7 +39,7 @@ To work rapidly towards a solution, ideas need to be thick and fast.  These will
 
 This time next month, 6 months, a year, 2 years, etc.. it won't look the same and most probably will not exists.
 
-Write tests and move on.  
+Write tests and move on.
 
 ## TDD
 
@@ -60,7 +63,7 @@ You'll think you're doing a good job by including a resilience framework to `exp
 
 More on this later.
 
-## Offload cross-cutting concerns 
+## Offload cross-cutting concerns
 
 This is in keeping with the DRY principle.  Heres a list of typical cross-cutting concerns you can achieve through the use of an API Gateway:
 - authentication & authorization
@@ -117,7 +120,7 @@ As we rapidly move from one task to the next, our memory of a prior piece of wor
 
 What helps for me is, capturing thoughts and possble solutions.  This leads to better articulation with your colleagues.  It also helps explaain Tech Debt.  How often have you had a "Why on earth did they do this?!" moment?  One of my sayings is always respect the legacy as, more oftern than that, it was the right thing to do at the time...you weren't there mannnnn!  Everyine can be be scinic after the fact!  So, to stop you coming off as an idiot with your colleagues, document you though process, final solution, your rationale and any Tech Debt (see section above).
 
-## No initial design will ever play out 
+## No initial design will ever play out
 
 I've been doing this for years and never has anything ever played out exactly as first envisaged.  If anyone tells you different then they have never developed or architected anything, ever, EVER!  It's that simple.  This leads on nicely with the next section...
 
@@ -149,7 +152,7 @@ OMG! How much time is wasted reading OR debugging complex code?!  Especially asy
 
 ## Controllers (thin MVC) should be thin/light - biz logic in models
 
-I've seen my fair share of controllers that contains line after line after line of business logic.  Business logic has no place in a controller. 
+I've seen my fair share of controllers that contains line after line after line of business logic.  Business logic has no place in a controller.
 
 Another, slightest of going off topic here, is UX principles.  I've always advocated that, if a client (think brower) moves away from page having issues a request but yet in receipt of that request's response, a pre-nav call should issue a cancel.  You can do this easily with ASP.NET Core.  This Cancellation token can be passed onto down and intervine in that executing request.  It's good practice but not often seen.
 
@@ -161,17 +164,17 @@ This deserves its own blog post.  For bravity, I'll summary the main points.  I 
 
 I good portion of my development has been cloud based.  It's where I feel the most relaxed and confident.  It's also the source of my enjoyment.  It often makes light of any nightmarish architectural constraints that are brough about by on-premise solutions.
 
-Several years ago the [Teactive Manifesto](https://www.reactivemanifesto.org/) came about.  A bunch of us subscribed to thing philosphy.  I think [12 Factor app](https://12factor.net/) popped up around the same time.  I could be wrong though.  Anyways, not important.  One of the tenets of the Reactive Manifesto was message driven.  Hugely relavant for cloud based development.  It's like the 101 of Cloud development; decoupling dependencies.  
+Several years ago the [Teactive Manifesto](https://www.reactivemanifesto.org/) came about.  A bunch of us subscribed to thing philosphy.  I think [12 Factor app](https://12factor.net/) popped up around the same time.  I could be wrong though.  Anyways, not important.  One of the tenets of the Reactive Manifesto was message driven.  Hugely relavant for cloud based development.  It's like the 101 of Cloud development; decoupling dependencies.
 
 At this time, we had developed a HA solution.  The problem with it though, was it wasn't scalable.  Services, HTTP APIs and the web application itself would also be used in a active/active or active/passive configuration.  We had high hopes for our solution.  I was tasked to create a scalable solution, one that could take full advantage of cloud infrastrutre.  It eventually could, but the journey to get there was a bit of a rought one to say the least.
 
 As intimated at the beginning of this section, I'm not going to be to forthcoming with the details.  This is definitely something for a fuller post.
 
-Our installation procedure was all Powershell driven.  We hadn't entertained including other products to support our product.  We just didn't have the experience, the budget or confidence of doing this.  After all, there were just 3 of us.  So, I set about investigating a way to effectively create our own software cluster capability that could scale.  This includes the automatic registering services that would come online to manage load. A well known Scala clsutering tech had been converted in part to .NET Framework.  This seemed ideal.  It was open source and lots positive references started to surface.  One of the benefits was `location tranparency`.  `Location transparency` is a term that used to identify network resoures by name and not by their actual location.  So, from a coding perspective, you can reference something from configuration, that could be running on another server, remote from where the _client_ is interfacing with it. I think this is cool.
+Our installation procedure was all PowerShell driven.  We hadn't entertained including other products to support our product.  We just didn't have the experience, the budget or confidence of doing this.  After all, there were just 3 of us.  So, I set about investigating a way to effectively create our own software cluster capability that could scale.  This includes the automatic registering services that would come online to manage load. A well known Scala clsutering tech had been converted in part to .NET Framework.  This seemed ideal.  It was open source and lots positive references started to surface.  One of the benefits was `location tranparency`.  `Location transparency` is a term that used to identify network resoures by name and not by their actual location.  So, from a coding perspective, you can reference something from configuration, that could be running on another server, remote from where the _client_ is interfacing with it. I think this is cool.
 
 The problem with it was that the clustering aspect of it took some considerable time to be ironed out.  It also didn't play nicely with IIS.  There was also limited online documentation around the topic of clustering through this OSS.  The author had a living to make and so all training was chargeable.  We didn't have a budget.  Myself and my lead developer worked through the available free online training.  This was extensive but it did take you down a path that would later prove difficult to back out of.  In short, you change your development paradigm to making everything message driven, even to the point of how your classes methods interacted with one other.  This was my 2nd mistake.  The 1st mistake was to use something that wasn't mature but more importantly, not fit for purpose for our requirements.
 
-As a consequence, we changed a large portion of our codebases on the promise that clustering will just work.  It didn't and it wasn't until later that we discovered it really didn't like IIS. I was told that it wasn't its fault, more of the fault of IIS.  My 3rd mistake was believing that by myself I could get it to work properly.  I couldn't and sadly this took a long time to realize.  This is one of those rare occasions when bloody-mindedness worked against me!  
+As a consequence, we changed a large portion of our codebases on the promise that clustering will just work.  It didn't and it wasn't until later that we discovered it really didn't like IIS. I was told that it wasn't its fault, more of the fault of IIS.  My 3rd mistake was believing that by myself I could get it to work properly.  I couldn't and sadly this took a long time to realize.  This is one of those rare occasions when bloody-mindedness worked against me!
 
 During this time, I reimagined our CI/CD pipeline and started using Octopus Deploy to package up and deploy our HA Web product.  This made it extremely easy to include and deploy supporting solutions that complimented our own.  This presented us with the opportunity of using a replacement to this clustering library.  This was NATS. I had used NATS several time before and felt comfortable and confident with it. NATS is awesome.  The elation of finally moving away from this horror was indescribable.
 
@@ -226,7 +229,7 @@ This approach of not storing missing critical data led to other uses in our prod
 
 ETL
 
-## Client side validation should never substitude server side validation
+## Client side validation should never substitute server side validation
 
 An oldie but goldie.  I don't think I need to add more here do I?
 
@@ -235,3 +238,7 @@ An oldie but goldie.  I don't think I need to add more here do I?
 - [direct client to microservices Vs API Gateway pattern](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/direct-client-to-microservice-communication-versus-the-api-gateway-pattern)
 - [gateway offloading](https://docs.microsoft.com/en-gb/azure/architecture/patterns/gateway-offloading)
 - [Monolith to Microservices](https://learning.oreilly.com/library/view/monolith-to-microservices)
+
+## Closing thought
+
+Engineering maturity is the ability to hold ideals and constraints in the same conversation without pretending that either one makes the trade-off disappear.

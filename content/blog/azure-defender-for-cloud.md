@@ -1,8 +1,11 @@
 ---
 title: "Azure Defender for Cloud"
 date: 2022-01-15T11:57:20Z
-tags: [azure, defender for cloud, cicd, cve, github actions, windows containers]
+tags: [cloud, azure, "defender for cloud", cicd, cve, "github actions", "windows containers"]
 ---
+
+
+In this article, you'll learn how Microsoft Defender for Cloud evaluates container workloads and where its recommendations fit in a delivery pipeline. That distinction matters because cloud failures usually emerge at the seams between configuration, identity, networking, and operations.
 
 # Defender for Cloud Containers
 
@@ -21,7 +24,7 @@ Cons:
 
 # Set up
 
-It takes very little time to configure image scanning and to secure your container images.  In my current role as Head of Cloud Platform at Carfinance 247 I am spear heading the migration effort to move our entire workload real estate from on-premise to Azure.  As part of this mission, we're using GH Actions for our CICD pipelines.  Azure Defender of Cloud Containers compliments GH Actions and I personally have found it a very painless exercise <sup>1</sup>.  It takes little more time than it does to actually read their instructions to configure, run and see the scan summary and remediation advice.   
+It takes very little time to configure image scanning and to secure your container images.  In my current role as Head of Cloud Platform at Carfinance 247 I am spear heading the migration effort to move our entire workload real estate from on-premise to Azure.  As part of this mission, we're using GH Actions for our CICD pipelines.  Azure Defender of Cloud Containers compliments GH Actions and I personally have found it a very painless exercise <sup>1</sup>.  It takes little more time than it does to actually read their instructions to configure, run and see the scan summary and remediation advice.
 
 With regards to configuring Azure Defender for Cloud, all it takes a few mouse clicks and you're done.  During this process, you will be required to copy 2 values it makes available to you that will need to be added as GitHub secrets.
 
@@ -31,17 +34,17 @@ The final step is to insert 2 GH Actions into your GHA Workflow.  You may need t
 ...
 - name: BUILD IMAGE
   run: |
-    cd ${{ env.ROOT_DIR }}   
-    
+    cd ${{ env.ROOT_DIR }}
+
     docker build -t ${{ env.ACR_NAME }}/${{ env.APP_DOCKERIMAGE }}:${{ env.TAG }} -f ${{ env.ROOT_DIR }}/${{ env.APP_DOCKERFILE }} .
     errorCode=$?
     if [ $errorCode -ne 0 ]; then
       echo "Could not build to ACR, error occured with docker build"
       exit 1
     fi
-    
+
 - name: SCAN FOR VULNERABILITIES
-  uses: Azure/container-scan@v0         
+  uses: Azure/container-scan@v0
   id: container-scan
   continue-on-error: true
   with:
@@ -58,7 +61,7 @@ The final step is to insert 2 GH Actions into your GHA Workflow.  You may need t
 
 - name: POST LOGS TO APPINSIGHTS
   uses: Azure/publish-security-assessments@v0
-  with: 
+  with:
     scan-results-path: ${{ steps.container-scan.outputs.scan-report-path }}
     connection-string: ${{ secrets.AZ_APPINSIGHTS_CONNECTION_STRING }}
     subscription-token: ${{ secrets.AZ_SUBSCRIPTION_TOKEN }}
@@ -70,7 +73,7 @@ _👆 We are not using (AZ_APPINSIGHTS_CONNECTION_STRING, AZ_SUBSCRIPTION_TOKEN)
 
 There are 2 places where you can view the Commons Vulnerabilities and Exposures.  These locations are wihtin GH Actions and the Defender for Cloud Blade in the Azure portal.
 
-## GH Action Job 
+## GH Action Job
 
 ![](../img/2022-01-15-15-51-01.png)
 
@@ -87,10 +90,24 @@ In summary:
 - IMO, this has be part of a wider initiative. For example, the inclusion of code quality analysis is a must to avoid vulnerabilities, bugs and poor coding practices/implementations making it into the codebase in the first place.  This is how _we_ roll. GitHub makes this easy!
 - I find it surprising how many CVEs, irrespective of criticality, are present in established docker images. You don't have to look far to discover them!
 
-# References
+## 2026 technical review
+
+## Technical review: product scope and naming
+
+Azure Defender became Microsoft Defender for Cloud. Defender for Containers combines posture recommendations and workload protection capabilities, but exact coverage, prerequisites, plans, and pricing change. Check the current plan documentation for each environment rather than assuming that enabling a subscription-level setting protects every cluster and registry automatically.
+
+A scanner finding is evidence to triage, not proof that an exploitable path exists; the absence of a finding is not proof of safety. Track image provenance, patch base images, rebuild when dependencies change, prevent mutable tags in controlled environments, and set an exception process with owner and expiry. Runtime alerts complement image and configuration assessment rather than replacing them.
+
+CI integration should use least-privilege identity and publish actionable results without exposing registry credentials. Decide what severity blocks a build, how reachability and compensating controls affect priority, and how accepted risk is revisited.
+
+## References
 
 - [Setup defender for container registries](https://docs.microsoft.com/en-gb/azure/defender-for-cloud/defender-for-container-registries-cicd)
-
 - [Defender for cloud](
 https://docs.microsoft.com/en-gb/azure/defender-for-cloud/defender-for-containers-introduction?tabs=defender-for-container-arch-aks)
+- [Microsoft Azure documentation](https://learn.microsoft.com/azure/)
+- [Microsoft identity platform documentation](https://learn.microsoft.com/entra/identity-platform/)
 
+## Closing thought
+
+Defender findings improve container security only when they shorten the distance between a vulnerable artifact, an accountable owner, and a verified rebuild.

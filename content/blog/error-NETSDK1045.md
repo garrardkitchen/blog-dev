@@ -1,37 +1,44 @@
 ---
-title: "Error NETSDK1045"
+title: "Diagnosing NETSDK1045"
 date: 2022-09-28T20:22:13+01:00
-tags: [error, visual studio, vs, vs2019, .net, sdk]
+tags: [engineering, dotnet, sdk, visual-studio, build-diagnostics]
 ---
 
-# _Error NETSDK1045 The current .NET SDK does not support targeting .NET 6.0_
+In this article, you'll learn how to diagnose NETSDK1045 by distinguishing an installed SDK from the SDK selected by the build. That matters because installing another SDK only helps when the failing process can discover and select it.
 
-## Error
+The error means the active .NET SDK does not support the project's target framework. It does **not** necessarily mean that the required SDK is absent from the machine.
 
-A colleague had Visual Studio shout this (see 👇) at him when he loaded up a FunctionsApp project.  He received this error twice as the second project was the unit tests for the FunctionsApp.
+## Start with evidence
 
+Run these commands from the project directory and from the same shell or runner that produces the error:
 
-> [!CAUTION]
-> Error  NETSDK1045  The current .NET SDK does not support targeting .NET 6.0.  Either target .NET 5.0 or lower, or use a version of the .NET SDK that supports .NET 6.0.    TestNasLinuxFuncAppWebTests    
-C:\Program Files\dotnet\sdk\5.0.409\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.TargetFrameworkInference.targets    141    
+~~~powershell
+dotnet --info
+dotnet --list-sdks
+dotnet --version
+~~~
 
-I interpretted this as the newer targets were not supported by the existing SDK.  Yeah, genius right 😁.
+The list command shows what is installed. The version command shows what the CLI selects for the current directory. Those answers can differ when a global.json pins an older feature band or when SDK lookup is affected by architecture and environment variables.
 
-However, even after installing .NET 6.0 and the Azure Functions Core Tools using it didn't fix the issue:
+Then check:
 
-```
-winget install -e --id Microsoft.DotNet.SDK.6
-winget install -e --id Microsoft.AzureFunctionsCoreTools
-```
+1. The project's TargetFramework or TargetFrameworks value.
+2. Every global.json found by walking from the working directory towards the filesystem root.
+3. Whether the process is x86, x64, or Arm64 and whether the matching SDK is installed.
+4. PATH, MSBuildSDKPath, and DOTNET_ROOT overrides.
+5. The SDK supported by the installed Visual Studio version.
 
-So, like most at this stage, I consulted with a trusted colleauge (Google) and found this in the MS Documentation - https://learn.microsoft.com/en-us/dotnet/core/tools/sdk-errors/netsdk1045.  He did reboot his vm, yet the error remained.  
+## Visual Studio is a special case
 
-I did also find a SO suggesting upgrading to VS2022 would fix this issue.  
+Visual Studio supports specific .NET SDK feature bands. A newer standalone SDK can therefore work with dotnet build while an older Visual Studio still fails to load or build the project. For the original .NET 6 case, moving from Visual Studio 2019 to a supported Visual Studio 2022 release resolved the mismatch. That is historical context, not a universal prescription to “upgrade Visual Studio” for every NETSDK1045.
 
-I couldn't find the reciprocal recommendation in MS documentation but he did upgrade to vs2022 regardless.  This did the trick. 🥳
+The reliable fix is to align three things: a supported target framework, a compatible SDK, and tooling that can use that SDK. In CI, pin the intended SDK deliberately and print dotnet --info in diagnostic output; on developer machines, keep global.json intentional rather than allowing it to become an invisible constraint.
 
-## Conclusion
+## References
+- [Microsoft: NETSDK1045 diagnostics](https://learn.microsoft.com/dotnet/core/tools/sdk-errors/netsdk1045)
+- [.NET SDK selection and global.json](https://learn.microsoft.com/dotnet/core/versions/selection)
+- [.NET support policy](https://dotnet.microsoft.com/platform/support/policy)
 
-If you get **Error NETSDK1045** in Visual Studio then upgrade to the latest verison of VisualStudio.
+## Closing thought
 
-
+NETSDK1045 stops being mysterious when SDK discovery and selection are treated as observable build inputs rather than as properties of the machine in general.

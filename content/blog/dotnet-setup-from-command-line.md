@@ -2,8 +2,11 @@
 title: "Dotnet Setup From Command Line"
 date: 2022-01-18T17:06:51Z
 draft: true
-tags: [dotnet, .NET, xunit, fluentvalidation, unit test, failures, sut]
+tags: [engineering, dotnet, ".NET", xunit, fluentvalidation, "unit test", failures, sut]
 ---
+
+
+In this article, you'll learn how to create, compose, and test a .NET solution entirely from the command line. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
 
 # Creating .NET Core app using dotnet cli outside of any IDE/Editor.
 
@@ -127,3 +130,11 @@ Finally, I'm going to access the GetUsers method via my web apps route path and 
 ```csharp
 app.MapGet("/", async (IApi api) => await api.GetUser());
 ```
+
+## References
+- [.NET documentation](https://learn.microsoft.com/dotnet/)
+- [.NET support policy](https://dotnet.microsoft.com/platform/support/policy)
+
+## Closing thought
+
+A solution built from the .NET CLI is not less sophisticated than one built in an IDE; it is simply a solution whose construction can be read, repeated, and automated.

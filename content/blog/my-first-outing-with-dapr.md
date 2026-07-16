@@ -1,19 +1,22 @@
 ---
 title: "My First Outing With Dapr"
 date: 2020-11-06T09:54:02Z
-tags: [dapr, kubernetes, redis, secret store csi driver, aks, nestjs, keda]
+tags: [cloud, dapr, kubernetes, redis, "secret store csi driver", aks, nestjs, keda]
 ---
+
+
+In this article, you'll learn what Dapr contributes to a Kubernetes application and where its building blocks stop short of replacing application design. That distinction matters because cloud failures usually emerge at the seams between configuration, identity, networking, and operations.
 
 **TL;DR**: Not as forgiving as I'd have liked ...
 
 {{< callout type="info" >}}
 
-I was a speaker at a meet-up in Manchester in late 2020. I spoke about Dapr, Keda and the NestJS Framework.  My talk topic was on "Writing less code - let your architecture and abstractions help with your *-cases".  The `*` in the title is a wildcard for use/edge/corner.  
+I was a speaker at a meet-up in Manchester in late 2020. I spoke about Dapr, Keda and the NestJS Framework.  My talk topic was on "Writing less code - let your architecture and abstractions help with your *-cases".  The `*` in the title is a wildcard for use/edge/corner.
 
 My code examples can be found here (includes both docker compose & Kubernetes manifests) - https://github.com/garrardkitchen/meetup-nov20
 {{< /callout >}}
 
-## Challenge #1 
+## Challenge #1
 
 This took a little longer than I'd have liked!
 
@@ -175,3 +178,10 @@ This post was created some time ago.  Now, we're using the Secrets Store CSI Dri
 Ref: https://docs.microsoft.com/en-us/azure/aks/csi-secrets-store-driver
 {{< /callout >}}
 
+## References
+- [Dapr documentation](https://docs.dapr.io/)
+- [Dapr building blocks](https://docs.dapr.io/concepts/building-blocks-concept/)
+
+## Closing thought
+
+Dapr can standardise access to distributed-system capabilities, but it cannot decide which state belongs together or which failures the application must be prepared to own.

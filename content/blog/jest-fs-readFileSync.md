@@ -1,8 +1,11 @@
 ---
 title: "Unit testing and mocking fs.ReadFileSync"
 date: 2020-05-28T07:32:45
-tags: ["jest", "unit testing", "twilio", "rabbitmq", "twilio taskrouter", "mssql", "sync", "twilio sync", "taskrouter"]
+tags: [engineering, jest, "unit testing", twilio, rabbitmq, "twilio taskrouter", mssql, sync, "twilio sync", taskrouter]
 ---
+
+
+In this article, you'll learn how to isolate filesystem access in Jest tests without turning mocks into an inaccurate model of Node.js. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
 
 I'd just ran `npm run test` in a newly created package I'd added to a monorepo ([lerna](https://lerna.js.org/)) I'd created for a project I was working on that integrates with Twilio Sync, RabbitMQ, Twilio TaskRouter and MSSQL, and I go this:
 
@@ -57,7 +60,7 @@ ENOENT: no such file or directory, open '.env'
       2 | const fs = require('fs')
       3 | const dotenv = require('dotenv')
     > 4 | const envConfig = dotenv.parse(fs.readFileSync(`.env`))
-```  
+```
 
 Which is that it can't find an `.env` file. And it wouldn't. Later refactoring would remove this file dependency but for now, all I want to do is to get my test working.
 
@@ -120,3 +123,7 @@ describe('@cf247/eda', () => {
 ```
 
 What this does is, when the `readFileSync` class function is called, it always returns an empty array `[]`.  As the unit code does not have a dependency on environment variables, this mocked response will work fine.
+
+## Closing thought
+
+A filesystem mock is useful when it isolates one decision in the unit under test, and dangerous when it quietly becomes a fictional replacement for Node's real I/O contract.

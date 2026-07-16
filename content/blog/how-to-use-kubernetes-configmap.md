@@ -1,11 +1,14 @@
 ---
-title: "How to Use Kubernetes Configmap"
+title: "How to Use Kubernetes ConfigMap"
 date: 2020-11-02T15:31:12Z
 draft: false
-tags: [kuberetes, configmap, cm, kubectl, secrets, best practice]
+tags: [cloud, kubernetes, configmap, cm, kubectl, secrets, "best practice"]
 ---
 
-There's a ton of material out there on how to use a ConfigMap.  In this post I will provide a recap on the basics then I drill into how to protect your secrets!  
+
+In this article, you'll learn how to create ConfigMaps, consume them from Pods, and keep confidential values in an appropriate secret system. That distinction matters because cloud failures usually emerge at the seams between configuration, identity, networking, and operations.
+
+There's a ton of material out there on how to use a ConfigMap.  In this post I will provide a recap on the basics then I drill into how to protect your secrets!
 
 There are a few ways to create a configMap.  Here, I cover just two of these ways;`--from-env-file` and --from-literal.  I won't cover options like from volume.
 
@@ -48,7 +51,7 @@ $ kubectl create configmap demo-config --from-env-file=config/.env.prod
 
 To confirm the values, you would type this:
 ```
-$ kubectl cm config-demo-1 -o yaml
+$ kubectl get cm config-demo-1 -o yaml
 apiVersion: v1
 data:
   foo: baa
@@ -76,12 +79,12 @@ metadata:
   namespace: dapr-demo
 data:
   foo: baa
-  name: garrard  
-```  
+  name: garrard
+```
 
 To confirm the values, you would type this:
 ```
-$ kubectl cm config-demo-2 -o yaml
+$ kubectl get cm config-demo-2 -o yaml
 apiVersion: v1
 data:
   foo: baa
@@ -112,7 +115,7 @@ metadata:
 spec:
   containers:
     - name: test-cache
-      image: k8s.gcr.io/busybox
+      image: registry.k8s.io/busybox:1.36.1
       command: ["/bin/sh", "-c", "env"]
       env:
         - name: NAME
@@ -149,7 +152,7 @@ ROLE=admin
 
 ## How to use Secrets
 
-TBC
+Use a Secret only for confidential values, and combine it with RBAC, encryption at rest, and a deliberate rotation path. The following command demonstrates object creation; avoid literal secrets on a shared command line in real environments.
 
 ## How to stop people from finding out your secrets.
 
@@ -219,8 +222,8 @@ spec:
   type: LoadBalancer
   ports:
   - port: 27017
-    targetPort: 27017    
-    protocol: TCP  
+    targetPort: 27017
+    protocol: TCP
   selector:
     run: mongodb
 ---
@@ -237,10 +240,10 @@ spec:
   template:
     metadata:
       labels:
-        run: mongodb        
+        run: mongodb
     spec:
       containers:
-      - name: mongodb        
+      - name: mongodb
         image: mongo
         resources:
           requests:
@@ -253,17 +256,17 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: config-demo-lit
-              key: user.name              
+              key: user.name
         - name: MONGO_INITDB_ROOT_USERNAME
           valueFrom:
             configMapKeyRef:
               name: config-demo-lit
-              key: user.name        
+              key: user.name
         - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: db-passwords
-              key: mongodb-password                      
+              key: mongodb-password
         - name: MONGO_DBNAME
           value: "orders"
 
@@ -274,3 +277,23 @@ To deploy the above 👆, type this:
 ```ps
 $ kubectl apply -f .\aks-deploy-mongodb-demo.yml
 ```
+
+## 2026 technical review
+
+## Technical review: configuration is visible data
+
+ConfigMaps are for non-confidential configuration. Values are visible through the Kubernetes API to authorised subjects and may appear in Pod specifications, environment inspection, logs, or support bundles. They are not encrypted merely because the cluster is managed.
+
+Kubernetes Secrets use base64 in their API representation, which is encoding rather than confidentiality. Protect them with least-privilege RBAC, encryption at rest, restricted etcd and control-plane access, audit policy, and careful Pod permissions. A subject that can create a Pod in a namespace can often arrange for that Pod to consume namespace Secrets, so review workload-creation privileges as part of the secret boundary.
+
+For cloud workloads, prefer workload identity and an external secret manager where feasible, then mount or retrieve only the values needed. Avoid secret values on command lines because shell history and process inspection may capture them. Do not expose MongoDB directly with a public LoadBalancer for a production example; use a private service, authentication, network policy, backup, and a maintained image pinned by digest or controlled tag.
+
+ConfigMap and Secret values consumed as environment variables do not update inside a running process. Mounted volumes can update eventually, but the application must reread them. Choose an explicit reload or rollout strategy.
+
+## References
+- [Kubernetes documentation](https://kubernetes.io/docs/home/)
+- [Kubernetes API reference](https://kubernetes.io/docs/reference/kubernetes-api/)
+
+## Closing thought
+
+Kubernetes makes configuration easy to distribute; reliability depends on knowing which values may be visible, which must be protected, and how running Pods learn that either has changed.

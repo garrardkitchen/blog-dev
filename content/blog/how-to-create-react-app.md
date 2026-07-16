@@ -2,12 +2,15 @@
 title: "How to Create React App"
 date: 2020-04-17T09:13:19+01:00
 draft: true
-tags: [react, nodejs]
+tags: [engineering, react, nodejs]
 ---
+
+
+In this article, you'll learn how the React patterns in this example work today, and why Create React App is now a legacy starting point. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
 
 # Why this blog?
 
-I recently started on a project to replace our current Twilio telephony implementation with Twilio Flex.  Flex is written with React.  It also comes with a set of core UI React components.  It doesn't yet support React Hooks but this is on the horizon!  I have used React a few times over the last 5ish years.  I had researched it and introduced it as a core UI front-end stack technology in a previous employment.  
+I recently started on a project to replace our current Twilio telephony implementation with Twilio Flex.  Flex is written with React.  It also comes with a set of core UI React components.  It doesn't yet support React Hooks but this is on the horizon!  I have used React a few times over the last 5ish years.  I had researched it and introduced it as a core UI front-end stack technology in a previous employment.
 
 Reusable UI components is a very powerful productivity enabler when done correctly.  Hooks, a new feature introduced with **React 16.8**, has consolidated my approach when building a React app. To capture new learnings, I have decided to create a blog post to share these and also to remind myself, possibly at a later date on how to do something.  It would not be the first time that I have searched for how to do something, to find the solution in an old blog post of mine!
 
@@ -50,7 +53,7 @@ import React, {useState} from "react"
 export default function App(prop) {
     const [items, setItems] = useState(prop.rebuildList)
     const onClick = () => {
-        //     
+        //
     }
     return (
         <App>
@@ -121,7 +124,7 @@ import React, {useRef} from "react";
 
 const Input = (props) => {
 
-    const myInput = useRef()    
+    const myInput = useRef()
 
     const onClick = () => {
         props.onSave(myInput.current.value)
@@ -156,6 +159,14 @@ convention includes prefixing function name with `use`.  For example, `use`Whate
 
 
 
+## 2026 technical review
+
+## Technical review: Create React App is legacy
+
+Create React App was a sensible zero-configuration entry point when this article was written. The React team deprecated it for new applications in February 2025. Existing CRA applications can continue in maintenance mode, but a new application should start with a recommended framework or, where a framework is genuinely unnecessary, a current build tool such as Vite, Parcel, or Rsbuild.
+
+The component ideas below—state, props, events, hooks, and one-way data flow—remain relevant. Tooling commands and older class-based examples should be read as historical context. For current code, follow the React documentation's function-component and Hooks guidance, keep rendering pure, and use an Effect only to synchronise with an external system rather than to derive ordinary display state.
+
 ## References
 
 - [create-a-new-react-app](https://reactjs.org/docs/create-a-new-react-app.html)
@@ -165,6 +176,9 @@ convention includes prefixing function name with `use`.  For example, `use`Whate
 - [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 - [Rules of Hooks](https://reactjs.org/docs/hooks-rules.html)
 - [Kata](https://github.com/garrardkitchen/katas/blob/master/react-function-components.md)
+- [React: Sunsetting Create React App](https://react.dev/blog/2025/02/14/sunsetting-create-react-app)
+- [React documentation](https://react.dev/learn)
 
+## Closing thought
 
-
+Create React App has aged out, but the deeper lesson remains: understand state and rendering well enough that a changing toolchain never becomes the architecture.

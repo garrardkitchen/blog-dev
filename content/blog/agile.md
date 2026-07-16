@@ -3,8 +3,11 @@ title: "Good Engineering - Agile"
 date: 2022-01-27T11:49:14+01:00
 draft: true
 featured: false
-tags: [Hugo, blogging, good engineering, agile]
+tags: [engineering, hugo, "good engineering", agile]
 ---
+
+
+In this article, you'll learn how to use agile principles as feedback mechanisms rather than as a collection of ceremonies. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
 
 To keep you on track, you need a framework.  A framework that helps you as a team member, to stay focused and be reminded of that iterations goals.  As the name suggests, it has to be an agile framework, one that is robust enough to change or assist the needs of the engineers.  One were the definition of done is reviewed as a matter of protocol and modified accordingly if the current definition does not cater for a new situation or observation.
 
@@ -18,6 +21,10 @@ Recently, there was a situation that we as Engineers we didn't like.  In short, 
 
 One thing I do feel strongly about is that the Scrum Master plays pivotal role.  It is a full time activity/occupation and this cannot be a role that in part is  the responsibility of a Tech Lead.  Knowing the importance of this role during the sprint, you can't have an Engineer being an Engineer as well as a Scrum Master.  If you're doing 'Scrum' right, then you need a dedicated Team SM. Otherwise, you're taking just way too much time away from your Tech Lead which isn't fair to them, the team or the business.
 
-As part of the story creation process, after the story description (AS A, I WANT, SO THAT) we capture the Acceptance Criteria ('ACs' for short).  It is here where we detail what the story needs to satisfy into order for the story to be deemed completed by the Engineer.  A constant failing in this area is the lack of tests; or more appropriately, the  optimisation of tests.  Let's say you're a 'newbie'.  You have very little domain knowledge or understanding of the system you're now responsible for.  Tests added to the story would prove invaluable to this 'newbie'.  It will also provide guidance on how to prove that your work fits the bill, back creating adequate unit tests as well as helping with furthering your domain and system orientation.  This is always an issue, wherever I have worked.   
+As part of the story creation process, after the story description (AS A, I WANT, SO THAT) we capture the Acceptance Criteria ('ACs' for short).  It is here where we detail what the story needs to satisfy into order for the story to be deemed completed by the Engineer.  A constant failing in this area is the lack of tests; or more appropriately, the  optimisation of tests.  Let's say you're a 'newbie'.  You have very little domain knowledge or understanding of the system you're now responsible for.  Tests added to the story would prove invaluable to this 'newbie'.  It will also provide guidance on how to prove that your work fits the bill, back creating adequate unit tests as well as helping with furthering your domain and system orientation.  This is always an issue, wherever I have worked.
 
 I also find framing the action and reason for a story helps. You start at that point to truly understand the implications of what you're encapsulating in this particular story. After all, to fully understand something  is to explain it to another, and you need to write about it. More often than not, if you can't type this description out in ~30 seconds, it's going to be decomposed in two or more stories.
+
+## Closing thought
+
+Agility is not demonstrated by completing a ceremony on schedule; it is demonstrated when new evidence can change the plan before the plan becomes waste.

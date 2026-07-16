@@ -1,19 +1,22 @@
 ---
 title: "Inner loop with Code Quality with Qodana"
 date: 2024-07-07T19:24:20+01:00
-tags: [vscode, ci, continuous integration, clean code, code quality, qodana, jetbrains, Inner-loop, .net aspire]
+tags: [engineering, vscode, ci, "continuous integration", "clean code", "code quality", qodana, jetbrains, Inner-loop, ".net aspire"]
 draft: true
 ---
+
+
+In this article, you'll learn how to align editor analysis, Qodana configuration, and CI so quality findings arrive consistently. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
 
 As part of the Inner-loop of a sample .NET Aspire demo solution...
 
 ![alt text](../img/qodana-sample-1.png)
 
-...after:  
+...after:
 
 ![alt text](../img/qodana-sample-2.png)
 
-# Create connection in vscode 
+# Create connection in vscode
 
 need to deploy via GH first to obtain project id in url path. VSCode requires the project id for connection
 
@@ -32,13 +35,13 @@ exclude:
   - name: NotAccessedPositionalProperty.Global
   - name: UnusedMember.Global
 ```
- 
+
 # linter that works
 
 _jetbrains/qodana-cdnet:2024.1-eap didn't_
 
 ```
-linter: jetbrains/qodana-dotnet:2024.1 
+linter: jetbrains/qodana-dotnet:2024.1
 ```
 
 # set solution file
@@ -116,6 +119,22 @@ C:\Users\garra\AppData\Roaming\Code\User\globalStorage\jetbrains.qodana-code\ncc
 - Patterns feature eg *.css didn't work for me, in fact the report gave a bill of healthy when I knew that was not the case
 
 
-# References
+## Deepening the article
+
+## Make local and CI analysis comparable
+
+Start with one Qodana configuration at the repository boundary and run the same linter family locally and in CI. In a monorepo, set the project directory explicitly and make the path relative to the checkout, not to a developer's machine. Pin the Qodana image or action version so a ruleset change does not arrive as an unexplained build failure.
+
+IDE inspection, Roslyn analyzers, and Qodana overlap without being identical. Decide which findings block a merge, which are advisory, and where suppressions live. A suppression should capture why the finding is acceptable and, where appropriate, when that decision expires.
+
+Quality gates should compare against a baseline when introducing analysis to an established codebase. Otherwise thousands of inherited findings obscure the regression introduced by the current change. Ratchet the baseline down deliberately, publish the report as a build artifact, and keep credentials for Qodana Cloud in repository or environment secrets rather than in the YAML file.
+
+## References
 
 - [YAML file](https://www.jetbrains.com/help/qodana/qodana-yaml.html#Include+an+inspection+into+the+analysis+scope)
+- [Qodana documentation](https://www.jetbrains.com/help/qodana/)
+- [Qodana .NET documentation](https://www.jetbrains.com/help/qodana/dotnet.html)
+
+## Closing thought
+
+Qodana strengthens the inner loop only when an editor finding and a CI finding tell the same story, at a time when the author can still act on it.

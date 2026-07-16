@@ -1,78 +1,49 @@
 ---
-title: "What is good Engineering?"
+title: "What Is Good Engineering?"
 date: 2020-01-27T11:49:14+01:00
 draft: true
 featured: false
-tags: [Hugo, blogging, good engineering, practices, principles]
+tags: [engineering, good-engineering, principles, practices, leadership]
 ---
 
-I was asked recently, "What is good Engineering?"  It's a great question.  One that instantly conjures up a plethora of visuals and emotions as, after all, your answer has to come from your experience, which by definition, will be subjective.  
+In this article, you'll learn how this series defines good engineering through outcomes, principles, practices, culture, and leadership. That matters because a team can follow every fashionable technique and still fail to build the right thing safely.
 
-I'd like to share with you how I see 'good engineering'.  I am currently employed as a Principal Engineer. I will use this perspective to help frame most of my answers.  Previous to this I held the position of was a CTO. It's fair to say, I've seen what both good and bad looks like and in many cases I've had the opportunity to make what is bad, good.
+Good engineering is the repeatable ability to turn uncertain needs into valuable, operable systems while preserving the capacity to change them. Code quality is part of that definition, but so are judgement, collaboration, delivery, security, cost, and the effect on people who operate or use the result.
 
-This is how I decompose good Engineering. Each area links through to a summary explanation and in each summary, there is a link to a fuller explanation. This explanation is captured in another blog post. So, if you just want the _skinny_, just stay on this page:
+## Principles guide judgement
 
-- [Principles](#principles)
-- [Practices](#practices)
-- [Culture and Collaboration](#culture-and-collaboration)
-- [Agile](#agile)
-- [The X factor](#the-x-factor)
+[Engineering principles](/blog/principles/) give teams a vocabulary for trade-offs: simplicity, separation of concerns, cohesive design, readable code, testing, and avoiding work whose need has not been demonstrated. They are heuristics rather than laws. DRY can reduce inconsistent knowledge, but premature abstraction can couple things that only look alike. Performance work needs measurements, while security and data-loss risks may justify prevention before an incident supplies them.
 
-#### [Principles]()
+The value of a principle is not that it ends a discussion. It helps a team explain why a choice fits this context.
 
-The more detailed explanation can be found here - [Good Engineering - Principles](/blog/principles).  In essence, I feel good engineering principles are all about ensuring all teams share a common foundation. This baseline will include a common approach to writing quality code, code that is efficient, code that does exactly what is required and nothing more.  Listed below are what I consider as core engineering principles.  I will go into more detail about the above ^^^ post:
+## Practices produce evidence
 
-- DRY (don't repeat yourself), YAGNI (you ain't going to need it), KISS (keep it simple silly)
-- SOLID principles (SRP, OCP, etc...)
-- Refactor (, refactor, refactor), as you go and not only done as the last task
-- Composition over inheritance (avoid class tree explosion! - think Strategy pattern - GoF)
-- Separation of Concerns (think MVC, CQRS, bounded context, etc...)
-- Avoid premature optimization (futile task until you have metrics to inform you better) 
-- Clean and readable code is always better than clever code (ask any engineer who has to extend or maintain a _clever_ piece of code!)
-- Defensive coding (guard against invalid class method parameters and accidental null assignment to class properties instead of an equality condition!)
-- Do no more, do no less (thank you XP!)
-- Coding standards (provide a template of core standards then stand back and let the team thrash out the rest - wear protection!)
-- Code reviews - Should only contain helpful and constructive comments and/or implementation questions. Not there to caress egos (that's for your mother to do)
-- Testing (unit/functional, and proficient with concepts like TDD & BDD)
+[Engineering practices](/blog/practices/) turn intent into repeatable evidence. Version control records change. Small reviews expose assumptions. Automated tests assess behavior at several boundaries. Continuous delivery makes a release routine. Telemetry shows what happened after release. Threat modelling, dependency maintenance, backups, recovery exercises, and incident learning address risks that a unit test cannot.
 
-At the risk of repeating myself, I see these the baseline.  And if you're not quite there yet, that's ok too. People in roles like the Principal Engineer will help you; that's if a mentoring colleague hadn't got to you first (see the x-factor section). A core responsibility is also to educate & share.  This means to help Engineers to understand concepts and approaches in many areas of computing, including cloud, microservices and serverless architecture.
+Automation should remove repeatable error and shorten feedback. It should not make a decision opaque. A pipeline nobody can diagnose is merely manual work encoded somewhere less accessible.
 
-But it doesn't stop here.  We all forget _stuff_. This can be a piece of technical detail, a concept, coding technique, ... the list continues. As such, this journey must a continuous one.  It's constant cycle of re-enforcing and education on the _new shiny things_. 
+## Culture determines when truth arrives
 
-#### [Practices]()
+[Culture and collaboration](/blog/culture-and-collaboration/) decide whether weak signals surface while they are still inexpensive. Engineers need to challenge a plan, disclose an error, and ask for help without performing certainty. Psychological safety coexists with accountability: the standard remains high, while the response to failure examines both individual choices and the system that shaped them.
 
-I go into more depth here - [Good Engineering - Practices](/blog/practices).  Good practices cover a huge expanse. It requires dedication, patience and exceptional planning. 
+An [agile operating model](/blog/agile/) helps when it reduces batch size, exposes learning, and lets plans change as evidence arrives. Ceremonies without feedback are scheduling theatre.
 
-In the above link, I provided an extensive list covering what I believe are good engineering practices.  I have included the top 10 of these practices:
+## Leadership makes quality scale
 
-- All application and infrastructure as code capturing in a DVCS (eg git)
-- Capture metrics that provide real-time statistics on both application and infrastructure performance (latency, errors, service saturation, etc...) & alerting (slack, sms, email)
-- change/issue management
-- Error management (adopting products similar to sentry.io to aggregate and provide succinct information in the run-up to an error. Cross SoC tracing)
-- documenting RCA (reasons for a failure)
-- Runbooks (actions required to deal effectively with a known situation)
-- Automate everything!
-- Share Technical rd maps, progress & changes
-- Document Roles & Responsibilities of all team members
-- Release management (hasslefree rollback & scheduled release when needed)
+[Technical leadership](/blog/leadership/) creates clarity and boundaries instead of a queue of approvals. Leaders connect engineering work to outcomes, make constraints explicit, bring the right perspectives into decisions, and record when a decision should be revisited. They develop other decision-makers and leave systems more understandable than they found them.
 
-#### [Leadship]()
+## A practical test
 
-I go into more depth here - [Good Engineering - Leadership](/blog/leadership). 
+Ask five questions of a change:
 
-Management, communicates and trust; the three tenets of 
+1. Does it solve a real problem for a named user or operator?
+2. What assumptions and failure modes are we accepting?
+3. What evidence will tell us it works in production?
+4. Can another engineer understand, change, and recover it?
+5. Is the ongoing value worth its security, operational, financial, and cognitive cost?
 
-#### [Culture-and-Collaboration]()
+There is no permanent score for good engineering. There is only the quality of the next decision and the feedback that improves the one after it.
 
-I go into more depth here - [Good Engineering - Culture and Collaboration](/blog/culture-and-collaboration). 
+## Closing thought
 
-Integrity, Emotional Intelligence & wellbeing
-
-TBC
-
-#### [Agile]()
-
-I go into more depth here - [Good Engineering - Agile](/blog/agile). 
-
-TBC
-
+Good engineering is not the absence of compromise; it is the ability to make each compromise visible, testable, reversible where possible, and humane.

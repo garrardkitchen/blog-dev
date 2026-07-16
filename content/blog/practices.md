@@ -3,10 +3,13 @@ title: "Good Engineering - Practices"
 date: 2020-01-27T11:49:14+01:00
 draft: true
 featured: false
-tags: [Hugo, blogging, good engineering, practices]
+tags: [engineering, hugo, "good engineering", practices]
 ---
 
-Good practices covers a miriad of challenges and possibilities. To infuse practices, it requires dedication, persistence, patience, exceptional planning, leadership and belief in you and your team's abilities.  Some of which I see as virtues.  This is not a one person journey. 
+
+In this article, you'll learn how engineering practices turn principles into repeatable evidence about quality, operability, and delivery. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
+
+Good practices covers a miriad of challenges and possibilities. To infuse practices, it requires dedication, persistence, patience, exceptional planning, leadership and belief in you and your team's abilities.  Some of which I see as virtues.  This is not a one person journey.
 
 In summary, good engineering practices look like this:
 
@@ -32,12 +35,12 @@ _This list is not exhaustive, here are a few things I have included:_
 - `agile` Definition of Done (and the review of this definition during the sprint retrospective)
 - `observability` Reporting of failures aacrossseveral channels (slack, email, sms, dashboard, etc...)
 - `agile` Celebrate releases
-- `devops` All infrastructure is created by an Infrastructure as Code (IAC) strategy 
+- `devops` All infrastructure is created by an Infrastructure as Code (IAC) strategy
 - `devops` Practice your DR drills, executing Runbooks and Chaos
 - `devops` CI/CD pipelines with regular builds and deployments (not necessarily regular _continue delivery_) (with feature branches and canary, blue-green, A/B, other)
-- `devops` Visibile DevOps advocacy - teams must be responsible for their domain services; you build it, you ship it, and you fix it 
-- `devops` Continuous iterations of DevOps principles - Principles of Flow, Feedback, continually learning & experimentation 
-- `observability` Status page - one place to notify customers, integration partners, when there's an issue. This also needs to be reflected in responses to API calls.  Presents an opportunity to whomever to raise issue too  
+- `devops` Visibile DevOps advocacy - teams must be responsible for their domain services; you build it, you ship it, and you fix it
+- `devops` Continuous iterations of DevOps principles - Principles of Flow, Feedback, continually learning & experimentation
+- `observability` Status page - one place to notify customers, integration partners, when there's an issue. This also needs to be reflected in responses to API calls.  Presents an opportunity to whomever to raise issue too
 
 _I drill down into more detail in the sections below about some of the bullet points above._
 
@@ -76,27 +79,27 @@ A key feature you need to look for from the platform is support for multiple lan
 
 Most error management systems offer integrations.  I recommend choosing one that can integrate with your current issue management system (think Jira).  The best integrations offer bi-directional updates so both systems reflect an up to date picture of the progress being made with the issue.
 
-Another important feature you must look for is an aggregation of errors.  This will reduce the noise and at the same time, illuminate the frequency of an error.  Some error management systems suggest why there's an issue when connected to your DVCS or an event to remind you when you experienced this issue previously.  
+Another important feature you must look for is an aggregation of errors.  This will reduce the noise and at the same time, illuminate the frequency of an error.  Some error management systems suggest why there's an issue when connected to your DVCS or an event to remind you when you experienced this issue previously.
 
 It is also important to take advantage of the APIs that your error management system offers.  For instance, some offer visibility into a timeline visualization of when a new release was made. This can be a powerful tool when correlating errors with releases as well as confirming the reduction of issues post a release.
 
 ### **kibana, prometheus & grafana**
 
-I hadn't used Prometheus or Grafana before I'd started in my latest role.  Prometheus is a time series Db and Grafana is a powerful visualization, analytics, and monitoring platform.  It is used purely for metrics and not logging or tracing.  I like it.  Prometheus is a no brainer as there's a 3rd party library we can use for or server language technology - .NET Core (Webhost).  
+I hadn't used Prometheus or Grafana before I'd started in my latest role.  Prometheus is a time series Db and Grafana is a powerful visualization, analytics, and monitoring platform.  It is used purely for metrics and not logging or tracing.  I like it.  Prometheus is a no brainer as there's a 3rd party library we can use for or server language technology - .NET Core (Webhost).
 
 ### **Moving now to InfluxDB because of push model; prometheus only supports pull model**
 
-Sometimes your current observability strategy includes products that don't operate in the way you need them too.  Prometheus is one example of this.  Prometheus only supports a pull model which means it needs to hit endpoints declared by your application and scrap metric information from there.  
+Sometimes your current observability strategy includes products that don't operate in the way you need them too.  Prometheus is one example of this.  Prometheus only supports a pull model which means it needs to hit endpoints declared by your application and scrap metric information from there.
 
 _A word of warning with regards to pull models, if you are including parameters as tags in metrics types, be careful that you don't include values that constantly change. This can result in a huge (Megabytes) payload being scrapped._
 
-We have looked at replacements and have decided on InfluxDB and associate suite products. InfluxDB being the time series Db, it supports a push model.  Their visualizations look more appealing than Grafana's too. 
+We have looked at replacements and have decided on InfluxDB and associate suite products. InfluxDB being the time series Db, it supports a push model.  Their visualizations look more appealing than Grafana's too.
 
 _I will be posting my take on observability strategies soon. When it's available, I'll include link here._
 
 # In production testing
 
-One of the most powerful *visualisation* I ever saw was statistics, showing in real-time, all the different testing and their success in the company's *production* public-facing website. The trust and reassurance this instills remain incalculable.  Another powerful visual I often see is when aggregated business metrics are included, again, in publicly accessible websites (think number of deals being propositioned, number of visits today).  This is brave though for obvious reasons. 
+One of the most powerful *visualisation* I ever saw was statistics, showing in real-time, all the different testing and their success in the company's *production* public-facing website. The trust and reassurance this instills remain incalculable.  Another powerful visual I often see is when aggregated business metrics are included, again, in publicly accessible websites (think number of deals being propositioned, number of visits today).  This is brave though for obvious reasons.
 
 # Serverless
 
@@ -121,3 +124,17 @@ If you've configured things properly, when the PR is created, a test build will 
 One of the failings of the PR process IMO is that you can ask a question and still approve the PR. Or that you can ask a question but the author is not forced to answer before merging.
 
 Another huge failure of the PR process is not the mechanics but how people view their role.  Icommonplaceplace to see petty comments or comments that just make the author feel dumb and are not at all constructive.  People also forget to give praise, e.g. great use of x in situation y.  It is, therefore, a sign of good engineering practices when someone moderates/reviews the comments and acts accordingly if it violates the principles of good PRs.
+
+## 2026 technical review
+
+## Technical review: pull, push, and evidence
+
+Prometheus is primarily pull-based for target scraping, but saying that it “only supports pull” is too absolute. Exporters expose metrics for scraping, Pushgateway covers a limited class of short-lived service-level batch jobs, and remote write sends samples from Prometheus to compatible backends. The choice between Prometheus and InfluxDB should follow the workload, query model, operational ownership, and retention requirements rather than a single transport distinction.
+
+Similarly, serverless does not remove servers or operations; it changes the unit of deployment and shifts parts of capacity management to a provider. Production testing is valuable when bounded by safe data, blast-radius controls, and an abort path. DevOps is an operating model that joins product delivery and operation, not a synonym for a CI/CD toolchain.
+
+Practices are hypotheses about how to produce evidence. Keep the practice only while that evidence improves decisions.
+
+## Closing thought
+
+An engineering practice earns its place by producing evidence that changes a decision; once it becomes ceremony without feedback, the name of the practice no longer matters.

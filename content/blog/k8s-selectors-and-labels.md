@@ -1,8 +1,11 @@
 ---
 title: "K8s Selectors and Labels"
 date: 2022-01-15T13:30:42Z
-tags: [kubernetes, k8s, deployment, pod, replicaset, selectors, equality-based, set-based, kubectl]
+tags: [cloud, kubernetes, k8s, deployment, pod, replicaset, selectors, equality-based, set-based, kubectl]
 ---
+
+
+In this article, you'll learn how Kubernetes labels and selectors bind controllers to Pods, and why an accidental mismatch is operationally serious. That distinction matters because cloud failures usually emerge at the seams between configuration, identity, networking, and operations.
 
 Right, what's the deal with all the labels and metadata in a Deployment manifest?!!!!
 
@@ -44,7 +47,7 @@ Ok, let me explain 👀 ...
 A deployment manifest _kind_ is a manifest that describes the desired state of your application(s).  I say applications here as a POD can contain more than one container (application).  The desired part of this is found in a ReplicaSet _kind_ manifest.  For example, you'd use a ReplicaSet if you require to have 2 replicas (instances) of your POD running.  A Deployment manifest is a short-hand way of stipulating this, ergo, saves you having to create 2 separate manifests.  Makes sense?  Good.
 
  {{< callout type="info" >}}
-Behind the scenes, it is the **Deployment Controller** that monitors your deployment's desired state and if it differs, it will return to it's desired state.        
+Behind the scenes, it is the **Deployment Controller** that monitors your deployment's desired state and if it differs, it will return to it's desired state.
 {{< /callout >}}
 
 So why is there two mentions of `metadata`?  Ok, The first reference identifies this Deployment object itself:
@@ -93,9 +96,9 @@ To demonstrate this, let's run the following command:
 ```powershell
 ❯ kubectl.exe get pods -l app=nginx -n default --show-labels
 NAME                                READY   STATUS         RESTARTS   AGE   LABELS
-nginx-deployment-6494589cc9-242v8   1/1     Running        0          3s    app=nginx,foo=baa,pod-template-hash=6494589cc9   
-nginx-deployment-6494589cc9-2fdf5   1/1     Running        0          3s    app=nginx,foo=baa,pod-template-hash=6494589cc9   
-nginx-deployment-6494589cc9-n8vxb   0/1     ErrImagePull   0          3s    app=nginx,foo=baa,pod-template-hash=6494589cc9      
+nginx-deployment-6494589cc9-242v8   1/1     Running        0          3s    app=nginx,foo=baa,pod-template-hash=6494589cc9
+nginx-deployment-6494589cc9-2fdf5   1/1     Running        0          3s    app=nginx,foo=baa,pod-template-hash=6494589cc9
+nginx-deployment-6494589cc9-n8vxb   0/1     ErrImagePull   0          3s    app=nginx,foo=baa,pod-template-hash=6494589cc9
 ```
 
 If you look at the LABELS column you can see labels that are not found in the Deployment metadata - eg `foo=baa`.
@@ -112,7 +115,7 @@ nginx-deployment-6494589cc9-qh8nc   0/1     ErrImagePull       0          6m10s 
 
 # Binding deployment to pod
 
-So, how do we couple the Deployment with the Pod?  Well, this is where the `selector` comes into play. The `selector` instructs Kubernetes to match on the `app` label for those that have a value of `nginx` and that the `foo` label that has the value of `baa`.  
+So, how do we couple the Deployment with the Pod?  Well, this is where the `selector` comes into play. The `selector` instructs Kubernetes to match on the `app` label for those that have a value of `nginx` and that the `foo` label that has the value of `baa`.
 
 ```yml
 spec:
@@ -123,3 +126,11 @@ spec:
 ```
 
 I hope this has made sense and has cleared up any confusion you may have had.
+
+## References
+- [Kubernetes documentation](https://kubernetes.io/docs/home/)
+- [Kubernetes API reference](https://kubernetes.io/docs/reference/kubernetes-api/)
+
+## Closing thought
+
+A Kubernetes selector is only a few characters of YAML, yet it defines the membership boundary on which a controller's entire promise depends.

@@ -3,12 +3,15 @@ title: "Good Engineering - Principles"
 date: 2020-03-01T20:09:14+01:00
 draft: false
 featured: true
-tags: [Hugo, blogging, good engineering, principles]
+tags: [engineering, hugo, "good engineering", principles]
 ---
+
+
+In this article, you'll learn how to apply familiar engineering principles as context-sensitive reasoning tools rather than rigid commandments. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
 
 I have written this post as a method to document what I see as the basics, foundations if you will, for good engineering.  Undoubtedly if you are a seasoned engineer, you will recognised all of these principles, less so, if you're just starting out.
 
-Most Engineers are fully versed in the foundations of writing quality, efficient, succinct and testable code.  As a Principal Engineer, one of my responsibilities is to ensure that these (1)  foundations are recognised by the engineers and (2) are adhered to by all engineers. 
+Most Engineers are fully versed in the foundations of writing quality, efficient, succinct and testable code.  As a Principal Engineer, one of my responsibilities is to ensure that these (1)  foundations are recognised by the engineers and (2) are adhered to by all engineers.
 
 Here's a list of concepts that for me, constitute good engineering principles:
 
@@ -41,17 +44,17 @@ Other sections:
 
 Clean and readable code is always better than clever code (ask any engineer who has to extend or maintain a _clever_ piece of code!)
 
-I've seen a lot of code recently that should never have got to the shape it has.  Complicated code requires time to understand, then time to add functionality.  Complicated code also happens to more difficult to recall so each time you need to go near it, you have to relearn it and added to this, any changes made to improve it, most likely have not been applied in full so they'll be a right old mixture of good, bad and the ugly thrown into the mix.  
+I've seen a lot of code recently that should never have got to the shape it has.  Complicated code requires time to understand, then time to add functionality.  Complicated code also happens to more difficult to recall so each time you need to go near it, you have to relearn it and added to this, any changes made to improve it, most likely have not been applied in full so they'll be a right old mixture of good, bad and the ugly thrown into the mix.
 
-A good measure of how bad a codebases is, and I'm going to plagiarise somebody else's analogy here, is by stepping through an interactive debug session. If you get momentarily distracted by a fly, then immediately return to the debugging and you do not know where the feck you are in the execution of the code flow, then it's a bad codebase! 
+A good measure of how bad a codebases is, and I'm going to plagiarise somebody else's analogy here, is by stepping through an interactive debug session. If you get momentarily distracted by a fly, then immediately return to the debugging and you do not know where the feck you are in the execution of the code flow, then it's a bad codebase!
 
 It's the responsibility of a Tech Lead or architecture to stop code bases ending up this way.
 
 ### [Code reviews]()
 
-It should only contain helpful and constructive comments and/or implementation questions. This process is not there to caress egos (that's for your mother to do!!).  One useful by-product of **code reviews** is conveying of your team's exacting coding standard and attention to deal, to new starters.  So, the quicker the new starter pushes a commit, the better! 
+It should only contain helpful and constructive comments and/or implementation questions. This process is not there to caress egos (that's for your mother to do!!).  One useful by-product of **code reviews** is conveying of your team's exacting coding standard and attention to deal, to new starters.  So, the quicker the new starter pushes a commit, the better!
 
-### [Coding standards]() 
+### [Coding standards]()
 
 (provide a template of core standards then stand back and let the team thrash out the rest - wear protection!)
 
@@ -70,9 +73,9 @@ The above-bracketed statement says it all!  **Inheritance** tends to back you in
 This is one example of defensive coding:
 
 ```csharp
-class User(string firstnaame, string lastname, int age) 
+class User(string firstnaame, string lastname, int age)
 {
-    if (null == firstname) 
+    if (null == firstname)
     {
         throw new NullReferenceException("Firstname cannot be null")
     }
@@ -110,15 +113,15 @@ One way to help identify code that does the same thing is by **refactoring**.  I
 This to a certain extent, goes hand in hand with avoiding **premature optimization**.  We all like the big picture  yes? This doesn't mean we need to do deliver on this it right now! You just need to know the boundaries of this piece, which, if greenfield, then you won't have any metrics to tell you the actual demand.  Think Capacity planning; what this piece of work needs to do based on current expectations. For example
 
 
-    Do we need multiple servers? Yes, I think 
+    Do we need multiple servers? Yes, I think
     Why do we need multiple servers?  Mmmmm, because I read it somewhere
     Do you have the metrics that support your argument for multiple servers? Wait, what?
     Next!
 
 
-A colleague recently shared with me the architecture of their side project. They are using **AWS** and I have 2 **certifications** in **AWS** (**Developer** and **Solutions Architect**).  I quickly went into **HA**/**scaling**/**resilience**/**durability**/**DR** overdrive, following it up with a verbal dump on what tech they should use.  This was all wrong.  They did not know their service demand.  Following my initial advice, will have increased their cost; unnecessarily.  I did, you'll be glad to hear, re-affirm their decision (may have made 1 or 2 helpful suggestions) shortly after [~2 hours]. 
+A colleague recently shared with me the architecture of their side project. They are using **AWS** and I have 2 **certifications** in **AWS** (**Developer** and **Solutions Architect**).  I quickly went into **HA**/**scaling**/**resilience**/**durability**/**DR** overdrive, following it up with a verbal dump on what tech they should use.  This was all wrong.  They did not know their service demand.  Following my initial advice, will have increased their cost; unnecessarily.  I did, you'll be glad to hear, re-affirm their decision (may have made 1 or 2 helpful suggestions) shortly after [~2 hours].
 
-Yeah, think big but don't deliver big without a customer base; as this, in my experience, will result in a huge waste of time, effort and money. Plus, sometimes, you don't really know where something is going to take you, and my advice here is to roll with it.  This last piece of advice is particularly pertinent if you're starting up. 
+Yeah, think big but don't deliver big without a customer base; as this, in my experience, will result in a huge waste of time, effort and money. Plus, sometimes, you don't really know where something is going to take you, and my advice here is to roll with it.  This last piece of advice is particularly pertinent if you're starting up.
 
 ### [Occam's Razor]()
 
@@ -135,11 +138,11 @@ Suppose there are two competing theories on why something is not working.  Norma
 
 Avoid premature optimization and all conversations relating to optimization until you know the facts.  This will be futile until you've **metrics** to better inform you.
 
-I've hit this numerous times when planning for **microservices** and bounded contexts, in particular, on green-field projects.  What should we include and where?  Should we separate claims away from users for instance?  Will the demand for Claims be greater than for users?  Who knows?!  You don't until you have some **metrics** behind you.  You can always merge or break them [**microservices**] up later.    
+I've hit this numerous times when planning for **microservices** and bounded contexts, in particular, on green-field projects.  What should we include and where?  Should we separate claims away from users for instance?  Will the demand for Claims be greater than for users?  Who knows?!  You don't until you have some **metrics** behind you.  You can always merge or break them [**microservices**] up later.
 
 Another area that I believe this encompasses is splitting code up across multiple files and folders.  If it's a PoC, a sample piece of code, or something that has a short shelf life, just keep it in one file.  When it's the right time - moving out of PoC/other - then you can consider optimizing it.  Up until then, it's a huge waste of time and effort.
 
-Architecture is a great example of when not to prematurely optimize.  Architecture normally infers cost.  Generally, the more of something, the greater the cost.  This could mean for a startup the difference between survival and their demise.  Adopting a **guiding principle** of being **frugal** from the outset, is a prudent and wise decision.  What this means is that you're always looking for the most cost-effective way of accomplishing your goal.  So, if you don't know your demand, it means you opt for a single server instead of having a **HA** cluster of 3 master nodes and 5 worker nodes!  Down from 8 servers to 1 which on a month by month basis during development and beta/early releases could mean the saving of thousands of pounds sterling.  
+Architecture is a great example of when not to prematurely optimize.  Architecture normally infers cost.  Generally, the more of something, the greater the cost.  This could mean for a startup the difference between survival and their demise.  Adopting a **guiding principle** of being **frugal** from the outset, is a prudent and wise decision.  What this means is that you're always looking for the most cost-effective way of accomplishing your goal.  So, if you don't know your demand, it means you opt for a single server instead of having a **HA** cluster of 3 master nodes and 5 worker nodes!  Down from 8 servers to 1 which on a month by month basis during development and beta/early releases could mean the saving of thousands of pounds sterling.
 
 Sadly, I've come across a few startup that have failed just because they ran out of cash early on.  It's a real shame for all involved.
 
@@ -181,7 +184,7 @@ A class (no method) should have one and only one reason to change, meaning that 
 Here's an example of a class )_purposefully awful for illustrative purposes_):
 
 ```csharp
-class User() 
+class User()
 {
     public string Username {get; set;}
     public string Fullname {get; set;}
@@ -190,48 +193,48 @@ class User()
 
     public User()
     {
-        _logger = new Logger() 
+        _logger = new Logger()
         _db = new UserContext();
     }
 
-    public Task<User> GetProfile(string username) 
+    public Task<User> GetProfile(string username)
     {
         ...
         _logger.Info($"Found profie for {username}")
         return this;
-    }    
+    }
 }
 ```
 
 You could say that the above includes both a model responsibility and a service responsibility.  These should be split into two separate .NET types, as in this example:
 
 ```csharp
-class User() 
+class User()
 {
     public string Username {get; set;}
     public string Fullname {get; set;}
-    public User(string username, string Fullname) 
+    public User(string username, string Fullname)
     {
         ...
-    }    
+    }
 }
 
-class UserService() 
+class UserService()
 {
     private readonly ILogger _logger;
 
     public UserService(ILogger _logger, IDbContext db)
     {
-        _logger = _logger    
-        _db = db;    
+        _logger = _logger
+        _db = db;
     }
 
-    public Task<User> GetProfile(string username) 
+    public Task<User> GetProfile(string username)
     {
         ...
         _logger.Info($"Found profie for {username}")
         return user;
-    }    
+    }
 }
 ```
 
@@ -255,7 +258,7 @@ This means that we need to design our classes in such a way that it's new respon
 
 One technique for implementing new functionality is by creating new derived classes.  A derived class will inherit from base class.  Another approach is to allow the 'client' to access the original class with an abstract interface.  I sometimes think of this simply as removing `if statements` by extension but I'm not convinced everybody would agree with this assessment though.
 
-So, in short, if there's an amendment or any new features required, instead of touching the existing functionality, it is better to create new derived class and leave the original class implementation.  Well, that's the advice!  I worry about the **class explosion** and if you're attempting to do this on top of not so perfect code! 
+So, in short, if there's an amendment or any new features required, instead of touching the existing functionality, it is better to create new derived class and leave the original class implementation.  Well, that's the advice!  I worry about the **class explosion** and if you're attempting to do this on top of not so perfect code!
 
 ##### Closed modification:
 
@@ -264,16 +267,16 @@ This is very easy to explain...only make modifications to code if there's a bug.
 This sample looks at delegating method logic to derived classes.
 
 ```csharp
-public class Order 
+public class Order
 {
-    public double GetOrderDiscount(double price, ProductType productType) 
+    public double GetOrderDiscount(double price, ProductType productType)
     {
         double newPrice = 0;
-        if (productType == ProductType.Food) 
+        if (productType == ProductType.Food)
         {
             newPrice = price - 0.1;
-        } 
-        else if (productType == ProductType.Hardware) 
+        }
+        else if (productType == ProductType.Hardware)
         {
             newPrice = price - 0.5;
         }
@@ -281,7 +284,7 @@ public class Order
     }
 }
 
-public enum ProductType 
+public enum ProductType
 {
     Food,
     Hardward
@@ -291,25 +294,25 @@ public enum ProductType
 Can rewrite, still using base implementation (think **decorator pattern**):
 
 ```csharp
-public class Order 
+public class Order
 {
-    public virtual double GetOrderDiscount(double price) 
+    public virtual double GetOrderDiscount(double price)
     {
         return price;
     }
 }
 
-public class FoodOrder : Order 
+public class FoodOrder : Order
 {
-    public override double GetOrderDiscount(double price) 
+    public override double GetOrderDiscount(double price)
     {
         return base.GetOrderDiscount(price) - 0.1;
     }
 }
 
-public class HardwareOrder : Order 
+public class HardwareOrder : Order
 {
-    public override double GetOrderDiscount(double price) 
+    public override double GetOrderDiscount(double price)
     {
         return base.GetOrderDiscount(price) - 0.5;
     }
@@ -322,7 +325,7 @@ Definition: "_Let q(x) be a property provable about objects of x of type T. Then
 
 All this is stating is that every subclass/derived class should be substitutable for their base/parent class.
 
-The example below demonstrates a violation of the **Liskov principle**, as by replacing the parent class (SumEvenNumbersOnly->Calculator), this does compromise the integrity of the **derived class** as the **higher-order class** is not replaced by the **derived class**.  Here, both `cal` and `eventsOnly` variables will be the same: 
+The example below demonstrates a violation of the **Liskov principle**, as by replacing the parent class (SumEvenNumbersOnly->Calculator), this does compromise the integrity of the **derived class** as the **higher-order class** is not replaced by the **derived class**.  Here, both `cal` and `eventsOnly` variables will be the same:
 ```csharp
 ...
 var nums = new int[] {1, 2, 3, 4, 5, 6, 7};
@@ -358,7 +361,7 @@ Here we have changed the assumed base class to an **abstract class**. Now, it ca
 var nums = new int[] {1, 2, 3, 4, 5, 6, 7};
 Calculator cal = new SumAllNumbersOnly(nums);
 Calculator evensOnly = new SumEvenNumbersOnly(nums);
-... 
+...
 public abstract class Calculator
 {
     protected IEnumerable<int> _num;
@@ -395,7 +398,7 @@ A client should never be forced to implement an interface that it doesn't use or
 Take the following interface:
 
 ```csharp
-public interface IAllTheThings 
+public interface IAllTheThings
 {
     Task<IAsyncEnumerable<Claim>> GetClaims(string username);
     Task<IAsyncEnumerable<User>> GetUsers(string team);
@@ -406,15 +409,15 @@ public interface IAllTheThings
 There's a clear distinction in responsibilities that are being suggested here by the contract name.  Sufficed to say, these should be split across different interfaces:
 
 ```csharp
-public interface IUser 
-{    
+public interface IUser
+{
     Task<IAsyncEnumerable<User>> GetUsers(string team);
     Task<User> AddUsers(User user);
 }
 
 public interface IClaim
 {
-    Task<IAsyncEnumerable<Claim>> GetClaims(string username);    
+    Task<IAsyncEnumerable<Claim>> GetClaims(string username);
 }
 ```
 
@@ -430,25 +433,25 @@ Let's deal with the first rule first.  High-level means policy, business logic a
 These two examples show perfectly the before and after of the move to a 'depend on abstraction':
 
 ```csharp
-public class BusinessRule 
+public class BusinessRule
 {
-    private DbContext _context;    
-    public BusinessRule() 
+    private DbContext _context;
+    public BusinessRule()
     {
         _context = new DbContext();
     }
-    public Rule GetRule(string ruleName) 
+    public Rule GetRule(string ruleName)
     {
         _context.GetRuleByName(ruleName);
     }
 }
 
-public class DbContext 
-{     
-    public DbContext() 
-    {        
+public class DbContext
+{
+    public DbContext()
+    {
     }
-    public Rule GetRuleByName(string name) 
+    public Rule GetRuleByName(string name)
     {
         return new Rule(new {Name = "Allow All The Things", Allow = false})
     }
@@ -459,30 +462,30 @@ public class DbContext
 After changing to an abstraction:
 
 ```csharp
-public interface IDbContext 
+public interface IDbContext
 {
     Rule GetRuleByName(string name);
 }
 
-public class BusinessRule 
+public class BusinessRule
 {
-    private IDbContext _context;    
-    public BusinessRule(IDbContext context) 
+    private IDbContext _context;
+    public BusinessRule(IDbContext context)
     {
         _context = context;
     }
-    public Rule GetRule(string ruleName) 
+    public Rule GetRule(string ruleName)
     {
         _context.GetRuleByName(ruleName);
     }
 }
 
 public class DbContext : IDbContext
-{     
-    public DbContext() 
-    {        
+{
+    public DbContext()
+    {
     }
-    public Rule GetRuleByName(string name) 
+    public Rule GetRuleByName(string name)
     {
         return new Rule(new {Name = "Allow All The Things", Allow = false})
     }
@@ -601,7 +604,7 @@ There are a few standards I adhere to when it comes to writing tests.  In the sa
 
 ### [YAGNI]()
 
-(you ain't going to need it) 
+(you ain't going to need it)
 
 Do no more, and no less than is required.  You do not want to have to maintain code that is never used or produce code that others have to maintain unwittingly. It's very difficult to future proof your code if you do not know what's going to happen, let alone without a specification!  It's a guess at best so don't waste your time or others.  Keeps things concise, succinct and simple.
 
@@ -643,11 +646,11 @@ I love hacking away at code as much as the next Engineer.  Hacking code is a gre
 
 After the session has finished I like to perform one final task.  This is to document findings/learnings and areas that require further investigation.  This is normally helped by capturing notes as we go along.
 
-As a side note to **TDD**, with modern compilers (think Roslyn in the .NET world) and even linting to a certain extent, you know if something will fail - if a reference type (.NET) does not exist yet - as your IDE _will be screaming at you_, so I don't run tests that are missing these reference types (think classes and interfaces in the .NET world).   
+As a side note to **TDD**, with modern compilers (think Roslyn in the .NET world) and even linting to a certain extent, you know if something will fail - if a reference type (.NET) does not exist yet - as your IDE _will be screaming at you_, so I don't run tests that are missing these reference types (think classes and interfaces in the .NET world).
 
 ### [Discussion point]()
 
-I'm sure I'm not alone here when I say, having the time available for 2 Engineers to code together for skills transfer etc is a challenging one.  An agile sprint doesn't facilitate this.  This is something that I often refer to as having the 'space to learn'.  The pressures of a sprint often, sadly, works against this.  This is doubly as difficult, if your sprint is made up of technical debt, BAU, Ad-hoc etc...  Timeboxing 'effort' into percentages doesn't always present an obvious education path for your Engineers either.  Having a day (developer day or similar) dedicated to learning also never really quite works out the way it's meant too, plus, 'a day'?!  In my experience, this, and trying to cram _genius_ into a time box also never quite works either.  After all, you can't schedule _genius_, in the same way, you can't guarantee that the best Engineers are in your locality, or that the best time for Engineers to work is between 9-5. 
+I'm sure I'm not alone here when I say, having the time available for 2 Engineers to code together for skills transfer etc is a challenging one.  An agile sprint doesn't facilitate this.  This is something that I often refer to as having the 'space to learn'.  The pressures of a sprint often, sadly, works against this.  This is doubly as difficult, if your sprint is made up of technical debt, BAU, Ad-hoc etc...  Timeboxing 'effort' into percentages doesn't always present an obvious education path for your Engineers either.  Having a day (developer day or similar) dedicated to learning also never really quite works out the way it's meant too, plus, 'a day'?!  In my experience, this, and trying to cram _genius_ into a time box also never quite works either.  After all, you can't schedule _genius_, in the same way, you can't guarantee that the best Engineers are in your locality, or that the best time for Engineers to work is between 9-5.
 
 _What is the answer? A mixture of all the above, at hock and at scheduled times, to ensure quality and advancement of skills._
 
@@ -674,3 +677,7 @@ Written mainly for me, I do hope you've found something useful here, and who kno
 - [Inversion of Control Containers and the Dependency Injection pattern](https://www.martinfowler.com/articles/injection.html)
 
 - [Write your tests](https://docs.microsoft.com/en-us/visualstudio/test/unit-test-basics?view=vs-2019#write-your-tests)
+
+## Closing thought
+
+Principles do their best work when they sharpen a contextual decision; applied without context, even a sensible principle can become a sophisticated way to avoid thinking.

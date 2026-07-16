@@ -1,9 +1,12 @@
 ---
-title: "Github Action Workflow Starter"
+title: "GitHub Action Workflow Starter"
 date: 2022-01-09T15:36:45Z
-tags: [github action workflow, starter, cruft, azure devops, bamboo, github plans]
+tags: [engineering, "github action workflow", starter, cruft, "azure devops", bamboo, "github plans"]
 draft: false
 ---
+
+
+In this article, you'll learn how workflow templates and reusable workflows standardize delivery without hiding important repository differences. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
 
 In this post, I share practical insights on how to simplify and streamline your CI/CD processes using GitHub Actions. The focus is on reducing complexity, minimizing effort, and making it easier for teams to adopt new workflows with less cognitive overhead.
 
@@ -71,3 +74,11 @@ Workflow starters reduce the need for extensive documentation or step-by-step gu
 <sup>1</sup> The Enterprise plan allows you to create private `.github` repositories, which is useful for referencing secrets securely. If you're not on the Enterprise plan, consider documenting how to handle secrets in your starter templates, using placeholders that can be replaced as needed.
 
 <sup>2</sup> My preference is to keep documentation close to the code, using READMEs and markdown files within the repository to support onboarding and knowledge sharing.
+
+## References
+- [GitHub Actions documentation](https://docs.github.com/actions)
+- [GitHub Actions security guidance](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions)
+
+## Closing thought
+
+A workflow starter should standardise the controls every repository needs while leaving the differences that matter visible to the team that owns them.

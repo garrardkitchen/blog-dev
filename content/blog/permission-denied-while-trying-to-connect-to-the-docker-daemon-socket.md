@@ -1,8 +1,11 @@
 ---
 title: "Permission Denied While Trying to Connect to the Docker Daemon Socket"
 date: 2022-01-07T08:20:20Z
-tags: [docker, linux, github actions, GHA, Self-Hosted Runner, dotnet, Azure Container Registry, ACR, containers, pods]
+tags: [cloud, docker, linux, "github actions", GHA, "Self-Hosted Runner", dotnet, "Azure Container Registry", ACR, containers, pods]
 ---
+
+
+In this article, you'll learn why Docker socket permissions fail, how to repair runner access, and what privilege you grant when you do. That distinction matters because cloud failures usually emerge at the seams between configuration, identity, networking, and operations.
 
 Out of the blue today, my first day back after Christmas break, I got this when running a GH Actions Workflow on one of our Self-Hosted Linux Runners 😱:
 
@@ -90,3 +93,21 @@ sudo ./svc.sh start
 ```
 
 Then I logged out and back in again to confirm docker access `docker ps` and finished off by re-running the failed GH Action Workflow.  🥳 Equilibrium is once again restored.  As per protocol, I shared issue and resolution with our IT Team in case this crops up again when I'm not online to help.
+
+## 2026 technical review
+
+## Technical review: the permission is the security boundary
+
+Adding a user to the docker group commonly resolves access to the rootful Docker socket, but Docker documents that membership as granting root-level privileges. On a shared or self-hosted CI machine, that is not a routine convenience; workflow code can mount the host filesystem or start privileged containers.
+
+First confirm which socket and context the CLI is using, inspect ownership, and check whether the daemon is running. If group access is appropriate, provision it deliberately and start a new login session so group membership is refreshed. Do not make the socket world-writable.
+
+For stronger isolation, evaluate Docker rootless mode or ephemeral runners that are destroyed after a job. Restrict which repositories can target a privileged runner, avoid untrusted pull-request code, and rotate any credentials that may have been exposed on a previously shared host.
+
+## References
+- [Docker Engine documentation](https://docs.docker.com/engine/)
+- [Docker rootless mode](https://docs.docker.com/engine/security/rootless/)
+
+## Closing thought
+
+Removing a Docker socket permission error is easy; understanding that the new permission is effectively authority over the host is the part that deserves care.

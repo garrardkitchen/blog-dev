@@ -1,10 +1,13 @@
 ---
 title: ".NET Aspire and Redis"
 date: 2024-02-25T09:41:08Z
-tags: [.net aspire, azd, blazor, csharp, devex, dependency injection, nuget, redis]
+tags: [engineering, ".net aspire", azd, blazor, csharp, devex, "dependency injection", nuget, redis]
 ---
 
-# First look into .NET Aspire 
+
+In this article, you'll learn how .NET Aspire models a Redis dependency, wires it into an application, and improves local orchestration. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
+
+# First look into .NET Aspire
 
 TL;DR: [See here](#addendum) for why AZD is not yet supported.
 
@@ -12,7 +15,7 @@ I decided to give .NET Aspire a try. I'm yet to watch an online tutorial but I d
 
 Last night, with some time to kill, I asked Copilot to send me some YT links so I could learn more. But Copilot refused to share any YT links. It only gave me some MS Learn links. One of them took me to the **[Samples GH repo](https://github.com/dotnet/aspire-samples)**.
 
-The first time I opened a sample project, the Visual Studio Community 2022 (Preview) version of VS I was using, asked me to install an Aspire component. It turned out to be the Aspire workload. It was a simple click-and-forget operation. I wish everything in life was that easy. 
+The first time I opened a sample project, the Visual Studio Community 2022 (Preview) version of VS I was using, asked me to install an Aspire component. It turned out to be the Aspire workload. It was a simple click-and-forget operation. I wish everything in life was that easy.
 
 To avoid this ahead of time you can:
 
@@ -48,7 +51,7 @@ I was even more impressed when I saw an example solution that had both a Windows
 
 
 {{< callout type="warning" >}}
-**My sample repo** 
+**My sample repo**
 
 You can find my sample .NET Aspire applicaton here:
 https://github.com/garrardkitchen/dotnet-aspire-and-redis-sample
@@ -102,7 +105,7 @@ using Microsoft.Extensions.Caching.Distributed;
 
 namespace sample1.Web;
 
-public class RedisClient(IDistributedCache cache)  
+public class RedisClient(IDistributedCache cache)
 {
     public async Task<int> GetCounterAsync(string key)
     {
@@ -197,20 +200,20 @@ I couldn't leave it there.  I had to make sure the counter was being written to 
 To get the current value of the counter, use:
 
 ```powershell
-redis-cli hget counter "data"   
+redis-cli hget counter "data"
 ```
 
 I also update the counter then refresh the page to see it reflect this change:
 
 ```powershell
-redis-cli hset counter "data" 25 
+redis-cli hset counter "data" 25
 ```
 
 I also looked at the distributed tracing to get confirmation of this.  Here's an example of this:
 
 {{< figure src="../img/2024-02-25-11-55-37.png" alt="" caption="Distributed trace example" >}}
 
-And that was that. I was able to take a sample Aspire app and perist a counter value to Redis cache with very little effort. All in all, this was a positive DevEx. 
+And that was that. I was able to take a sample Aspire app and perist a counter value to Redis cache with very little effort. All in all, this was a positive DevEx.
 
 # Conclusion
 
@@ -220,7 +223,7 @@ And that was that. I was able to take a sample Aspire app and perist a counter v
 
 _I added this section a few days after posting the original article_
 
-Well, I couldn't wait to use AZD to deploy my sample app.  Sadly, this didn't go too well.  
+Well, I couldn't wait to use AZD to deploy my sample app.  Sadly, this didn't go too well.
 
 I got this error [condensed] at the deploy application stage:
 
@@ -236,9 +239,15 @@ I found this GH issue that confirms this behaviour ➡️ https://github.com/Azu
 
 So, sadly you can't use AZD with .NET Aspire, yet.  It's a real shame this hasn't been made public.
 
-# References
+## References
 
 - https://github.com/dotnet/aspire-samples
 - https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/setup-tooling?tabs=visual-studio
 - https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/
 - https://learn.microsoft.com/en-us/dotnet/aspire/deployment/azure/aca-deployment-azd-in-depth
+- [.NET documentation](https://learn.microsoft.com/dotnet/)
+- [.NET support policy](https://dotnet.microsoft.com/platform/support/policy)
+
+## Closing thought
+
+The Aspire dashboard makes Redis easy to start, but the enduring design work is deciding what may be cached, how it expires, and what the application does when the cache is absent.

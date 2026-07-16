@@ -3,11 +3,14 @@ title: "Building EntraTool - A Secure CLI for Microsoft Entra ID Token Managemen
 date: 2025-12-18T10:00:00Z
 draft: false
 author: "Garrard Kitchen"
-tags: ["entra-id", "azure", "security", "oauth2", "dotnet", "cli", "devops", "ai-development"]
+tags: [ai, entra-id, azure, security, oauth2, dotnet, cli, devops, ai-development]
 categories: ["Development", "Security", "DevOps"]
 summary: "How I built a cross-platform CLI tool in 1 hour to eliminate the frustration and security risks of manually managing Entra ID access tokens across multiple environments—and why you should never commit another secret to your repo."
 featured_image: "/images/entra-token-cli/hero.png"
 ---
+
+
+In this article, you'll learn how a token-management CLI can make OAuth flows repeatable while keeping credentials out of source control. That matters because useful AI integration depends as much on explicit trust and verification as it does on model capability.
 
 ## The Problem: Death by a Thousand Manual Token Requests
 
@@ -378,3 +381,11 @@ It took 1 hour to build with AI assistance, but it will save you **hours every m
 **Have you struggled with token management or accidentally committed secrets?** Share your story in the comments below. Let's build better, more secure developer experiences together.
 
 *Built with ☕ and Claude Sonnet 4.5 in 1 hour on December 18, 2025.*
+
+## References
+- [Microsoft Azure documentation](https://learn.microsoft.com/azure/)
+- [Microsoft identity platform documentation](https://learn.microsoft.com/entra/identity-platform/)
+
+## Closing thought
+
+A token tool earns trust not by making credentials invisible, but by making the lifetime, audience, authority, and storage of every credential difficult to misunderstand.

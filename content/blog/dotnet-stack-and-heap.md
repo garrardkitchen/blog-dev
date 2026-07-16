@@ -2,10 +2,13 @@
 title: ".NET Stack, Heap and Boxing"
 date: 2022-02-04T08:38:16Z
 draft: false
-tags: [csharp, .net, stack, heap, allocations, gc, boxing]
+tags: [engineering, csharp, ".net", stack, heap, allocations, gc, boxing]
 ---
 
-This week I have been investigating how to reduce memory allocation in a few HTTP APIs.  I won't go into any explicit work-related examples here but I will touch on facets relating to this effort.  
+
+In this article, you'll learn how .NET stores values, when boxing allocates, and why stack-versus-heap slogans are only approximations. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
+
+This week I have been investigating how to reduce memory allocation in a few HTTP APIs.  I won't go into any explicit work-related examples here but I will touch on facets relating to this effort.
 
 Let's start off by looking at `Reference Types` and `Value types` and how they get allocated into the Heap.  I will also touch on concepts such as boxing and GC pressure.
 
@@ -31,7 +34,7 @@ In this class, we can see that _attempts is a Value Type:
 public class NewOrder
 {
     private int _attempts = 0;
-    
+
     public void PlaceOrder() {}
 }
 ```
@@ -46,7 +49,7 @@ The same will happen if you hoist a Struct to the root of the class.  Take this 
 public class Order
 {
     private Item _item = new Item();
-    
+
     public Order() {}
 }
 
@@ -71,7 +74,7 @@ This example shows the result on the ItemCount property after it gets boxed via 
 
 _Boxing and unboxing_
 
-**Boxing** is process of converting a `Value Type` to the type `object` (aka implicit conversion). It creates a new allocation in the Heap, copies in the `Values type` value and returns a reference. 
+**Boxing** is process of converting a `Value Type` to the type `object` (aka implicit conversion). It creates a new allocation in the Heap, copies in the `Values type` value and returns a reference.
 
 See the last int32 instance in this screengrab:
 
@@ -106,8 +109,24 @@ To reiterate an earlier point, there are many approaches to reducing GC pressure
 - Setting the initial seize of a _dynamic_ collection
 - ArrayPool for short-lived arrays (large)
 
-As a side note here due to the inclusion of the .NET 6 and string interpolation point above, I've now been using .NET 6 for a few months.  This includes both exploratory and new projects.  I was especially keen to start using .NET 6 from the benefits from process isolation (out-of-process) - fewer conflicts, DI and full control of the process that we're all used to with paradigms outside of the serverless model. I have grown to like the minimum API. Like most, I initially felt uneasy with the lack of c# verbosity but now welcome it.  I do, and I am sure I am not alone here, have been using both BenchmarkDotNET and SharpLab to compare performance and language decompilation.  I didn't bother much with .NET 5.  This was due to .NET 5 never having the LTS label. 
+As a side note here due to the inclusion of the .NET 6 and string interpolation point above, I've now been using .NET 6 for a few months.  This includes both exploratory and new projects.  I was especially keen to start using .NET 6 from the benefits from process isolation (out-of-process) - fewer conflicts, DI and full control of the process that we're all used to with paradigms outside of the serverless model. I have grown to like the minimum API. Like most, I initially felt uneasy with the lack of c# verbosity but now welcome it.  I do, and I am sure I am not alone here, have been using both BenchmarkDotNET and SharpLab to compare performance and language decompilation.  I didn't bother much with .NET 5.  This was due to .NET 5 never having the LTS label.
+
+## 2026 technical review
+
+## Technical review: avoid the location shortcut
+
+“Value types live on the stack and reference types live on the heap” is not a rule of the Common Language Infrastructure. Storage depends on context and runtime optimisation. A value can be a field inside a heap-allocated object, an array element, a captured variable, or held in a register. A reference may be stored in a stack frame while the object it refers to is managed elsewhere.
+
+Boxing occurs when a value type is converted to object or to an interface representation that requires a boxed value. That generally allocates and copies the value, but performance conclusions should come from measurement. Generics often avoid boxing, and modern JIT optimisation can change where temporary values are materialised.
+
+The managed heap is garbage-collected; the stack follows call-frame lifetime. Neither is inherently “fast” or “slow” in isolation. Use allocation profilers and benchmarks to investigate a real hot path, and optimise lifetime, locality, and volume rather than chasing a diagram.
 
 ## References
 
 - [Boxing/unboxing](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/boxing-and-unboxing)
+- [.NET documentation](https://learn.microsoft.com/dotnet/)
+- [.NET support policy](https://dotnet.microsoft.com/platform/support/policy)
+
+## Closing thought
+
+Performance work improves when stack-and-heap folklore gives way to measurements of the allocations, lifetimes, and access patterns the runtime actually produced.

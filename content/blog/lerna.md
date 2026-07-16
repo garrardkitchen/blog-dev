@@ -1,10 +1,13 @@
 ---
 title: "Lerna"
 date: 2020-05-04T16:59:03+01:00
-tags: ["lerna", "nodejs", "twilio", "twilio sync", "twilio workers", "twilio flex", "pattern"]
+tags: [engineering, lerna, nodejs, twilio, "twilio sync", "twilio workers", "twilio flex", pattern]
 draft: true
 featured: true
 ---
+
+
+In this article, you'll learn how to structure shared packages in a JavaScript monorepo and make ownership boundaries explicit. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
 
 ## Phew, not being Furloughed
 
@@ -43,3 +46,7 @@ A consumer will be responsible for consuming an entity state change and forwardi
 ### Responsibility #2
 
 Rebuild state via HTTP API endpoint or web portal
+
+## Closing thought
+
+A monorepo tool can coordinate versions and tasks, but sustainable sharing still depends on packages whose ownership and compatibility are clearer than their physical proximity.

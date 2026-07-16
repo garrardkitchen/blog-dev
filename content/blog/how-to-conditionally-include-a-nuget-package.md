@@ -1,8 +1,11 @@
 ---
 title: "How to Conditionally Include a Nuget Package"
 date: 2022-09-21T20:58:53+01:00
-tags: [azure, functionsapp, selenium, chromedriver, docker, nuget, linux, runtime identifier]
+tags: [engineering, azure, functionsapp, selenium, chromedriver, docker, nuget, linux, "runtime identifier"]
 ---
+
+
+In this article, you'll learn how MSBuild conditions can select platform-specific NuGet assets without creating divergent project files. That matters because durable engineering comes from understanding trade-offs, not merely reproducing a command or pattern.
 
 # The context
 
@@ -41,7 +44,7 @@ In this example xml snippet, you can see how I've implemented a default and how 
     </When>
     <Otherwise>
         <ItemGroup>
-            <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="104.0.5112.7900" />            
+            <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="104.0.5112.7900" />
         </ItemGroup>
     </Otherwise>
 </Choose>
@@ -58,3 +61,7 @@ And if you set the verbosity of the output by adding this switch `-v d` (d*etail
 ![](../img/2022-09-21-13-01-36.png)
 
 And there you have it, an example of how to include a different version of a nuget package.
+
+## Closing thought
+
+A conditional package reference is successful when platform variation remains explicit in the project while the application presents one coherent behavior to its callers.
