@@ -1,98 +1,121 @@
 {{ define "main" }}
-  {{ $posts := where .Site.RegularPages "Section" "blog" }}
-  {{ $posts = where $posts "Draft" false }}
-  {{ $posts = first 4 (sort $posts "Date" "desc") }}
+{{ $posts := where .Site.RegularPages "Section" "blog" }}
+{{ $posts = where $posts "Draft" false }}
+{{ $posts = first 4 (sort $posts "Date" "desc") }}
 
-  <main class="garden-home-v2 garden-shell">
-    <div class="garden-home-layout">
-      <div class="garden-home-main">
-        <section class="garden-hero">
-          <div class="garden-hero-copy">
-            <p class="garden-eyebrow">Cloud native · AI · Engineering</p>
-            <h1>
-              Ideas that make<br />
-              systems simpler<span>.</span>
-            </h1>
-            <p class="garden-lede">
-              Thoughts on cloud native engineering, agentic engineering, software factories, leadership, practical
-              ideas, real-world lessons and a bias for simpler, safer systems.
-            </p>
-            <a class="garden-button" href="{{ "blog" | relURL }}">
-              Browse latest posts <span>→</span>
-            </a>
+<main class="garden-home-v2 garden-shell">
+  <div class="garden-home-layout">
+    <div class="garden-home-main">
+      <section class="garden-hero">
+        <div class="garden-hero-copy">
+          <p class="garden-eyebrow">Cloud native · AI · Engineering</p>
+          <h1>
+            Ideas that make<br />
+            systems simpler<span>.</span>
+          </h1>
+          <p class="garden-lede">
+            Thoughts on cloud native engineering, agentic engineering, software factories, leadership, practical
+            ideas, real-world lessons and a bias for simpler, safer systems.
+          </p>
+          <a class="garden-button" href="{{ "blog" | relURL }}">
+            Browse latest posts <span>→</span>
+          </a>
+        </div>
+
+        <div class="garden-hero-art garden-hero-svg" aria-hidden="true"><img src="{{ "images/home/home-banner.png" | relURL }}"
+            alt=""></div>
+      </section>
+
+      <section class="garden-section garden-topic-section">
+        <div class="garden-section-heading">
+          <div>
+            <p class="garden-eyebrow">Explore by curiosity</p>
+            <h2>A little something for every rabbit hole.</h2>
           </div>
+        </div>
 
-          <div class="garden-hero-art garden-hero-svg" aria-hidden="true"><img src="{{ "images/garden/hero.svg" | relURL }}" alt=""></div>
-        </section>
-
-        <section class="garden-section garden-topic-section">
-          <div class="garden-section-heading">
-            <div>
-              <p class="garden-eyebrow">Explore by curiosity</p>
-              <h2>A little something for every rabbit hole.</h2>
+        <div class="garden-topic-grid">
+          <a class="garden-topic topic-cloud" href="{{ "blog" | relURL }}"><img class="garden-topic-art" src="{{ "images/home/home-cloud.png" | relURL }}" alt="">
+            <div class="garden-topic-copy">
+              <h3>Cloud</h3>
+              <p>Designing resilient, observable platforms that scale.</p><span>Explore Cloud →</span>
             </div>
-          </div>
+          </a>
 
-          <div class="garden-topic-grid">
-            <a class="garden-topic topic-cloud" href="{{ "blog" | relURL }}"><img class="garden-topic-art" src="{{ "images/garden/cloud.svg" | relURL }}" alt=""><div class="garden-topic-copy"><h3>Cloud</h3><p>Designing resilient, observable platforms that scale.</p><span>Explore Cloud →</span></div></a>
-
-            <a class="garden-topic topic-ai" href="{{ "ai" | relURL }}"><img class="garden-topic-art" src="{{ "images/garden/ai.svg" | relURL }}" alt=""><div class="garden-topic-copy"><h3>AI</h3><p>Practical AI engineering, from prompts to production.</p><span>Explore AI →</span></div></a>
-
-            <a class="garden-topic topic-engineering" href="{{ "nuggets" | relURL }}"><img class="garden-topic-art" src="{{ "images/garden/engineering.svg" | relURL }}" alt=""><div class="garden-topic-copy"><h3>Engineering</h3><p>Patterns, practices and lessons from the trenches.</p><span>Explore Engineering →</span></div></a>
-
-            <a class="garden-topic topic-gaming" href="{{ "gaming" | relURL }}"><img class="garden-topic-art" src="{{ "images/garden/gaming.svg" | relURL }}" alt=""><div class="garden-topic-copy"><h3>Gaming</h3><p>Thoughts on games, design and what I’m playing.</p><span>Explore Gaming →</span></div></a>
-          </div>
-        </section>
-
-        {{ with index $posts 0 }}
-          <section class="garden-featured-post">
-            <div class="garden-featured-art"><img src="{{ "images/garden/agent.svg" | relURL }}" alt="Agent learning feedback loop"></div>
-            <div class="garden-featured-copy">
-              <p class="garden-eyebrow">Featured</p>
-              <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-              <p>{{ .Summary | plainify | truncate 185 }}</p>
-              <div class="garden-post-meta">
-                {{ .Date.Format "Jan 2, 2006" }} <span>·</span> {{ .ReadingTime }} min read
-              </div>
-              <a class="garden-round-arrow" href="{{ .RelPermalink }}">→</a>
+          <a class="garden-topic topic-ai" href="{{ "ai" | relURL }}"><img class="garden-topic-art" src="{{ "images/home/home-ai.png" | relURL }}" alt="">
+            <div class="garden-topic-copy">
+              <h3>AI</h3>
+              <p>Practical AI engineering, from prompts to production.</p><span>Explore AI →</span>
             </div>
-          </section>
-        {{ end }}
-      </div>
+          </a>
 
-      <aside class="garden-home-rail">
-        <section class="garden-rail-card garden-now">
-          <p class="garden-rail-title">Latest writing</p>
+          <a class="garden-topic topic-engineering" href="{{ "nuggets" | relURL }}"><img class="garden-topic-art"
+              src="{{ "images/home/home-engineering.png" | relURL }}" alt="">
+            <div class="garden-topic-copy">
+              <h3>Engineering</h3>
+              <p>Patterns, practices and lessons from the trenches.</p><span>Explore Engineering →</span>
+            </div>
+          </a>
 
-          {{ range first 3 $posts }}
-            <article>
-              <span class="garden-rail-icon">↗</span>
-              <div>
-                <strong><a href="{{ .RelPermalink }}">{{ .Title }}</a></strong>
-                <small>{{ .Date.Format "Jan 2, 2006" }} · {{ .ReadingTime }} min read</small>
-              </div>
-            </article>
-          {{ end }}
+          <a class="garden-topic topic-gaming" href="{{ "gaming" | relURL }}"><img class="garden-topic-art" src="{{ "images/home/home-gaming.png" | relURL }}" alt="">
+            <div class="garden-topic-copy">
+              <h3>Gaming</h3>
+              <p>Thoughts on games, design and what I’m playing.</p><span>Explore Gaming →</span>
+            </div>
+          </a>
+        </div>
+      </section>
 
-          <a href="{{ "blog" | relURL }}">See all writing →</a>
-
-          <p class="garden-rail-title garden-reading-title">Reading</p>
-          <ul>
-            <li>Team Topologies <small>Matthew Skelton, Manuel Pais</small></li>
-            <li>Cloud Native Patterns <small>Cornelia Davis</small></li>
-            <li>The Phoenix Project <small>Gene Kim, Kevin Behr, George Spafford</small></li>
-          </ul>
-
-          <a href="{{ "nuggets" | relURL }}">See full reading list →</a>
-        </section>
-
-        <section class="garden-rail-card garden-subscribe">
-          <div class="garden-subscribe-mark">✈</div>
-          <h2>Stay in the loop</h2>
-          <p>A short newsletter with new posts, nuggets and things I’m exploring.</p>
-          <a class="garden-button" href="{{ "index.xml" | relURL }}">Follow RSS →</a>
-        </section>
-      </aside>
+      {{ with index $posts 0 }}
+      <section class="garden-featured-post">
+        <div class="garden-featured-art"><img src="{{ "images/home/home-feedback.png" | relURL }}"
+            alt="Agent learning feedback loop"></div>
+        <div class="garden-featured-copy">
+          <p class="garden-eyebrow">Featured</p>
+          <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <p>{{ .Summary | plainify | truncate 185 }}</p>
+          <div class="garden-post-meta">
+            {{ .Date.Format "Jan 2, 2006" }} <span>·</span> {{ .ReadingTime }} min read
+          </div>
+          <a class="garden-round-arrow" href="{{ .RelPermalink }}">→</a>
+        </div>
+      </section>
+      {{ end }}
     </div>
-  </main>
+
+    <aside class="garden-home-rail">
+      <section class="garden-rail-card garden-now">
+        <p class="garden-rail-title">Latest writing</p>
+
+        {{ range first 3 $posts }}
+        <article>
+          <span class="garden-rail-icon">↗</span>
+          <div>
+            <strong><a href="{{ .RelPermalink }}">{{ .Title }}</a></strong>
+            <small>{{ .Date.Format "Jan 2, 2006" }} · {{ .ReadingTime }} min read</small>
+          </div>
+        </article>
+        {{ end }}
+
+        <a href="{{ "blog" | relURL }}">See all writing →</a>
+
+        <p class="garden-rail-title garden-reading-title">Reading</p>
+        <ul>
+          <li>Team Topologies <small>Matthew Skelton, Manuel Pais</small></li>
+          <li>Cloud Native Patterns <small>Cornelia Davis</small></li>
+          <li>The Phoenix Project <small>Gene Kim, Kevin Behr, George Spafford</small></li>
+        </ul>
+
+        <a href="{{ "nuggets" | relURL }}">See full reading list →</a>
+      </section>
+
+      <section class="garden-rail-card garden-subscribe">
+        <div class="garden-subscribe-mark">✈</div>
+        <h2>Stay in the loop</h2>
+        <p>A short newsletter with new posts, nuggets and things I’m exploring.</p>
+        <a class="garden-button" href="{{ "index.xml" | relURL }}">Follow RSS →</a>
+      </section>
+    </aside>
+  </div>
+</main>
 {{ end }}
