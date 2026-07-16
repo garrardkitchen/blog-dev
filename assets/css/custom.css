@@ -1367,6 +1367,27 @@ pre.mermaid {
   color: #10264f
 }
 
+.garden-collection {
+  margin-top: 3rem
+}
+
+.garden-collection-list {
+  max-width: 680px
+}
+
+.garden-collection-list .garden-rail-icon {
+  background: #eaf1e9
+}
+
+.garden-collection-list strong a {
+  color: inherit;
+  text-decoration: none
+}
+
+.garden-collection-list article:hover strong a {
+  color: #fa674b
+}
+
 .garden-section-rail {
   position: sticky;
   top: 6rem;
@@ -1492,6 +1513,7 @@ pre.mermaid {
   .garden-section-layout {
     gap: 2rem
   }
+
 }
 
 /* SVG illustration treatment for the Knowledge Garden cards and workflow. */
