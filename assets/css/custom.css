@@ -1888,3 +1888,333 @@ article table {
   font-family: 'JetBrains Mono', ui-monospace, monospace !important;
   font-size: 12px !important;
 }
+
+/* --------------------------------------------------------------------------
+   Responsive foundations
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: clip;
+}
+
+body {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+img,
+picture,
+video,
+canvas,
+svg,
+iframe {
+  max-width: 100%;
+}
+
+.garden-home-main,
+.garden-section-content,
+.garden-list-posts,
+.garden-article-content,
+.garden-article-layout > *,
+.garden-section-layout > *,
+.garden-home-layout > * {
+  min-width: 0;
+}
+
+.garden-mobile-menu {
+  display: none;
+  position: relative;
+}
+
+.garden-mobile-menu summary {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--garden-line);
+  border-radius: .6rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  list-style: none;
+  background: #fff;
+}
+
+.garden-mobile-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.garden-mobile-menu summary span,
+.garden-mobile-menu summary span::before,
+.garden-mobile-menu summary span::after {
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--garden-ink);
+  display: block;
+}
+
+.garden-mobile-menu summary span {
+  position: relative;
+}
+
+.garden-mobile-menu summary span::before,
+.garden-mobile-menu summary span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.garden-mobile-menu summary span::before {
+  top: -6px;
+}
+
+.garden-mobile-menu summary span::after {
+  top: 6px;
+}
+
+.garden-mobile-menu[open] summary span {
+  background: transparent;
+}
+
+.garden-mobile-menu[open] summary span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.garden-mobile-menu[open] summary span::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+.garden-mobile-menu-panel {
+  position: absolute;
+  top: calc(100% + .65rem);
+  right: 0;
+  width: min(18rem, calc(100vw - 2rem));
+  padding: .55rem;
+  border: 1px solid var(--garden-line);
+  border-radius: .75rem;
+  background: #fffdf9;
+  box-shadow: 0 16px 36px rgba(16, 38, 79, .16);
+}
+
+.garden-mobile-menu-panel a {
+  display: block;
+  padding: .75rem .85rem;
+  border-radius: .45rem;
+  color: var(--garden-ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.garden-mobile-menu-panel a:hover,
+.garden-mobile-menu-panel a.is-active {
+  color: var(--garden-coral);
+  background: var(--garden-sage);
+}
+
+.content pre,
+.content .hextra-code-block,
+.garden-article-content pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.content table,
+.garden-article-content table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.content .mermaid,
+.garden-article-content .mermaid {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+  .garden-nav-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .garden-nav-links {
+    display: none;
+  }
+
+  .garden-mobile-menu {
+    display: block;
+  }
+
+  .garden-list-layout,
+  .garden-article-layout,
+  .garden-section-layout {
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .garden-nav,
+  .garden-nav-inner {
+    height: 64px;
+  }
+
+  .garden-nav-inner {
+    padding-inline: 1rem;
+  }
+
+  .garden-nav-actions {
+    gap: .4rem;
+  }
+
+  .garden-nav-actions .search-wrapper {
+    display: none;
+  }
+
+  .garden-nav-actions .theme-toggle {
+    width: 42px;
+    height: 42px;
+  }
+
+  .garden-home-v2,
+  .garden-list,
+  .garden-section-page,
+  .garden-standard-page,
+  .garden-article-shell {
+    padding-inline: 1rem;
+  }
+
+  .garden-home-v2 {
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+  }
+
+  .garden-home-v2 .garden-hero {
+    padding: clamp(1.25rem, 7vw, 1.75rem);
+    border-radius: .75rem;
+  }
+
+  .garden-home-v2 .garden-hero h1,
+  .garden-hero h1,
+  .garden-list h1,
+  .garden-article-header h1,
+  .garden-section-page h1,
+  .garden-standard-page h1 {
+    font-size: clamp(2.25rem, 12vw, 3rem);
+    line-height: 1;
+    letter-spacing: -.055em;
+  }
+
+  .garden-hero-svg {
+    display: none !important;
+  }
+
+  .garden-topic-grid,
+  .garden-post-grid,
+  .garden-list-aside,
+  .garden-article-aside,
+  .garden-home-rail,
+  .garden-section-rail {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .garden-home-v2 .garden-topic {
+    min-height: 0;
+  }
+
+  .garden-topic-art {
+    height: auto;
+    aspect-ratio: 16 / 8;
+  }
+
+  .garden-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .garden-featured-copy,
+  .garden-rail-card,
+  .garden-list-aside > div {
+    padding: 1.1rem;
+  }
+
+  .garden-round-arrow {
+    position: static;
+    margin-top: 1rem;
+  }
+
+  .garden-list,
+  .garden-section-page,
+  .garden-standard-page {
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .garden-list-header,
+  .garden-section-page header {
+    margin-bottom: 2rem;
+  }
+
+  .garden-article-shell {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+
+  .garden-article-header {
+    margin-bottom: 2rem;
+  }
+
+  .garden-article-content h2,
+  .garden-section-content h2 {
+    font-size: 1.65rem;
+  }
+
+  .garden-article-content blockquote {
+    margin-inline: 0;
+    padding: .85rem 1rem;
+  }
+
+  .columns-container {
+    flex-direction: column;
+  }
+
+  .column-item {
+    width: 100%;
+    padding: .75rem 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .garden-brand {
+    font-size: 1.05rem;
+  }
+
+  .garden-nav-inner {
+    padding-inline: .75rem;
+  }
+
+  .garden-home-v2,
+  .garden-list,
+  .garden-section-page,
+  .garden-standard-page,
+  .garden-article-shell {
+    padding-inline: .75rem;
+  }
+
+  .garden-home-v2 .garden-hero {
+    padding: 1.1rem;
+  }
+
+  .garden-button {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
