@@ -1,15 +1,20 @@
 ---
 linkTitle: "AI"
 title: Artificial Intelligence
+layout: category-list
+cascade:
+  - type: blog
+    _target:
+      kind: page
 ---
 
 Welcome to the home of Artificial Intelligence (AI) content! Here, you'll find discussions, explanations, and insights into a wide range of AI concepts and technologies. 
 
 Here are some post links relating to AI:
 
- - [Unlock Better AI Code - Why Small Batches are Your Secret Weapon](/blog/unlock-better-ai-code)
- - [This post explains what prompts are and how to creating them in the context of GitHub Copilot Chat](/blog/prompts)
- - [Setting Up a Model Context Protocol (MCP) Remote Server in VSCode](/blog/mcp-server-example)
+ - [Unlock Better AI Code - Why Small Batches are Your Secret Weapon](/ai/unlock-better-ai-code)
+ - [This post explains what prompts are and how to creating them in the context of GitHub Copilot Chat](/ai/prompts)
+ - [Setting Up a Model Context Protocol (MCP) Remote Server in VSCode](/ai/mcp-server-example)
 
 
 

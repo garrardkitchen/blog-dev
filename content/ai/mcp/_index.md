@@ -1,9 +1,11 @@
 ---
 linkTitle: MCP
 title: Model Context Protocol 
+description: Articles explaining MCP concepts, local and remote servers, and secure AI integrations.
 # prev: /docs/guide/shortcodes/tabs
 # next: /docs/advanced/multi-language
 draft: false
+layout: category-list
 ---
 
 ## What is Model Context Protocol (MCP)

@@ -1,12 +1,14 @@
 ---
 linkTitle: MCP
 title: Model Context Protocol Nuggets
+description: Short MCP checklists for configuring local, remote, and VS Code servers.
 # prev: /docs/guide/shortcodes/tabs
 # next: /docs/advanced/multi-language
-draft: true
+draft: false
+layout: category-list
 ---
 
-This section covers some advanced topics of the theme.
+Focused MCP notes and checklists for quickly reviewing common server configurations.
 
 <!--more-->
 

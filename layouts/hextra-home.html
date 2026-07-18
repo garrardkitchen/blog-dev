@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{ $posts := where .Site.RegularPages "Section" "blog" }}
+{{ $posts := where .Site.RegularPages "Section" "in" (slice "general" "engineering" "cloud" "ai" "gaming") }}
 {{ $posts = where $posts "Draft" false }}
 {{ $posts = first 4 (sort $posts "Date" "desc") }}
 
@@ -17,7 +17,7 @@
             Thoughts on cloud native engineering, agentic engineering, software factories, leadership, practical
             ideas, real-world lessons and a bias for simpler, safer systems.
           </p>
-          <a class="garden-button" href="{{ "blog" | relURL }}">
+          <a class="garden-button" href="{{ "general" | relURL }}">
             Browse latest posts <span>→</span>
           </a>
         </div>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="garden-topic-grid">
-          <a class="garden-topic topic-cloud" href="{{ "blog" | relURL }}"><img class="garden-topic-art" src="{{ "images/home/home-cloud.png" | relURL }}" alt="">
+          <a class="garden-topic topic-cloud" href="{{ "cloud" | relURL }}"><img class="garden-topic-art" src="{{ "images/home/home-cloud.png" | relURL }}" alt="">
             <div class="garden-topic-copy">
               <h3>Cloud</h3>
               <p>Designing resilient, observable platforms that scale.</p><span>Explore Cloud →</span>
@@ -49,7 +49,7 @@
             </div>
           </a>
 
-          <a class="garden-topic topic-engineering" href="{{ "nuggets" | relURL }}"><img class="garden-topic-art"
+          <a class="garden-topic topic-engineering" href="{{ "engineering" | relURL }}"><img class="garden-topic-art"
               src="{{ "images/home/home-engineering.png" | relURL }}" alt="">
             <div class="garden-topic-copy">
               <h3>Engineering</h3>
@@ -97,7 +97,7 @@
         </article>
         {{ end }}
 
-        <a href="{{ "blog" | relURL }}">See all writing →</a>
+        <a href="{{ "general" | relURL }}">See all writing →</a>
 
         <p class="garden-rail-title garden-reading-title">Reading</p>
         <ul>

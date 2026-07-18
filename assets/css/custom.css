@@ -607,6 +607,66 @@ body {
   text-decoration: none
 }
 
+.garden-list-aside .garden-list-count {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  column-gap: .65rem;
+  padding: 1.5rem
+}
+
+.garden-list-aside .garden-list-count .garden-eyebrow {
+  grid-column: 1 / -1;
+  margin-bottom: .35rem
+}
+
+.garden-list-aside .garden-list-count strong {
+  color: var(--garden-ink);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: .9
+}
+
+.garden-list-aside .garden-list-count span {
+  color: #53617b;
+  font-size: .95rem;
+  font-weight: 700
+}
+.garden-list-aside .garden-category-topics {
+  display: grid;
+  gap: 0;
+  padding: 1.5rem
+}
+
+.garden-list-aside .garden-category-topic {
+  display: grid;
+  gap: .3rem;
+  margin: 0;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--garden-line)
+}
+
+.garden-list-aside .garden-category-topic:last-child {
+  border-bottom: 0
+}
+
+.garden-list-aside .garden-category-topic strong {
+  color: var(--garden-ink);
+  font-size: 1.1rem
+}
+
+.garden-list-aside .garden-category-topic span,
+.garden-list-aside .garden-category-topic small {
+  color: #53617b;
+  font-size: .82rem;
+  font-weight: 400;
+  line-height: 1.45
+}
+
+.garden-list-aside .garden-category-topic small {
+  color: var(--garden-coral);
+  font-weight: 700
+}
+
 .aside-sprout {
   font-size: 2rem;
   color: #5a8667

@@ -4,10 +4,12 @@
     <a class="garden-brand" href="{{ .Site.Home.RelPermalink }}">Garrard Kitchen</a>
 
     <div class="garden-nav-links">
-      <a class="{{ if eq $section "blog" }}is-active{{ end }}" href="{{ "blog" | relURL }}">Cloud</a>
-      <a class="{{ if eq $section "nuggets" }}is-active{{ end }}" href="{{ "nuggets" | relURL }}">Engineering</a>
+      <a class="{{ if eq $section "general" }}is-active{{ end }}" href="{{ "general" | relURL }}">General</a>
+      <a class="{{ if eq $section "cloud" }}is-active{{ end }}" href="{{ "cloud" | relURL }}">Cloud</a>
+      <a class="{{ if eq $section "engineering" }}is-active{{ end }}" href="{{ "engineering" | relURL }}">Engineering</a>
       <a class="{{ if eq $section "ai" }}is-active{{ end }}" href="{{ "ai" | relURL }}">AI</a>
       <a class="{{ if eq $section "gaming" }}is-active{{ end }}" href="{{ "gaming" | relURL }}">Gaming</a>
+      <a class="{{ if eq $section "nuggets" }}is-active{{ end }}" href="{{ "nuggets" | relURL }}">Nuggets</a>
       <a class="{{ if eq $section "about" }}is-active{{ end }}" href="{{ "about" | relURL }}">About</a>
     </div>
 
@@ -17,10 +19,12 @@
       <details class="garden-mobile-menu">
         <summary aria-label="Open navigation menu"><span aria-hidden="true"></span></summary>
         <div class="garden-mobile-menu-panel">
-          <a class="{{ if eq $section "blog" }}is-active{{ end }}" href="{{ "blog" | relURL }}">Cloud</a>
-          <a class="{{ if eq $section "nuggets" }}is-active{{ end }}" href="{{ "nuggets" | relURL }}">Engineering</a>
+          <a class="{{ if eq $section "general" }}is-active{{ end }}" href="{{ "general" | relURL }}">General</a>
+          <a class="{{ if eq $section "cloud" }}is-active{{ end }}" href="{{ "cloud" | relURL }}">Cloud</a>
+          <a class="{{ if eq $section "engineering" }}is-active{{ end }}" href="{{ "engineering" | relURL }}">Engineering</a>
           <a class="{{ if eq $section "ai" }}is-active{{ end }}" href="{{ "ai" | relURL }}">AI</a>
           <a class="{{ if eq $section "gaming" }}is-active{{ end }}" href="{{ "gaming" | relURL }}">Gaming</a>
+          <a class="{{ if eq $section "nuggets" }}is-active{{ end }}" href="{{ "nuggets" | relURL }}">Nuggets</a>
           <a class="{{ if eq $section "about" }}is-active{{ end }}" href="{{ "about" | relURL }}">About</a>
         </div>
       </details>

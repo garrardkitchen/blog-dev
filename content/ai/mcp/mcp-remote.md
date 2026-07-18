@@ -8,7 +8,7 @@ draft: false
 
 In this article, you'll learn where the remote MCP example lives, how remote transport changes the threat model, and what to verify first. That matters because centralising a capability also centralises the consequences of weak identity and tenant isolation.
 
-The [sample code](https://github.com/garrardkitchen/mcp-server-example) and [walk-through](/blog/mcp-server-example/) show the mechanics of connecting a host to a remote MCP server. Treat the example as a learning scaffold; production readiness begins where the happy-path connection ends.
+The [sample code](https://github.com/garrardkitchen/mcp-server-example) and [walk-through](/ai/mcp-server-example/) show the mechanics of connecting a host to a remote MCP server. Treat the example as a learning scaffold; production readiness begins where the happy-path connection ends.
 
 ## What changes when the server is remote
 
