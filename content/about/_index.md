@@ -17,6 +17,17 @@ I'm an agentic engineer, DevSecOps expert, Cloud Native Lead, and Distinguished 
 
 I’m a Fujitsu Distinguished Engineer and Cloud Native Lead - Cloud Architect, a polyglot developer with a predominantly backend focus, and Team Lead on one of Fujitsu’s highest-priority projects. My guiding principles are Secure by Design, Green by Design, and Cloud First, applied from the first whiteboard sketch through to production. At Fujitsu, I lead the technical delivery of a modern workplace agentic platform spanning AI agents and MCP, security-first design, Azure infrastructure at scale, and policy-driven governance and compliance. I was honoured with the Fujitsu Distinguished Engineer award in 2024, and co-lead the FUSION Applications technical community in 2025.
 
+## Free developer tools
+
+I also build free, open-source tools that solve practical developer problems—from exploring MCP servers and simplifying Microsoft Entra authentication to understanding GitLab activity, sharing files securely, and creating safer GIFs.
+
+- [MCP Explorer](https://mcp-explorer-x-docs.garrardkitchen.com/) — a Docker-first MCP workbench for tools, prompts, resources, workflows, and multi-provider AI chat.
+- [Entra Auth CLI](https://entra-auth-cli-docs.garrardkitchen.com/) — generate Microsoft Entra ID tokens across common OAuth 2.0 flows from a .NET global tool.
+- [GitLab Summary](https://gitlab-summary-docs.garrardkitchen.com/) — create concise, AI-assisted summaries of GitLab projects, merge requests, and failed pipelines.
+- [Cloud Share](https://cloud-share-docs.garrardkitchen.com/) — securely share files and text peer to peer without running your own infrastructure.
+- [GIF Creator](https://gif-creator-docs.garrardkitchen.com/) — create polished GIFs with AI-assisted sensitive-content redaction and export controls.
+- [MCP Explorer (legacy)](https://mcp-explorer-docs.garrardkitchen.com/) — test, debug, and explore MCP servers, tools, workflows, and AI chat.
+
 Outside the world of technology, I am a proud father of two energetic boys and a loving and committed husband to Louise. This blog is my space to share insights, lessons, and stories from my professional journey and personal life. Whether you're here for tech tips, career advice, or a glimpse into my day-to-day experiences, I hope you'll find something inspiring and valuable.
 
 Thanks for stopping by!

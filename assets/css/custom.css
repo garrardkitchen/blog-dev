@@ -1252,6 +1252,47 @@ pre.mermaid {
   font-size: .78rem;
   text-decoration: none
 }
+.garden-tools-rail > p:not(.garden-rail-title) {
+  margin: 0 0 .9rem;
+  color: #53617b;
+  font-size: .8rem;
+  line-height: 1.5;
+}
+
+.garden-tools-rail nav {
+  display: flex;
+  margin-bottom: 1rem;
+  flex-direction: column;
+}
+
+.garden-tools-rail nav a {
+  display: flex;
+  padding: .62rem 0;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #e5e9e4;
+  color: #10264f;
+  font-size: .8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.garden-tools-rail nav a:hover,
+.garden-tools-rail nav a:hover span {
+  color: #fa674b;
+}
+
+.garden-tools-rail nav span {
+  color: #6c7a91;
+}
+
+.garden-tools-about {
+  color: #fa674b;
+  font-size: .78rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
 
 .garden-subscribe {
   background: #edf4ed
