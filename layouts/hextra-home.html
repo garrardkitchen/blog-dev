@@ -92,7 +92,13 @@
           <span class="garden-rail-icon">↗</span>
           <div>
             <strong><a href="{{ .RelPermalink }}">{{ .Title }}</a></strong>
-            <small>{{ .Date.Format "Jan 2, 2006" }} · {{ .ReadingTime }} min read</small>
+            <small>
+              {{ .Date.Format "Jan 2, 2006" }} · {{ .ReadingTime }} min read
+              {{ with .Section }}
+              {{ $section := . | humanize | title }}
+              <span class="garden-category-pill" title="{{ $section }}">{{ $section | truncate 16 "..." }}</span>
+              {{ end }}
+            </small>
           </div>
         </article>
         {{ end }}

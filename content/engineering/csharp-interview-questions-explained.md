@@ -1,7 +1,7 @@
 ---
 title: "36 C# Interview Questions, Explained by When They Matter"
 description: "A practical, grouped guide to 36 C# interview questions covering types, async, concurrency, memory, and deployment."
-date: 2026-08-02
+date: 2026-08-01
 draft: false
 featured: true
 tags: ["engineering", "csharp", "dotnet", "interviews", "performance", "async"]
