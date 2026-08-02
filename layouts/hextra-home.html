@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{ $posts := where .Site.RegularPages "Section" "in" (slice "general" "engineering" "cloud" "ai" "gaming") }}
 {{ $posts = where $posts "Draft" false }}
-{{ $posts = first 4 (sort $posts "Date" "desc") }}
+{{ $posts = first 9 (sort $posts "Date" "desc") }}
 
 <main class="garden-home-v2 garden-shell">
   <div class="garden-home-layout">
@@ -87,7 +87,7 @@
       <section class="garden-rail-card garden-now">
         <p class="garden-rail-title">Latest writing</p>
 
-        {{ range first 3 $posts }}
+        {{ range first 10 $posts }}
         <article>
           <span class="garden-rail-icon">↗</span>
           <div>
