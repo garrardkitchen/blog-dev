@@ -1,0 +1,89 @@
+
+
+baseURL = "http://blog.garrardkitchen.com/"
+languageCode = "en-gb"
+title = "Blog"
+#theme = "beautifulhugo"
+#theme = "book"
+theme = "hextra"
+publishDir = "docs"
+pygmentsCodeFences = true
+pygmentsCodeFencesGuessSyntax = true
+#googleAnalytics = "UA-162297404-1"
+disablePathToLower = true
+enableGitInfo = true
+#<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+#pygmentsUseClasses = true
+#pygmentsStyle = "trac"
+
+[author]
+name = "garrardkitchen"
+homepage = "http://www.garrardkitchen.com"
+
+[params]
+BookToC = true
+BookSection = '*'
+BookDateFormat = 'January 2, 2006'
+sidebar = true
+show_excerpts = true
+description = 'Made by <a href="http://www.garrardkitchen.com">Garrard Kitchen</a>'
+#useHLJS = true
+subtitle = "Garrard Kitchen"
+rss = true
+comments = true
+readingTime = true
+wordCount = true
+socialShare = true
+delayDisqus = true
+showRelatedPosts = true
+
+[[menu.main]]
+name = "Home"
+url = "/"
+identifier = "home"
+weight = 1
+
+[[menu.about]]
+name = "About"
+url = "http://www.garrardkitchen.com"
+identifier = "address-card"
+weight = 2
+
+[[menu.github]]
+name = "Github"
+url = "https://github.com/garrardkitchen"
+identifier = "github"
+weight = 3
+
+
+
+
+[menu]
+
+# [[menu.before]]
+[[menu.after]]
+  name = "Github"
+  url = "https://github.com/garrardkitchen"
+  weight = 10
+
+[[menu.after]]
+  name = "Blog"
+  url = "https://blog.garrardkitchen.com/"
+  weight = 20
+
+[[menu.after]]
+  name = "Resume"
+  url = "https://www.garrardkitchen.com/"
+  weight = 20
+
+[[menu.after]]
+  name = "Katas"
+  url = "https://katas.garrardkitchen.com/"
+  weight = 20
+
+[markup]
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.tableOfContents]
+  startLevel = 1    

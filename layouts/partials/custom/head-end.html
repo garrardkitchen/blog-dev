@@ -1,0 +1,36 @@
+<script type="text/javascript">
+  (function (c, l, a, r, i, t, y) {
+    c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+    t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+    y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+  })(window, document, "clarity", "script", "jh07y3ab4s");
+</script>
+
+<!-- ==========================================================================
+  Font loading — blog.garrardkitchen.com
+  Location: layouts/partials/custom/head-end.html
+  Preferred over @import in custom.css: preconnect hints + parallel loading.
+  GDPR/performance note: consider self-hosting the woff2 files instead
+  (google-webfonts-helper), replacing these links with @font-face rules at
+  the top of custom.css — removes two DNS lookups and keeps EU visitors'
+  IPs away from Google's font CDN.
+========================================================================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+  rel="stylesheet">
+
+<!-- ==========================================================================
+  OPTIONAL — Mermaid font at config level.
+  Only needed if the CSS-only override in custom.css causes label clipping
+  (Mermaid sizes node boxes by measuring text before CSS applies). The exact
+  override mechanism varies by Hextra version — check how your version's
+  Mermaid partial reads its config; some expect
+  themeVariables: { fontFamily: ... } instead. If the CSS route renders
+  cleanly, delete this block; simpler wins.
+========================================================================== -->
+
+<script>
+  window.mermaid_config = { fontFamily: "'Inter', sans-serif" };
+</script>

@@ -1,0 +1,36 @@
+{{- $sections := where .Sections "Draft" false -}}
+{{- $pages := where .RegularPages "Draft" false -}}
+
+{{- with $sections -}}
+  <section class="garden-collection" aria-labelledby="topics-heading">
+    <div class="garden-rail-card garden-now garden-collection-list">
+      <p id="topics-heading" class="garden-rail-title">Explore topics</p>
+      {{- range .ByTitle -}}
+        <article>
+          <span class="garden-rail-icon" aria-hidden="true">↗</span>
+          <div>
+            <strong><a href="{{ .RelPermalink }}">{{ or .LinkTitle .Title }}</a></strong>
+            <small>{{ len .RegularPages }} {{ if eq (len .RegularPages) 1 }}note{{ else }}notes{{ end }} · {{ or .Description (.Summary | plainify | truncate 90) | default "Browse this collection." }}</small>
+          </div>
+        </article>
+      {{- end -}}
+    </div>
+  </section>
+{{- end -}}
+
+{{- with $pages -}}
+  <section class="garden-collection" aria-labelledby="notes-heading">
+    <div class="garden-rail-card garden-now garden-collection-list">
+      <p id="notes-heading" class="garden-rail-title">{{ if $sections }}Also useful{{ else }}Notes{{ end }}</p>
+      {{- range .ByDate.Reverse -}}
+        <article>
+          <span class="garden-rail-icon" aria-hidden="true">↗</span>
+          <div>
+            <strong><a href="{{ .RelPermalink }}">{{ .Title }}</a></strong>
+            <small>{{ with .Date }}{{ .Format "02 Jan 2006" }} · {{ end }}{{ .ReadingTime }} min read</small>
+          </div>
+        </article>
+      {{- end -}}
+    </div>
+  </section>
+{{- end -}}

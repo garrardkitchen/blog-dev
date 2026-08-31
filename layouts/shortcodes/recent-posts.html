@@ -1,0 +1,18 @@
+{{- $section := .Get "section" | default "blog" -}}
+{{- $limit := .Get "limit" | default 5 -}}
+{{- $pages := where .Site.RegularPages "Section" $section -}}
+{{- $pages = first $limit (sort $pages "Date" "desc") -}}
+
+<div style="margin-top: 1rem;">
+{{- range $pages -}}
+  <div style="margin-bottom: 1.5rem;">
+    <div style="font-weight: bold; color: #666; margin-bottom: 0.25rem;">{{ .Date.Format "Jan 2, 2006" }}</div>
+    <div style="margin-bottom: 0.5rem;">
+      <a href="{{ .RelPermalink }}" style="font-size: 1.1rem; font-weight: 500; color: #2563eb; text-decoration: none;">{{ .Title }}</a>
+    </div>
+    {{- if .Summary -}}
+      <div style="font-style: italic; color: #6b7280; font-size: 0.9rem; line-height: 1.4;">{{ .Summary | plainify | truncate 150 }}</div>
+    {{- end -}}
+  </div>
+{{- end -}}
+</div>
